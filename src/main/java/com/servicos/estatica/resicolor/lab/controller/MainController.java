@@ -97,7 +97,7 @@ public class MainController implements Initializable {
 		centralPane.getChildren().addAll(mainContainer);
 	}
 
-	@FXML
+	/*@FXML
 	private void openScreen1() {
 		mainContainer.setScreen(screen3ID);
 	}
@@ -110,7 +110,7 @@ public class MainController implements Initializable {
 	@FXML
 	private void openScreen3() {
 		mainContainer.setScreen(screen2ID);
-	}
+	}*/
 
 	@FXML
 	private void handleImgClienteAction() throws IOException {
@@ -126,12 +126,12 @@ public class MainController implements Initializable {
 		stage.showAndWait();
 	}
 
-	/*@FXML
+	@FXML
 	public void openStyleOptions() throws IOException {
 		Stage stage;
 		Parent root;
 		stage = new Stage();
-		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/app/ConfigClockStyle.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/ConfigClockStyle.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Estilo do relógio");
 		stage.initModality(Modality.APPLICATION_MODAL);
@@ -148,7 +148,7 @@ public class MainController implements Initializable {
 	@FXML
 	private void unhoverBtClock() {
 		tmlBtClockShrink.play();
-	}*/
+	}
 
 	@FXML
 	private void exit() {
