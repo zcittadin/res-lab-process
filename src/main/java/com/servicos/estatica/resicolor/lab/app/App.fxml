@@ -56,6 +56,30 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
+                  <Button layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#openScreen1" prefHeight="25.0" prefWidth="130.0" text="Balão 1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="14.0" layoutY="74.0" mnemonicParsing="false" onAction="#openScreen2" prefHeight="25.0" prefWidth="130.0" text="Balão 2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="14.0" layoutY="118.0" mnemonicParsing="false" onAction="#openScreen3" prefHeight="25.0" prefWidth="130.0" text="Balão 3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children></AnchorPane>
          </left>
          <center>
