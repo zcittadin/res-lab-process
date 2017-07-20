@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="664.0" prefWidth="1208.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.servicos.estatica.resicolor.lab.controller.Screen3Controller">
+<AnchorPane fx:id="mainPane" prefHeight="664.0" prefWidth="1208.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.Screen3Controller">
    <children>
       <Label layoutX="590.0" layoutY="324.0" text="Label 3" />
+      <ImageView fx:id="imgEstatica" fitHeight="42.0" fitWidth="138.0" layoutX="1083.0" layoutY="607.0" onMouseClicked="#handleImgEstaticaAction" onMouseEntered="#hoverImgEstatica" onMouseExited="#unhoverImgEstatica" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../style/logotipo.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

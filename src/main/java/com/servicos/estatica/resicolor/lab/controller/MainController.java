@@ -67,7 +67,6 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
 		StyleClockProperty.lcdDesignProperty().addListener(new ChangeListener<LcdDesign>() {
 			@Override
 			public void changed(ObservableValue<? extends LcdDesign> observable, LcdDesign oldValue,
