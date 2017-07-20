@@ -14,7 +14,7 @@ public class App extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Resicolor - Divisão de resinas");
-		// stage.setMaximized(true);
+		stage.setMaximized(true);
 		stage.show();
 	}
 

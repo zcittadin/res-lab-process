@@ -42,6 +42,8 @@ public class MainController implements Initializable {
 	public static String screen2File = "/com/servicos/estatica/resicolor/lab/app/Screen2.fxml";
 	public static String screen3ID = "screen3";
 	public static String screen3File = "/com/servicos/estatica/resicolor/lab/app/Screen3.fxml";
+	public static String screenConsultaID = "Consulta";
+	public static String screenConsultaFile = "/com/servicos/estatica/resicolor/lab/app/Consulta.fxml";
 
 	@FXML
 	private AnchorPane mainPane;
@@ -88,28 +90,34 @@ public class MainController implements Initializable {
 		tmlBtClockShrink.getKeyFrames()
 				.addAll(new KeyFrame(Duration.seconds(0.3), new KeyValue(btStyleClock.translateXProperty(), 0)));
 
-		mainContainer.loadScreen(screen3ID, screen3File);
 		mainContainer.loadScreen(screen1ID, screen1File);
 		mainContainer.loadScreen(screen2ID, screen2File);
-		CurrentScreenProperty.setScreen(screen3ID);
+		mainContainer.loadScreen(screen3ID, screen3File);
+		mainContainer.loadScreen(screenConsultaID, screenConsultaFile);
+		CurrentScreenProperty.setScreen(screen1ID);
 
-		mainContainer.setScreen(screen3ID);
+		mainContainer.setScreen(screen1ID);
 		centralPane.getChildren().addAll(mainContainer);
 	}
 
 	@FXML
 	private void openScreen1() {
-		mainContainer.setScreen(screen3ID);
-	}
-
-	@FXML
-	private void openScreen2() {
 		mainContainer.setScreen(screen1ID);
 	}
 
 	@FXML
-	private void openScreen3() {
+	private void openScreen2() {
 		mainContainer.setScreen(screen2ID);
+	}
+
+	@FXML
+	private void openScreen3() {
+		mainContainer.setScreen(screen3ID);
+	}
+
+	@FXML
+	private void openConsulta() {
+		mainContainer.setScreen(screenConsultaID);
 	}
 
 	@FXML

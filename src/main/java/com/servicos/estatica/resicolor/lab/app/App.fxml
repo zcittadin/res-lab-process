@@ -31,12 +31,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Label layoutX="543.0" layoutY="21.0" text="Controle laboratorial">
+                  <Label layoutX="453.0" layoutY="21.0" text="Controle de ensaio laboratorial">
                      <font>
                         <Font name="Corbel Bold" size="38.0" />
                      </font>
                   </Label>
-                  <Clock fx:id="clock" layoutX="1230.0" layoutY="3.0" lcdDesign="LIGHTGREEN_BLACK" prefHeight="73.0" prefWidth="129.0" skinType="LCD" />
+                  <Clock fx:id="clock" layoutX="1230.0" layoutY="3.0" lcdDesign="LIGHTGREEN_BLACK" prefHeight="73.0" prefWidth="129.0" running="true" secondsVisible="true" skinType="LCD" />
                </children>
             </AnchorPane>
          </top>
@@ -73,6 +73,14 @@
                      </cursor>
                   </Button>
                   <Button layoutX="14.0" layoutY="118.0" mnemonicParsing="false" onAction="#openScreen3" prefHeight="25.0" prefWidth="130.0" text="Balão 3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="14.0" layoutY="161.0" mnemonicParsing="false" onAction="#openConsulta" prefHeight="25.0" prefWidth="130.0" text="Consultas">
                      <font>
                         <Font size="20.0" />
                      </font>
