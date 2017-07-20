@@ -40,7 +40,6 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		imgEstatica.setImage(new Image("/com/servicos/estatica/resicolor/lab/style/logotipo.png"));
 		estaticaResizer = new ImageViewResizer(imgEstatica, 138, 42);
 		estaticaResizer.setLayoutX(150.0);
@@ -51,7 +50,6 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 
 		estaticaFadeTransition = new FadeTransition(Duration.millis(1000), imgEstatica);
 		estaticaFadeTransition.setCycleCount(1);
-
 	}
 
 	@FXML
