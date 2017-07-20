@@ -101,6 +101,7 @@ public class ConfigClockStyleController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		mainPane.setPrefSize(680, 440);
 		initGroup();
+		setLightGreenBlack();
 		initSelection();
 	}
 
@@ -297,6 +298,9 @@ public class ConfigClockStyleController implements Initializable {
 
 	private void initSelection() {
 
+		if (StyleClockProperty.lcdDesignProperty().get() == LcdDesign.LIGHTGREEN_BLACK) {
+			rdLightGreenBlack.setSelected(Boolean.TRUE);
+		}
 		if (StyleClockProperty.lcdDesignProperty().get() == LcdDesign.AMBER) {
 			rdAmber.setSelected(Boolean.TRUE);
 		}
@@ -371,9 +375,6 @@ public class ConfigClockStyleController implements Initializable {
 		}
 		if (StyleClockProperty.lcdDesignProperty().get() == LcdDesign.LIGHTGREEN) {
 			rdLightGreen.setSelected(Boolean.TRUE);
-		}
-		if (StyleClockProperty.lcdDesignProperty().get() == LcdDesign.LIGHTGREEN_BLACK) {
-			rdLightGreenBlack.setSelected(Boolean.TRUE);
 		}
 		if (StyleClockProperty.lcdDesignProperty().get() == LcdDesign.ORANGE) {
 			rdOrange.setSelected(Boolean.TRUE);
