@@ -18,9 +18,9 @@ import zan.inc.custom.components.ImageViewResizer;
 public class EstaticaInfoUtil {
 
 	@FXML
-	private AnchorPane mainPane;
+	protected AnchorPane mainPane;
 	@FXML
-	private ImageView imgEstatica;
+	protected ImageView imgEstatica;
 	
 	private static FadeTransition estaticaFadeTransition;
 	private static ImageViewResizer estaticaResizer;
