@@ -35,7 +35,6 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 	@Override
 	public void setScreenParent(ScreensController screenPage) {
 		myController = screenPage;
-
 	}
 
 	@Override
