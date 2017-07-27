@@ -21,22 +21,20 @@ public class EstaticaInfoUtil {
 	protected AnchorPane mainPane;
 	@FXML
 	protected ImageView imgEstatica;
-	
+
 	private static FadeTransition estaticaFadeTransition;
 	private static ImageViewResizer estaticaResizer;
 
 	protected void initEstaticaInfo() {
 		imgEstatica.setImage(new Image("/com/servicos/estatica/resicolor/lab/style/logotipo.png"));
-		estaticaResizer = new ImageViewResizer(imgEstatica, 138, 42);
-		estaticaResizer.setLayoutX(150.0);
-		estaticaResizer.setLayoutY(150.0);
-		estaticaResizer.setLayoutX(1083);
-		estaticaResizer.setLayoutY(607);
+		estaticaResizer = new ImageViewResizer(imgEstatica, 136, 57);
+		estaticaResizer.setLayoutX(1223);
+		estaticaResizer.setLayoutY(13);
 		mainPane.getChildren().addAll(estaticaResizer);
 		estaticaFadeTransition = new FadeTransition(Duration.millis(1000), imgEstatica);
 		estaticaFadeTransition.setCycleCount(1);
 	}
-	
+
 	@FXML
 	private void handleImgEstaticaAction() throws IOException {
 		Stage stage;

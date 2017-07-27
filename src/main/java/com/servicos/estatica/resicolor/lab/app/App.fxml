@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" prefHeight="723.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.MainController">
@@ -18,11 +19,6 @@
          <top>
             <AnchorPane prefHeight="82.0" prefWidth="1366.0" styleClass="myGradient" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btStyleClock" layoutX="1200.0" layoutY="9.0" mnemonicParsing="false" onAction="#openStyleOptions" onMouseEntered="#hoverBtClock" onMouseExited="#unhoverBtClock" prefHeight="25.0" prefWidth="139.0" styleClass="btStyleClock" stylesheets="@../style/style.css" text=" Estilos do relógio...">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <ImageView fx:id="imgCliente" fitHeight="70.0" fitWidth="124.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
                      <image>
                         <Image url="@../style/resicolor.png" />
@@ -36,13 +32,21 @@
                         <Font name="Corbel Bold" size="38.0" />
                      </font>
                   </Label>
-                  <Clock fx:id="clock" layoutX="1230.0" layoutY="3.0" lcdDesign="LIGHTGREEN_BLACK" prefHeight="73.0" prefWidth="129.0" running="true" secondsVisible="true" skinType="LCD" />
+                  <ImageView fx:id="imgEstatica" fitHeight="57.0" fitWidth="136.0" layoutX="1223.0" layoutY="13.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true">
+                     <image>
+                        <Image url="@../style/logotipo.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </AnchorPane>
          </top>
          <left>
             <AnchorPane prefHeight="641.0" prefWidth="158.0" styleClass="myGradient" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
                <children>
+                  <Rectangle fx:id="rectClock" arcHeight="25.0" arcWidth="25.0" fill="DODGERBLUE" height="85.0" layoutX="9.0" layoutY="10.0" stroke="#09156f" strokeType="INSIDE" width="140.0" />
                   <Ellipse layoutX="79.0" layoutY="577.0" radiusX="33.0" radiusY="43.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #F5F5F5;">
                      <effect>
                         <BoxBlur height="29.29" width="32.32" />
@@ -56,38 +60,47 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Button layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#openScreen1" prefHeight="25.0" prefWidth="130.0" text="Balão 1">
+                  <Button fx:id="btInicio" layoutY="115.0" mnemonicParsing="false" onAction="#openScreenInicial" prefHeight="37.0" prefWidth="158.0" text="Início">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="16.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="14.0" layoutY="74.0" mnemonicParsing="false" onAction="#openScreen2" prefHeight="25.0" prefWidth="130.0" text="Balão 2">
+                  <Button layoutY="153.0" mnemonicParsing="false" onAction="#openScreen1" prefHeight="37.0" prefWidth="158.0" text="Balão 1">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="16.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="14.0" layoutY="118.0" mnemonicParsing="false" onAction="#openScreen3" prefHeight="25.0" prefWidth="130.0" text="Balão 3">
+                  <Button layoutY="191.0" mnemonicParsing="false" onAction="#openScreen2" prefHeight="37.0" prefWidth="158.0" text="Balão 2">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="16.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="14.0" layoutY="161.0" mnemonicParsing="false" onAction="#openConsulta" prefHeight="25.0" prefWidth="130.0" text="Consultas">
+                  <Button layoutY="229.0" mnemonicParsing="false" onAction="#openScreen3" prefHeight="37.0" prefWidth="158.0" text="Balão 3">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="16.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button layoutY="267.0" mnemonicParsing="false" onAction="#openConsulta" prefHeight="37.0" prefWidth="158.0" text="Consultas">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Clock fx:id="clock" layoutX="11.0" layoutY="21.0" lcdDesign="BLUE" prefHeight="60.0" prefWidth="136.0" running="true" secondsVisible="true" skinType="LCD" />
                </children></AnchorPane>
          </left>
          <center>

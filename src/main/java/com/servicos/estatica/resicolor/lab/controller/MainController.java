@@ -6,16 +6,10 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.property.CurrentScreenProperty;
-import com.servicos.estatica.resicolor.lab.property.StyleClockProperty;
+import com.servicos.estatica.resicolor.lab.util.EstaticaInfoUtil;
 
 import eu.hansolo.medusa.Clock;
-import eu.hansolo.medusa.LcdDesign;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,19 +17,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import zan.inc.custom.components.ImageViewResizer;
 
-public class MainController implements Initializable {
+public class MainController extends EstaticaInfoUtil implements Initializable {
 
+	public static String screenInicialID = "inicial";
+	public static String screenInicialFile = "/com/servicos/estatica/resicolor/lab/app/InicialScreen.fxml";
 	public static String screen1ID = "screen1";
 	public static String screen1File = "/com/servicos/estatica/resicolor/lab/app/Screen1.fxml";
 	public static String screen2ID = "screen2";
@@ -50,30 +46,25 @@ public class MainController implements Initializable {
 	@FXML
 	private Pane centralPane;
 	@FXML
+	private Rectangle rectClock;
+	@FXML
 	private ImageView imgCliente;
 	@FXML
 	private ImageView imgExit;
-	@FXML
-	private Button btStyleClock;
 	@FXML
 	private Clock clock;
 
 	private static ImageViewResizer imgClienteResizer;
 	private static ImageViewResizer imgExitResizer;
-	private static Timeline tmlBtClockGrow = new Timeline();
-	private static Timeline tmlBtClockShrink = new Timeline();
 
 	ScreensController mainContainer = new ScreensController();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		StyleClockProperty.lcdDesignProperty().addListener(new ChangeListener<LcdDesign>() {
-			@Override
-			public void changed(ObservableValue<? extends LcdDesign> observable, LcdDesign oldValue,
-					LcdDesign newValue) {
-				clock.setLcdDesign(newValue);
-			}
-		});
+		
+		initEstaticaInfo();
+
+		rectClock.setFill(Color.TRANSPARENT);
 
 		imgCliente.setImage(new Image("/com/servicos/estatica/resicolor/lab/style/resicolor.png"));
 		imgClienteResizer = new ImageViewResizer(imgCliente, 126, 70);
@@ -84,19 +75,20 @@ public class MainController implements Initializable {
 		imgExitResizer.setLayoutY(633);
 		mainPane.getChildren().addAll(imgClienteResizer, imgExitResizer);
 
-		tmlBtClockGrow.getKeyFrames()
-				.addAll(new KeyFrame(Duration.seconds(0.3), new KeyValue(btStyleClock.translateXProperty(), -105)));
-		tmlBtClockShrink.getKeyFrames()
-				.addAll(new KeyFrame(Duration.seconds(0.3), new KeyValue(btStyleClock.translateXProperty(), 0)));
-
+		mainContainer.loadScreen(screenInicialID, screenInicialFile);
 		mainContainer.loadScreen(screen1ID, screen1File);
 		mainContainer.loadScreen(screen2ID, screen2File);
 		mainContainer.loadScreen(screen3ID, screen3File);
 		mainContainer.loadScreen(screenConsultaID, screenConsultaFile);
-		CurrentScreenProperty.setScreen(screen1ID);
 
-		mainContainer.setScreen(screen1ID);
+		CurrentScreenProperty.setScreen(screenInicialID);
+		mainContainer.setScreen(screenInicialID);
 		centralPane.getChildren().addAll(mainContainer);
+	}
+
+	@FXML
+	private void openScreenInicial() {
+		mainContainer.setScreen(screenInicialID);
 	}
 
 	@FXML
@@ -131,31 +123,6 @@ public class MainController implements Initializable {
 		stage.initOwner(imgCliente.getScene().getWindow());
 		stage.setResizable(Boolean.FALSE);
 		stage.showAndWait();
-	}
-
-	@FXML
-	public void openStyleOptions() throws IOException {
-		Stage stage;
-		Parent root;
-		stage = new Stage();
-		root = FXMLLoader
-				.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/ConfigClockStyle.fxml"));
-		stage.setScene(new Scene(root));
-		stage.setTitle("Estilo do relógio");
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.initOwner(imgExit.getScene().getWindow());
-		stage.setResizable(Boolean.FALSE);
-		stage.showAndWait();
-	}
-
-	@FXML
-	private void hoverBtClock() {
-		tmlBtClockGrow.play();
-	}
-
-	@FXML
-	private void unhoverBtClock() {
-		tmlBtClockShrink.play();
 	}
 
 	@FXML
