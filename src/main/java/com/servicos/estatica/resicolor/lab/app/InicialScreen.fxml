@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -234,9 +235,55 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <AnchorPane fx:id="pane1" layoutX="109.0" layoutY="232.0" prefHeight="153.0" prefWidth="264.0" style="-fx-background-color: white;" />
-      <AnchorPane fx:id="pane2" layoutX="480.0" layoutY="232.0" prefHeight="153.0" prefWidth="264.0" style="-fx-background-color: white;" />
-      <AnchorPane fx:id="pane3" layoutX="844.0" layoutY="232.0" prefHeight="153.0" prefWidth="264.0" style="-fx-background-color: white;" />
+      <AnchorPane fx:id="pane1" layoutX="109.0" layoutY="232.0" prefHeight="153.0" prefWidth="264.0" style="-fx-background-color: white;">
+         <children>
+            <Label fx:id="lblCrono1" alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+               <font>
+                  <Font name="DSEG7 Classic-Bold" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label layoutX="5.0" layoutY="15.0" text="Tempo decorrido:" textFill="#09156f">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane2" layoutX="480.0" layoutY="232.0" prefHeight="153.0" prefWidth="264.0" style="-fx-background-color: white;">
+         <children>
+            <Label fx:id="lblCrono2" alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+               <font>
+                  <Font name="DSEG7 Classic-Bold" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label layoutX="5.0" layoutY="15.0" text="Tempo decorrido:" textFill="#09156f">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <AnchorPane fx:id="pane3" layoutX="844.0" layoutY="232.0" prefHeight="153.0" prefWidth="264.0" style="-fx-background-color: white;">
+         <children>
+            <Label fx:id="lblCrono3" alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+               <font>
+                  <Font name="DSEG7 Classic-Bold" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label layoutX="5.0" layoutY="15.0" text="Tempo decorrido:" textFill="#09156f">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
       <Line endX="162.0" layoutX="210.0" layoutY="231.0" startX="-100.0" stroke="#09156f" strokeWidth="2.0" />
       <Line endX="162.0" layoutX="581.0" layoutY="231.0" startX="-100.0" stroke="#09156f" strokeWidth="2.0" />
       <Line endX="162.0" layoutX="945.0" layoutY="231.0" startX="-100.0" stroke="#09156f" strokeWidth="2.0" />

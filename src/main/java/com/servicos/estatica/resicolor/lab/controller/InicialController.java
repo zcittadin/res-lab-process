@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.effects.JFXDepthManager;
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
 import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
+import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 
 import javafx.animation.KeyFrame;
@@ -48,6 +49,12 @@ public class InicialController implements Initializable, ControlledScreen {
 	private Label txtSp2;
 	@FXML
 	private Label txtSp3;
+	@FXML
+	private Label lblCrono1;
+	@FXML
+	private Label lblCrono2;
+	@FXML
+	private Label lblCrono3;
 	@FXML
 	private Button btConnect1;
 	@FXML
@@ -102,6 +109,9 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Timeline tmlHeater2;
 	private static Timeline tmlHeater3;
 	private static Timeline scanModbusSlaves = new Timeline();
+	private static Chronometer chrono1 = new Chronometer();
+	private static Chronometer chrono2 = new Chronometer();
+	private static Chronometer chrono3 = new Chronometer();
 
 	private static Boolean isConnected1 = false;
 	private static Boolean isConnected2 = false;
@@ -159,6 +169,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		scanModbusSlaves.play();
 		chapaTransition1.play();
 		tmlHeater1.play();
+		chrono1.start(lblCrono1);
 	}
 
 	@FXML
@@ -167,6 +178,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		imgMola2.setEffect(sepia2);
 		chapaTransition2.play();
 		tmlHeater2.play();
+		chrono2.start(lblCrono2);
 	}
 
 	@FXML
@@ -175,6 +187,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		imgMola3.setEffect(sepia3);
 		tmlHeater3.play();
 		chapaTransition3.play();
+		chrono3.start(lblCrono3);
 	}
 
 	@FXML
@@ -185,6 +198,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		tmlHeater1.stop();
 		imgMola1.setEffect(null);
 		lnChapa1.setStroke(Color.RED);
+		chrono1.stop();
 	}
 
 	@FXML
@@ -194,6 +208,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		chapaTransition2.stop();
 		imgMola2.setEffect(null);
 		lnChapa2.setStroke(Color.RED);
+		chrono2.stop();
 	}
 
 	@FXML
@@ -203,6 +218,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		chapaTransition3.stop();
 		imgMola3.setEffect(null);
 		lnChapa3.setStroke(Color.RED);
+		chrono3.stop();
 	}
 
 	@FXML
