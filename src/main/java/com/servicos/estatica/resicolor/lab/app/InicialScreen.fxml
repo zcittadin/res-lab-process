@@ -91,7 +91,7 @@
          </effect>
       </Label>
       <Label layoutX="191.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label alignment="CENTER_RIGHT" layoutX="191.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
+      <Label fx:id="txtSp1" alignment="CENTER_RIGHT" layoutX="191.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="30.0" />
          </font>
@@ -100,7 +100,7 @@
          </effect>
       </Label>
       <Label layoutX="562.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label alignment="CENTER_RIGHT" layoutX="562.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
+      <Label fx:id="txtSp2" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="30.0" />
          </font>
@@ -109,7 +109,7 @@
          </effect>
       </Label>
       <Label layoutX="926.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label alignment="CENTER_RIGHT" layoutX="926.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
+      <Label fx:id="txtSp3" alignment="CENTER_RIGHT" layoutX="926.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="30.0" />
          </font>
@@ -120,7 +120,7 @@
       <Line fx:id="lnChapa1" endX="40.0" layoutX="272.0" layoutY="222.0" startX="-100.0" stroke="RED" strokeWidth="7.0" />
       <Line fx:id="lnChapa2" endX="40.0" layoutX="641.0" layoutY="225.0" startX="-100.0" stroke="RED" strokeWidth="7.0" />
       <Line fx:id="lnChapa3" endX="40.0" layoutX="1006.0" layoutY="225.0" startX="-100.0" stroke="RED" strokeWidth="7.0" />
-      <Button fx:id="btSp1" layoutX="157.0" layoutY="475.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
+      <Button fx:id="btSp1" layoutX="157.0" layoutY="475.0" mnemonicParsing="false" onAction="#changeSp1" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
          <font>
             <Font name="DejaVu Sans Bold" size="15.0" />
          </font>
@@ -128,7 +128,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btSp2" layoutX="527.0" layoutY="475.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
+      <Button fx:id="btSp2" layoutX="527.0" layoutY="475.0" mnemonicParsing="false" onAction="#changeSp2" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
          <font>
             <Font name="DejaVu Sans Bold" size="15.0" />
          </font>
@@ -136,7 +136,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btSp3" layoutX="890.0" layoutY="475.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
+      <Button fx:id="btSp3" layoutX="890.0" layoutY="475.0" mnemonicParsing="false" onAction="#changeSp3" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
          <font>
             <Font name="DejaVu Sans Bold" size="15.0" />
          </font>

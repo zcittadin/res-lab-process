@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.effects.JFXDepthManager;
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
+import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -12,6 +13,7 @@ import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
@@ -23,6 +25,12 @@ import javafx.util.Duration;
 
 public class InicialController implements Initializable, ControlledScreen {
 
+	@FXML
+	private Label txtSp1;
+	@FXML
+	private Label txtSp2;
+	@FXML
+	private Label txtSp3;
 	@FXML
 	private ImageView imgGlass1;
 	@FXML
@@ -75,6 +83,31 @@ public class InicialController implements Initializable, ControlledScreen {
 		configAnimations();
 	}
 
+	@FXML
+	private void changeSp1() {
+		String sp = FxDialogs.showTextInput("Set-point", "Balão 1", "Digite o set-point:", "");
+		if (sp != null) {
+			txtSp1.setText(sp);
+		}
+	}
+
+	@FXML
+	private void changeSp2() {
+		String sp = FxDialogs.showTextInput("Set-point", "Balão 2", "Digite o set-point:", "");
+		if (sp != null) {
+			txtSp2.setText(sp);
+		}
+	}
+
+	@FXML
+	private void changeSp3() {
+		String sp = FxDialogs.showTextInput("Set-point", "Balão 3", "Digite o set-point:", "");
+		if (sp != null) {
+			txtSp3.setText(sp);
+
+		}
+	}
+
 	private void configLayout() {
 		rect1.setFill(Color.TRANSPARENT);
 		rect2.setFill(Color.TRANSPARENT);
@@ -107,7 +140,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		tmlAcende.setCycleCount(Timeline.INDEFINITE);
 		tmlAcende.setAutoReverse(true);
 		tmlAcende.play();
-		
+
 		chapaTransition1 = new StrokeTransition(Duration.millis(1000), lnChapa1, Color.RED, Color.ORANGE);
 		chapaTransition2 = new StrokeTransition(Duration.millis(1000), lnChapa2, Color.RED, Color.ORANGE);
 		chapaTransition3 = new StrokeTransition(Duration.millis(1000), lnChapa3, Color.RED, Color.ORANGE);
@@ -121,4 +154,5 @@ public class InicialController implements Initializable, ControlledScreen {
 		chapaTransition2.play();
 		chapaTransition3.play();
 	}
+
 }
