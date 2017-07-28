@@ -1,42 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.InicialController">
    <children>
+      <Rectangle fx:id="rect1" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="548.0" layoutX="76.0" layoutY="24.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="331.0" />
+      <ImageView fx:id="imgNovus1" fitHeight="199.0" fitWidth="228.0" layoutX="141.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../style/n1100.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="155.0" layoutY="356.0" prefHeight="46.0" prefWidth="172.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Rectangle fx:id="rect3" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="548.0" layoutX="810.0" layoutY="24.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="331.0" />
+      <Rectangle fx:id="rect2" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="548.0" layoutX="446.0" layoutY="24.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="331.0" />
       <Separator orientation="VERTICAL" prefHeight="664.0" />
-      <ImageView fx:id="imgGlass1" fitHeight="251.0" fitWidth="264.0" layoutX="109.0" layoutY="150.0" pickOnBounds="true">
+      <ImageView fx:id="imgGlass1" fitHeight="251.0" fitWidth="264.0" layoutX="109.0" layoutY="40.0" pickOnBounds="true">
          <image>
             <Image url="@../style/giphy.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgMola1" fitHeight="55.0" fitWidth="200.0" layoutX="184.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgMola1" fitHeight="55.0" fitWidth="200.0" layoutX="184.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../style/thumbs.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgGlass2" fitHeight="251.0" fitWidth="264.0" layoutX="478.0" layoutY="150.0" pickOnBounds="true">
+      <ImageView fx:id="imgGlass2" fitHeight="251.0" fitWidth="264.0" layoutX="480.0" layoutY="40.0" pickOnBounds="true">
          <image>
             <Image url="@../style/giphy.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgGlass3" fitHeight="251.0" fitWidth="264.0" layoutX="842.0" layoutY="150.0" pickOnBounds="true">
+      <ImageView fx:id="imgGlass3" fitHeight="251.0" fitWidth="264.0" layoutX="844.0" layoutY="40.0" pickOnBounds="true">
          <image>
             <Image url="@../style/giphy.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgMola2" fitHeight="55.0" fitWidth="200.0" layoutX="553.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgMola2" fitHeight="55.0" fitWidth="200.0" layoutX="555.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../style/thumbs.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgMola3" fitHeight="55.0" fitWidth="200.0" layoutX="917.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgMola3" fitHeight="55.0" fitWidth="200.0" layoutX="919.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../style/thumbs.png" />
          </image>
       </ImageView>
+      <Label alignment="CENTER_RIGHT" layoutX="156.0" layoutY="355.0" prefHeight="46.0" prefWidth="172.0" text="000.0" textFill="#f50000">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="40.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <ImageView fx:id="imgNovus2" fitHeight="199.0" fitWidth="228.0" layoutX="512.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../style/n1100.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="526.0" layoutY="356.0" prefHeight="46.0" prefWidth="172.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label alignment="CENTER_RIGHT" layoutX="526.0" layoutY="355.0" prefHeight="46.0" prefWidth="172.0" text="000.0" textFill="#f50000">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="40.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <ImageView fx:id="imgNovus3" fitHeight="199.0" fitWidth="228.0" layoutX="876.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../style/n1100.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="890.0" layoutY="356.0" prefHeight="46.0" prefWidth="172.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label alignment="CENTER_RIGHT" layoutX="890.0" layoutY="356.0" prefHeight="46.0" prefWidth="172.0" text="000.0" textFill="#f50000">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="40.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <Label layoutX="191.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label alignment="CENTER_RIGHT" layoutX="191.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="30.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <Label layoutX="562.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label alignment="CENTER_RIGHT" layoutX="562.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="30.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <Label layoutX="926.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label alignment="CENTER_RIGHT" layoutX="926.0" layoutY="404.0" prefHeight="36.0" prefWidth="136.0" text="000.0" textFill="#12f500">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="30.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <Line fx:id="lnChapa1" endX="40.0" layoutX="272.0" layoutY="222.0" startX="-100.0" stroke="RED" strokeWidth="7.0" />
+      <Line fx:id="lnChapa2" endX="40.0" layoutX="641.0" layoutY="225.0" startX="-100.0" stroke="RED" strokeWidth="7.0" />
+      <Line fx:id="lnChapa3" endX="40.0" layoutX="1006.0" layoutY="225.0" startX="-100.0" stroke="RED" strokeWidth="7.0" />
+      <Button fx:id="btSp1" layoutX="157.0" layoutY="475.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
+         <font>
+            <Font name="DejaVu Sans Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btSp2" layoutX="527.0" layoutY="475.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
+         <font>
+            <Font name="DejaVu Sans Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btSp3" layoutX="890.0" layoutY="475.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="P" textFill="#1017a1">
+         <font>
+            <Font name="DejaVu Sans Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

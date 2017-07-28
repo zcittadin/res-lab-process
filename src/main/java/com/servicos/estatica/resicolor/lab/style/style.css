@@ -6,6 +6,11 @@
 	-fx-background-color: linear-gradient(to bottom, rgba(0,28,28,1) 0%, rgba(0,128,128,1) 100%);
 }
 
+.displayGradient{
+	-fx-background-color: linear-gradient(to bottom, rgba(69.0, 72.0, 77.0, 1.0) 3.0%,
+		rgba(0.0, 0.0, 0.0, 1.0) 100.0%);
+}
+
 .btStyleClock {
   -fx-graphic: url('clock_edit.png');
 }
