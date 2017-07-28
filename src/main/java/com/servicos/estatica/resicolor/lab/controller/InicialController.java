@@ -5,19 +5,24 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.effects.JFXDepthManager;
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
+import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -26,11 +31,29 @@ import javafx.util.Duration;
 public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
+	private AnchorPane pane1;
+	@FXML
+	private AnchorPane pane2;
+	@FXML
+	private AnchorPane pane3;
+	@FXML
+	private Label lblTemp1;
+	@FXML
+	private Label lblTemp2;
+	@FXML
+	private Label lblTemp3;
+	@FXML
 	private Label txtSp1;
 	@FXML
 	private Label txtSp2;
 	@FXML
 	private Label txtSp3;
+	@FXML
+	private Button btConnect1;
+	@FXML
+	private Button btConnect2;
+	@FXML
+	private Button btConnect3;
 	@FXML
 	private ImageView imgGlass1;
 	@FXML
@@ -78,6 +101,15 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Timeline tmlHeater1;
 	private static Timeline tmlHeater2;
 	private static Timeline tmlHeater3;
+	private static Timeline scanModbusSlaves = new Timeline();
+
+	private static Boolean isConnected1 = false;
+	private static Boolean isConnected2 = false;
+	private static Boolean isConnected3 = false;
+
+	private static ModbusRTUService modService = new ModbusRTUService();
+
+	private static Double tempReator = new Double(0);
 
 	ScreensController myController;
 
@@ -90,6 +122,10 @@ public class InicialController implements Initializable, ControlledScreen {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		configLayout();
 		configAnimations();
+		modService.setConnectionParams("COM9", 9600);
+		modService.openConnection();
+		initModbusReadSlaves();
+		initModbusReadSlaves();
 	}
 
 	@FXML
@@ -120,6 +156,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void initProc1() {
 		imgGlass1.setImage(gifGlassFile);
 		imgMola1.setEffect(sepia1);
+		scanModbusSlaves.play();
 		chapaTransition1.play();
 		tmlHeater1.play();
 	}
@@ -142,6 +179,7 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void stopProc1() {
+		scanModbusSlaves.stop();
 		imgGlass1.setImage(imgGlassFile);
 		chapaTransition1.stop();
 		tmlHeater1.stop();
@@ -167,6 +205,39 @@ public class InicialController implements Initializable, ControlledScreen {
 		lnChapa3.setStroke(Color.RED);
 	}
 
+	@FXML
+	private void toggleConnect1() {
+		if (isConnected1) {
+			isConnected1 = false;
+			btConnect1.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
+		} else {
+			isConnected1 = true;
+			btConnect1.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
+		}
+	}
+
+	@FXML
+	private void toggleConnect2() {
+		if (isConnected2) {
+			isConnected2 = false;
+			btConnect2.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
+		} else {
+			isConnected2 = true;
+			btConnect2.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
+		}
+	}
+
+	@FXML
+	private void toggleConnect3() {
+		if (isConnected3) {
+			isConnected3 = false;
+			btConnect3.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
+		} else {
+			isConnected3 = true;
+			btConnect3.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
+		}
+	}
+
 	private void configLayout() {
 		rect1.setFill(Color.TRANSPARENT);
 		rect2.setFill(Color.TRANSPARENT);
@@ -180,6 +251,9 @@ public class InicialController implements Initializable, ControlledScreen {
 		JFXDepthManager.setDepth(imgNovus1, 5);
 		JFXDepthManager.setDepth(imgNovus2, 5);
 		JFXDepthManager.setDepth(imgNovus3, 5);
+		JFXDepthManager.setDepth(pane1, 5);
+		JFXDepthManager.setDepth(pane2, 5);
+		JFXDepthManager.setDepth(pane3, 5);
 		JFXDepthManager.setDepth(rect1, 5);
 		JFXDepthManager.setDepth(rect2, 5);
 		JFXDepthManager.setDepth(rect3, 5);
@@ -226,6 +300,19 @@ public class InicialController implements Initializable, ControlledScreen {
 		chapaTransition1.setAutoReverse(true);
 		chapaTransition2.setAutoReverse(true);
 		chapaTransition3.setAutoReverse(true);
+	}
+
+	private void initModbusReadSlaves() {
+		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				tempReator = modService.readMultipleRegisters(1, 0, 1);
+				lblTemp1.setText(tempReator.toString());
+				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
+				// 1);
+			}
+		}));
+		scanModbusSlaves.setCycleCount(Timeline.INDEFINITE);
+
 	}
 
 }

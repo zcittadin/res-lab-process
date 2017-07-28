@@ -27,7 +27,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Label layoutX="453.0" layoutY="21.0" text="Controle de ensaio laboratorial">
+                  <Label layoutX="453.0" layoutY="21.0" text="Controle de ensaio laboratorial" textFill="#09156f">
                      <font>
                         <Font name="Corbel Bold" size="38.0" />
                      </font>
