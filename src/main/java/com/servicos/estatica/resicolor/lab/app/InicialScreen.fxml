@@ -159,12 +159,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="210.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStylePlay" stylesheets="@../style/style.css">
+      <Button layoutX="210.0" layoutY="40.0" mnemonicParsing="false" onAction="#initProc1" styleClass="btStylePlay" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="242.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleStop" stylesheets="@../style/style.css">
+      <Button layoutX="242.0" layoutY="40.0" mnemonicParsing="false" onAction="#stopProc1" styleClass="btStyleStop" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -189,12 +189,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="579.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStylePlay" stylesheets="@../style/style.css">
+      <Button layoutX="579.0" layoutY="40.0" mnemonicParsing="false" onAction="#initProc2" styleClass="btStylePlay" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="611.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleStop" stylesheets="@../style/style.css">
+      <Button layoutX="611.0" layoutY="40.0" mnemonicParsing="false" onAction="#stopProc2" styleClass="btStyleStop" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -219,12 +219,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="944.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStylePlay" stylesheets="@../style/style.css">
+      <Button layoutX="944.0" layoutY="40.0" mnemonicParsing="false" onAction="#initProc3" styleClass="btStylePlay" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="976.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleStop" stylesheets="@../style/style.css">
+      <Button layoutX="976.0" layoutY="40.0" mnemonicParsing="false" onAction="#stopProc3" styleClass="btStyleStop" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
