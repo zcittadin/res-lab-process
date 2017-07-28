@@ -150,7 +150,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="178.0" layoutY="20.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+      <Button layoutX="178.0" layoutY="20.0" mnemonicParsing="false" onAction="#openConfigEnsaio" styleClass="btStyleAdd" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

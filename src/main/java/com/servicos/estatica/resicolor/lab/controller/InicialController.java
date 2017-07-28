@@ -1,5 +1,6 @@
 package com.servicos.estatica.resicolor.lab.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,7 +17,10 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
@@ -27,6 +31,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class InicialController implements Initializable, ControlledScreen {
@@ -252,6 +258,20 @@ public class InicialController implements Initializable, ControlledScreen {
 			isConnected3 = true;
 			btConnect3.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
 		}
+	}
+
+	@FXML
+	public void openConfigEnsaio() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/ConfigEnsaio.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Informações sobre o cliente");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(btConnect1.getScene().getWindow());
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
 	}
 
 	private void configLayout() {
