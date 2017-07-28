@@ -144,5 +144,95 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button layoutX="146.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleConnect" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="178.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="274.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="210.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStylePlay" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="242.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleStop" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="306.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="515.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleConnect" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="547.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="643.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="579.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStylePlay" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="611.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleStop" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="675.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="880.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleConnect" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="912.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="1008.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="944.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStylePlay" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="976.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleStop" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="1040.0" layoutY="40.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
