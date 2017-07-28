@@ -138,7 +138,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		configLayout();
 		configAnimations();
-		modService.setConnectionParams("COM9", 9600);
+		modService.setConnectionParams("COM5", 9600);
 		modService.openConnection();
 		initModbusReadSlaves();
 		initModbusReadSlaves();
