@@ -38,3 +38,7 @@
 .btStyleReport {
   -fx-graphic: url('layout.png');
 }
+
+.btStyleUp {
+  -fx-graphic: url('pyramid.png');
+}
