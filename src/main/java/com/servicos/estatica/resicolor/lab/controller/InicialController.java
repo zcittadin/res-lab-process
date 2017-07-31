@@ -138,9 +138,8 @@ public class InicialController implements Initializable, ControlledScreen {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		configLayout();
 		configAnimations();
-		modService.setConnectionParams("COM5", 9600);
+		modService.setConnectionParams("COM9", 9600);
 		modService.openConnection();
-		initModbusReadSlaves();
 		initModbusReadSlaves();
 	}
 
@@ -281,9 +280,11 @@ public class InicialController implements Initializable, ControlledScreen {
 		imgGlass1.setImage(imgGlassFile);
 		imgGlass2.setImage(imgGlassFile);
 		imgGlass3.setImage(imgGlassFile);
-		/*JFXDepthManager.setDepth(imgGlass1, 5);
-		JFXDepthManager.setDepth(imgGlass2, 5);
-		JFXDepthManager.setDepth(imgGlass3, 5);*/
+		/*
+		 * JFXDepthManager.setDepth(imgGlass1, 5);
+		 * JFXDepthManager.setDepth(imgGlass2, 5);
+		 * JFXDepthManager.setDepth(imgGlass3, 5);
+		 */
 		JFXDepthManager.setDepth(imgNovus1, 5);
 		JFXDepthManager.setDepth(imgNovus2, 5);
 		JFXDepthManager.setDepth(imgNovus3, 5);
