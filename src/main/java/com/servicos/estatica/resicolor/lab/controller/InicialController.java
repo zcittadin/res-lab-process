@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.fazecast.jSerialComm.SerialPort;
 import com.jfoenix.effects.JFXDepthManager;
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
 import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
@@ -14,6 +15,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
@@ -62,6 +66,10 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private Label lblCrono3;
 	@FXML
+	private ComboBox<String> comboPorts;
+	@FXML
+	private ComboBox<String> comboBaud;
+	@FXML
 	private Button btConnect;
 	@FXML
 	private ImageView imgGlass1;
@@ -85,6 +93,8 @@ public class InicialController implements Initializable, ControlledScreen {
 	private Rectangle rect1;
 	@FXML
 	private Rectangle rect2;
+	@FXML
+	private Rectangle rect3;
 	@FXML
 	private Line lnChapa1;
 	@FXML
@@ -118,6 +128,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static ModbusRTUService modService = new ModbusRTUService();
 
 	private static Double tempReator = new Double(0);
+	private static ObservableList<String> availablePorts;
 
 	ScreensController myController;
 
@@ -130,9 +141,21 @@ public class InicialController implements Initializable, ControlledScreen {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		configLayout();
 		configAnimations();
-		modService.setConnectionParams("COM9", 9600);
-		modService.openConnection();
 		initModbusReadSlaves();
+
+		SerialPort[] ports = modService.getComPorts();
+		availablePorts = FXCollections.observableArrayList();
+		for (SerialPort port : ports) {
+			availablePorts.add(port.getSystemPortName());
+		}
+		if (!availablePorts.isEmpty()) {
+			comboPorts.setItems(availablePorts);
+			comboPorts.setValue(availablePorts.get(0));
+		} else {
+			btConnect.setDisable(Boolean.TRUE);
+			comboPorts.setValue("COM indisponível");
+		}
+
 	}
 
 	@FXML
@@ -163,7 +186,6 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void initProc1() {
 		imgGlass1.setImage(gifGlassFile);
 		imgMola1.setEffect(sepia1);
-		scanModbusSlaves.play();
 		chapaTransition1.play();
 		tmlHeater1.play();
 		chrono1.start(lblCrono1);
@@ -221,10 +243,15 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private void toggleConnect() {
 		if (isConnected) {
+			scanModbusSlaves.stop();
+			modService.closeConnection();
 			isConnected = false;
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
 			btConnect.setText("Conectar");
 		} else {
+			modService.setConnectionParams(comboPorts.getValue(), 9600);
+			modService.openConnection();
+			scanModbusSlaves.play();
 			isConnected = true;
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
 			btConnect.setText("Desconectar");
@@ -248,7 +275,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void configLayout() {
 		rect1.setFill(Color.TRANSPARENT);
 		rect2.setFill(Color.TRANSPARENT);
-		// rect3.setFill(Color.TRANSPARENT);
+		rect3.setFill(Color.TRANSPARENT);
 		imgGlass1.setImage(imgGlassFile);
 		imgGlass2.setImage(imgGlassFile);
 		imgGlass3.setImage(imgGlassFile);
@@ -265,7 +292,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		JFXDepthManager.setDepth(pane3, 5);
 		JFXDepthManager.setDepth(rect1, 5);
 		JFXDepthManager.setDepth(rect2, 5);
-		// JFXDepthManager.setDepth(rect3, 5);
+		JFXDepthManager.setDepth(rect3, 5);
 		sepia1.setInput(glow1);
 		imgMola1.setEffect(sepia1);
 		sepia2.setInput(glow2);

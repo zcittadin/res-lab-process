@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,8 +18,8 @@
 
 <AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.InicialController">
    <children>
-      <Rectangle fx:id="rect1" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="615.0" layoutX="343.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="823.0" />
-      <AnchorPane fx:id="pane3" layoutX="411.0" layoutY="437.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
+      <Rectangle fx:id="rect1" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="615.0" layoutX="363.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="823.0" />
+      <AnchorPane fx:id="pane3" layoutX="431.0" layoutY="437.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
          <children>
             <Label fx:id="lblCrono3" alignment="CENTER" layoutX="164.0" layoutY="43.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
@@ -102,7 +104,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pane2" layoutX="411.0" layoutY="232.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="pane2" layoutX="431.0" layoutY="232.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
          <children>
             <Label fx:id="lblCrono2" alignment="CENTER" layoutX="163.0" layoutY="45.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
@@ -187,7 +189,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pane1" layoutX="411.0" layoutY="29.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="pane1" layoutX="431.0" layoutY="29.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
          <children>
             <Label fx:id="lblCrono1" alignment="CENTER" layoutX="163.0" layoutY="44.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
@@ -272,14 +274,14 @@
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fx:id="imgNovus1" fitHeight="180.0" fitWidth="228.0" layoutX="950.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNovus1" fitHeight="180.0" fitWidth="228.0" layoutX="970.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../style/n1100.png" />
          </image>
       </ImageView>
-      <Label layoutX="962.0" layoutY="55.0" prefHeight="40.0" prefWidth="155.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label layoutX="982.0" layoutY="55.0" prefHeight="40.0" prefWidth="155.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
       <Separator orientation="VERTICAL" prefHeight="664.0" />
-      <Label fx:id="lblTemp1" alignment="CENTER_RIGHT" layoutX="963.0" layoutY="55.0" prefHeight="40.0" prefWidth="155.0" text="000.0" textFill="#f50000">
+      <Label fx:id="lblTemp1" alignment="CENTER_RIGHT" layoutX="983.0" layoutY="55.0" prefHeight="40.0" prefWidth="155.0" text="000.0" textFill="#f50000">
          <font>
             <Font name="DSEG7 Classic-Bold" size="34.0" />
          </font>
@@ -287,13 +289,13 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <ImageView fx:id="imgNovus2" fitHeight="180.0" fitWidth="228.0" layoutX="950.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNovus2" fitHeight="180.0" fitWidth="228.0" layoutX="970.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../style/n1100.png" />
          </image>
       </ImageView>
-      <Label layoutX="963.0" layoutY="259.0" prefHeight="40.0" prefWidth="155.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="lblTemp2" alignment="CENTER_RIGHT" layoutX="963.0" layoutY="259.0" prefHeight="40.0" prefWidth="155.0" text="000.0" textFill="#f50000">
+      <Label layoutX="983.0" layoutY="259.0" prefHeight="40.0" prefWidth="155.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label fx:id="lblTemp2" alignment="CENTER_RIGHT" layoutX="983.0" layoutY="259.0" prefHeight="40.0" prefWidth="155.0" text="000.0" textFill="#f50000">
          <font>
             <Font name="DSEG7 Classic-Bold" size="34.0" />
          </font>
@@ -301,13 +303,13 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <ImageView fx:id="imgNovus3" fitHeight="180.0" fitWidth="228.0" layoutX="950.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNovus3" fitHeight="180.0" fitWidth="228.0" layoutX="970.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../style/n1100.png" />
          </image>
       </ImageView>
-      <Label layoutX="963.0" layoutY="463.0" prefHeight="40.0" prefWidth="155.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="lblTemp3" alignment="CENTER_RIGHT" layoutX="963.0" layoutY="463.0" prefHeight="40.0" prefWidth="155.0" text="000.0" textFill="#f50000">
+      <Label layoutX="983.0" layoutY="463.0" prefHeight="40.0" prefWidth="155.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label fx:id="lblTemp3" alignment="CENTER_RIGHT" layoutX="983.0" layoutY="463.0" prefHeight="40.0" prefWidth="155.0" text="000.0" textFill="#f50000">
          <font>
             <Font name="DSEG7 Classic-Bold" size="34.0" />
          </font>
@@ -315,8 +317,8 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <Label layoutX="996.0" layoutY="98.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="txtSp1" alignment="CENTER_RIGHT" layoutX="996.0" layoutY="98.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
+      <Label layoutX="1016.0" layoutY="98.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label fx:id="txtSp1" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="98.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="25.0" />
          </font>
@@ -324,8 +326,8 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <Label layoutX="996.0" layoutY="301.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="txtSp2" alignment="CENTER_RIGHT" layoutX="996.0" layoutY="301.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
+      <Label layoutX="1016.0" layoutY="301.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label fx:id="txtSp2" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="301.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="25.0" />
          </font>
@@ -333,8 +335,8 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <Label layoutX="996.0" layoutY="506.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="txtSp3" alignment="CENTER_RIGHT" layoutX="996.0" layoutY="506.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
+      <Label layoutX="1016.0" layoutY="506.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
+      <Label fx:id="txtSp3" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="506.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="25.0" />
          </font>
@@ -342,7 +344,7 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <Button fx:id="btSp1" layoutX="965.0" layoutY="162.0" mnemonicParsing="false" onAction="#changeSp1" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
+      <Button fx:id="btSp1" layoutX="985.0" layoutY="162.0" mnemonicParsing="false" onAction="#changeSp1" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
          <font>
             <Font name="DejaVu Sans Bold" size="13.0" />
          </font>
@@ -350,7 +352,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btSp2" layoutX="965.0" layoutY="365.0" mnemonicParsing="false" onAction="#changeSp2" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
+      <Button fx:id="btSp2" layoutX="985.0" layoutY="365.0" mnemonicParsing="false" onAction="#changeSp2" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
          <font>
             <Font name="DejaVu Sans Bold" size="13.0" />
          </font>
@@ -358,7 +360,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btSp3" layoutX="965.0" layoutY="570.0" mnemonicParsing="false" onAction="#changeSp3" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
+      <Button fx:id="btSp3" layoutX="985.0" layoutY="570.0" mnemonicParsing="false" onAction="#changeSp3" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
          <font>
             <Font name="DejaVu Sans Bold" size="13.0" />
          </font>
@@ -366,89 +368,114 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="468.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="436.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="540.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="508.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="492.0" mnemonicParsing="false" onAction="#initProc3" styleClass="btStylePlay" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="460.0" mnemonicParsing="false" onAction="#initProc3" styleClass="btStylePlay" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="516.0" mnemonicParsing="false" onAction="#stopProc3" styleClass="btStyleStop" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="484.0" mnemonicParsing="false" onAction="#stopProc3" styleClass="btStyleStop" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="564.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="532.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="59.0" mnemonicParsing="false" onAction="#openConfigEnsaio" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="28.0" mnemonicParsing="false" onAction="#openConfigEnsaio" styleClass="btStyleAdd" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="83.0" mnemonicParsing="false" onAction="#initProc1" styleClass="btStylePlay" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="52.0" mnemonicParsing="false" onAction="#initProc1" styleClass="btStylePlay" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="107.0" mnemonicParsing="false" onAction="#stopProc1" styleClass="btStyleStop" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="76.0" mnemonicParsing="false" onAction="#stopProc1" styleClass="btStyleStop" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="131.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="100.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="155.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="124.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="259.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="231.0" mnemonicParsing="false" styleClass="btStyleAdd" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="283.0" mnemonicParsing="false" onAction="#initProc2" styleClass="btStylePlay" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="255.0" mnemonicParsing="false" onAction="#initProc2" styleClass="btStylePlay" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="307.0" mnemonicParsing="false" onAction="#stopProc2" styleClass="btStyleStop" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="279.0" mnemonicParsing="false" onAction="#stopProc2" styleClass="btStyleStop" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="331.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="303.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="379.0" layoutY="355.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+      <Button layoutX="399.0" layoutY="327.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle fx:id="rect2" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="180.0" layoutX="25.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="295.0" />
-      <ComboBox layoutX="98.0" layoutY="63.0" prefWidth="150.0" />
-      <ComboBox layoutX="98.0" layoutY="102.0" prefWidth="150.0" />
-      <Button fx:id="btConnect" layoutX="107.0" layoutY="142.0" mnemonicParsing="false" onAction="#toggleConnect" prefHeight="40.0" prefWidth="132.0" styleClass="btStyleDisconnect" stylesheets="@../style/style.css" text="Conectar">
+      <Rectangle fx:id="rect2" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="112.0" layoutX="25.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="320.0" />
+      <ComboBox fx:id="comboPorts" layoutX="58.0" layoutY="76.0" prefWidth="110.0" />
+      <Button fx:id="btConnect" layoutX="181.0" layoutY="76.0" mnemonicParsing="false" onAction="#toggleConnect" prefHeight="25.0" prefWidth="132.0" styleClass="btStyleDisconnect" stylesheets="@../style/style.css" text="Conectar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label layoutX="40.0" layoutY="22.0" text="Conexão" textFill="#09156f">
+      <Label layoutX="135.0" layoutY="14.0" text="Conexão" textFill="#09156f">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="rect3" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="485.0" layoutX="25.0" layoutY="143.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="320.0" />
+      <TabPane layoutX="40.0" layoutY="197.0" prefHeight="411.0" prefWidth="291.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Balão 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="myGradient" stylesheets="@../style/style.css" />
+            </content>
+          </Tab>
+          <Tab text="Balão 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="myGradient" stylesheets="@../style/style.css" />
+            </content>
+          </Tab>
+            <Tab text="Balão 3">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="myGradient" stylesheets="@../style/style.css" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="60.0" layoutY="56.0" text="Porta" textFill="#09156f" />
+      <Label layoutX="88.0" layoutY="147.0" text="Parâmetros de ensaio" textFill="#09156f">
          <font>
             <Font size="20.0" />
          </font>
