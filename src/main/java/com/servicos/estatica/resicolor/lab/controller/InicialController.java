@@ -62,11 +62,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private Label lblCrono3;
 	@FXML
-	private Button btConnect1;
-	@FXML
-	private Button btConnect2;
-	@FXML
-	private Button btConnect3;
+	private Button btConnect;
 	@FXML
 	private ImageView imgGlass1;
 	@FXML
@@ -89,8 +85,6 @@ public class InicialController implements Initializable, ControlledScreen {
 	private Rectangle rect1;
 	@FXML
 	private Rectangle rect2;
-	@FXML
-	private Rectangle rect3;
 	@FXML
 	private Line lnChapa1;
 	@FXML
@@ -119,9 +113,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Chronometer chrono2 = new Chronometer();
 	private static Chronometer chrono3 = new Chronometer();
 
-	private static Boolean isConnected1 = false;
-	private static Boolean isConnected2 = false;
-	private static Boolean isConnected3 = false;
+	private static Boolean isConnected = false;
 
 	private static ModbusRTUService modService = new ModbusRTUService();
 
@@ -227,35 +219,15 @@ public class InicialController implements Initializable, ControlledScreen {
 	}
 
 	@FXML
-	private void toggleConnect1() {
-		if (isConnected1) {
-			isConnected1 = false;
-			btConnect1.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
+	private void toggleConnect() {
+		if (isConnected) {
+			isConnected = false;
+			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
+			btConnect.setText("Conectar");
 		} else {
-			isConnected1 = true;
-			btConnect1.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
-		}
-	}
-
-	@FXML
-	private void toggleConnect2() {
-		if (isConnected2) {
-			isConnected2 = false;
-			btConnect2.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
-		} else {
-			isConnected2 = true;
-			btConnect2.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
-		}
-	}
-
-	@FXML
-	private void toggleConnect3() {
-		if (isConnected3) {
-			isConnected3 = false;
-			btConnect3.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
-		} else {
-			isConnected3 = true;
-			btConnect3.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
+			isConnected = true;
+			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
+			btConnect.setText("Desconectar");
 		}
 	}
 
@@ -268,7 +240,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		stage.setScene(new Scene(root));
 		stage.setTitle("Informações sobre o cliente");
 		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.initOwner(btConnect1.getScene().getWindow());
+		stage.initOwner(btConnect.getScene().getWindow());
 		stage.setResizable(Boolean.FALSE);
 		stage.showAndWait();
 	}
@@ -276,7 +248,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void configLayout() {
 		rect1.setFill(Color.TRANSPARENT);
 		rect2.setFill(Color.TRANSPARENT);
-		rect3.setFill(Color.TRANSPARENT);
+		// rect3.setFill(Color.TRANSPARENT);
 		imgGlass1.setImage(imgGlassFile);
 		imgGlass2.setImage(imgGlassFile);
 		imgGlass3.setImage(imgGlassFile);
@@ -293,7 +265,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		JFXDepthManager.setDepth(pane3, 5);
 		JFXDepthManager.setDepth(rect1, 5);
 		JFXDepthManager.setDepth(rect2, 5);
-		JFXDepthManager.setDepth(rect3, 5);
+		// JFXDepthManager.setDepth(rect3, 5);
 		sepia1.setInput(glow1);
 		imgMola1.setEffect(sepia1);
 		sepia2.setInput(glow2);
