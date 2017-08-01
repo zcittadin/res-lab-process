@@ -2,14 +2,17 @@ package com.servicos.estatica.resicolor.lab.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import com.fazecast.jSerialComm.SerialPort;
 import com.jfoenix.effects.JFXDepthManager;
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
 import com.servicos.estatica.resicolor.lab.dao.EnsaioDAO;
+import com.servicos.estatica.resicolor.lab.dao.LeituraDAO;
 import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
 import com.servicos.estatica.resicolor.lab.model.Ensaio;
+import com.servicos.estatica.resicolor.lab.model.Leitura;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 import com.servicos.estatica.resicolor.lab.util.Toast;
@@ -32,6 +35,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
@@ -138,6 +142,12 @@ public class InicialController implements Initializable, ControlledScreen {
 	private Line lnChapa2;
 	@FXML
 	private Line lnChapa3;
+	@FXML
+	private ProgressIndicator prog1;
+	@FXML
+	private ProgressIndicator prog2;
+	@FXML
+	private ProgressIndicator prog3;
 
 	private static Image gifGlassFile = new Image("/com/servicos/estatica/resicolor/lab/style/glass.gif");
 	private static Image imgGlassFile = new Image("/com/servicos/estatica/resicolor/lab/style/glass.png");
@@ -181,6 +191,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Ensaio ensaio3;
 
 	private static EnsaioDAO ensaioDAO = new EnsaioDAO();
+	private static LeituraDAO leituraDAO = new LeituraDAO();
 
 	ScreensController myController;
 
@@ -215,6 +226,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
+				prog1.setVisible(true);
 				// leituras.clear();
 				ensaio1 = new Ensaio(null, null, txtLoteBalao1.getText(), "Balão 1", 0, 0, null, null);
 				ensaioDAO.saveEnsaio(ensaio1);
@@ -224,17 +236,19 @@ public class InicialController implements Initializable, ControlledScreen {
 		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				// progressSave.setVisible(false);
+				prog1.setVisible(false);
 				btPlay1.setDisable(false);
 				btStop1.setDisable(false);
 				btChart1.setDisable(false);
 				btReport1.setDisable(false);
+				txtLoteBalao1.setDisable(true);
 				makeToast("Ensaio salvo com sucesso.");
 			}
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
+				prog1.setVisible(true);
 				// isAdding = false;
 				// txtProcesso.setText(null);
 				// txtProcesso.setDisable(true);
@@ -255,6 +269,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			@Override
 			protected Void call() throws Exception {
 				// leituras.clear();
+				prog2.setVisible(true);
 				ensaio2 = new Ensaio(null, null, txtLoteBalao2.getText(), "Balão 2", 0, 0, null, null);
 				ensaioDAO.saveEnsaio(ensaio2);
 				return null;
@@ -263,7 +278,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				// progressSave.setVisible(false);
+				prog2.setVisible(false);
 				btPlay2.setDisable(false);
 				btStop2.setDisable(false);
 				btChart2.setDisable(false);
@@ -274,6 +289,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
+				prog2.setVisible(false);
 				// isAdding = false;
 				// txtProcesso.setText(null);
 				// txtProcesso.setDisable(true);
@@ -294,6 +310,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			@Override
 			protected Void call() throws Exception {
 				// leituras.clear();
+				prog3.setVisible(true);
 				ensaio3 = new Ensaio(null, null, txtLoteBalao3.getText(), "Balão 3", 0, 0, null, null);
 				ensaioDAO.saveEnsaio(ensaio3);
 				return null;
@@ -302,17 +319,20 @@ public class InicialController implements Initializable, ControlledScreen {
 		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				// progressSave.setVisible(false);
+				prog3.setVisible(false);
 				btPlay3.setDisable(false);
 				btStop3.setDisable(false);
 				btChart3.setDisable(false);
 				btReport3.setDisable(false);
+				isBalaoReady1 = true;
 				makeToast("Ensaio salvo com sucesso.");
 			}
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
+				prog3.setVisible(false);
+				isBalaoReady1 = false;
 				// isAdding = false;
 				// txtProcesso.setText(null);
 				// txtProcesso.setDisable(true);
@@ -324,7 +344,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		});
 		Thread t = new Thread(saveTask);
 		t.start();
-		isBalaoReady1 = true;
 	}
 
 	@FXML
@@ -358,6 +377,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		chapaTransition1.play();
 		tmlHeater1.play();
 		chrono1.start(lblCrono1);
+		isBalaoRunning1 = true;
+		isBalaoReady1 = false;
 	}
 
 	@FXML
@@ -449,11 +470,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		imgGlass1.setImage(imgGlassFile);
 		imgGlass2.setImage(imgGlassFile);
 		imgGlass3.setImage(imgGlassFile);
-		/*
-		 * JFXDepthManager.setDepth(imgGlass1, 5);
-		 * JFXDepthManager.setDepth(imgGlass2, 5);
-		 * JFXDepthManager.setDepth(imgGlass3, 5);
-		 */
 		JFXDepthManager.setDepth(imgNovus1, 5);
 		JFXDepthManager.setDepth(imgNovus2, 5);
 		JFXDepthManager.setDepth(imgNovus3, 5);
@@ -509,12 +525,16 @@ public class InicialController implements Initializable, ControlledScreen {
 	}
 
 	private void initModbusReadSlaves() {
-		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				tempReator = modService.readMultipleRegisters(1, 0, 1);
 				lblTemp1.setText(tempReator.toString());
 				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
 				// 1);
+
+				if (isBalaoRunning1) {
+					leituraDAO.saveLeitura(new Leitura(null, ensaio1, Calendar.getInstance().getTime(), tempReator, 0));
+				}
 			}
 		}));
 		scanModbusSlaves.setCycleCount(Timeline.INDEFINITE);

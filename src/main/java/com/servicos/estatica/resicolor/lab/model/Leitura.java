@@ -26,7 +26,7 @@ public class Leitura implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_ensaio")
 	private Ensaio ensaio;
-	@Column(name = "dt_proc")
+	@Column(name = "dt_leitura")
 	private Date dtProc;
 	@Column(name = "temp")
 	private double temp;
