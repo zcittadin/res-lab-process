@@ -2,6 +2,8 @@ package com.servicos.estatica.resicolor.lab.app;
 
 import java.util.Optional;
 
+import com.servicos.estatica.resicolor.lab.util.HibernateUtil;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -22,7 +24,7 @@ public class App extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Resicolor - Divisão de resinas");
-		//stage.setMaximized(true);
+		// stage.setMaximized(true);
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
@@ -39,6 +41,11 @@ public class App extends Application {
 			}
 		});
 		stage.show();
+	}
+
+	@Override
+	public void stop() throws Exception {
+		HibernateUtil.closeSessionFactory();
 	}
 
 	public static void main(String[] args) {

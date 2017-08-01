@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 import com.fazecast.jSerialComm.SerialPort;
 import com.jfoenix.effects.JFXDepthManager;
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
+import com.servicos.estatica.resicolor.lab.dao.EnsaioDAO;
 import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
+import com.servicos.estatica.resicolor.lab.model.Ensaio;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 
@@ -17,6 +19,8 @@ import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,6 +31,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
@@ -47,6 +52,8 @@ public class InicialController implements Initializable, ControlledScreen {
 	private AnchorPane pane2;
 	@FXML
 	private AnchorPane pane3;
+	@FXML
+	private TextField txtLoteBalao1;
 	@FXML
 	private Label lblTemp1;
 	@FXML
@@ -130,6 +137,9 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Double tempReator = new Double(0);
 	private static ObservableList<String> availablePorts;
 
+	private static Ensaio ensaio;
+	private static EnsaioDAO ensaioDAO = new EnsaioDAO();
+
 	ScreensController myController;
 
 	@Override
@@ -155,7 +165,45 @@ public class InicialController implements Initializable, ControlledScreen {
 			btConnect.setDisable(Boolean.TRUE);
 			comboPorts.setValue("COM indisponível");
 		}
+	}
 
+	@FXML
+	public void saveBalao1() {
+		Task<Void> saveTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				// leituras.clear();
+				ensaio = new Ensaio(null, null, txtLoteBalao1.getText(), 0, 0, null, null);
+				ensaioDAO.saveEnsaio(ensaio);
+				return null;
+			}
+		};
+		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				// isAdding = false;
+				// progressSave.setVisible(false);
+				// btCancelar.setDisable(false);
+				// lblTemp.setText("000.0");
+				// lblChrono.setText("00:00:00");
+				// makeToast("Processo salvo com sucesso.");
+			}
+		});
+		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				// isAdding = false;
+				// txtProcesso.setText(null);
+				// txtProcesso.setDisable(true);
+				// btNovo.setDisable(true);
+				// btSalvar.setDisable(true);
+				// btCancelar.setDisable(true);
+				// progressSave.setVisible(false);
+			}
+		});
+		Thread t = new Thread(saveTask);
+		t.start();
+		// isReady = true;
 	}
 
 	@FXML
