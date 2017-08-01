@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "ensaio")
 public class Ensaio implements Serializable {
 
-	private static final long serialVersionUID = -1726682239439353261L;
+	private static final long serialVersionUID = -2212557629858281679L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +28,8 @@ public class Ensaio implements Serializable {
 	private List<Leitura> leituras;
 	@Column(name = "lote")
 	private String lote;
+	@Column(name = "balao")
+	private String balao;
 	@Column(name = "t_max")
 	private double tempMax;
 	@Column(name = "t_min")
@@ -41,11 +43,12 @@ public class Ensaio implements Serializable {
 
 	}
 
-	public Ensaio(Long id, List<Leitura> leituras, String lote, double tempMax, double tempMin, Date dhInicial,
-			Date dhFinal) {
+	public Ensaio(Long id, List<Leitura> leituras, String lote, String balao, double tempMax, double tempMin,
+			Date dhInicial, Date dhFinal) {
 		this.id = id;
 		this.leituras = leituras;
 		this.lote = lote;
+		this.balao = balao;
 		this.tempMax = tempMax;
 		this.tempMin = tempMin;
 		this.dhInicial = dhInicial;
@@ -84,6 +87,14 @@ public class Ensaio implements Serializable {
 		this.lote = lote;
 	}
 
+	public String getBalao() {
+		return balao;
+	}
+
+	public void setBalao(String balao) {
+		this.balao = balao;
+	}
+
 	public double getTempMax() {
 		return tempMax;
 	}
@@ -110,8 +121,8 @@ public class Ensaio implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ensaio [id=" + id + ", leituras=" + leituras + ", lote=" + lote + ", tempMax=" + tempMax + ", tempMin="
-				+ tempMin + ", dhInicial=" + dhInicial + ", dhFinal=" + dhFinal + "]";
+		return "Ensaio [id=" + id + ", leituras=" + leituras + ", lote=" + lote + ", balao=" + balao + ", tempMax="
+				+ tempMax + ", tempMin=" + tempMin + ", dhInicial=" + dhInicial + ", dhFinal=" + dhFinal + "]";
 	}
 
 	@Override
