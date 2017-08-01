@@ -1,8 +1,9 @@
 package com.servicos.estatica.resicolor.lab.controller;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.fazecast.jSerialComm.SerialPort;
@@ -28,11 +29,11 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
@@ -46,7 +47,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -87,6 +87,12 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private ComboBox<String> comboPorts;
 	@FXML
+	private Button btAdd1;
+	@FXML
+	private Button btAdd2;
+	@FXML
+	private Button btAdd3;
+	@FXML
 	private Button btConnect;
 	@FXML
 	private Button btPlay1;
@@ -112,6 +118,12 @@ public class InicialController implements Initializable, ControlledScreen {
 	private Button btReport2;
 	@FXML
 	private Button btReport3;
+	@FXML
+	private Button btSaveBalao1;
+	@FXML
+	private Button btSaveBalao2;
+	@FXML
+	private Button btSaveBalao3;
 	@FXML
 	private ImageView imgGlass1;
 	@FXML
@@ -183,7 +195,7 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	private static ModbusRTUService modService = new ModbusRTUService();
 
-	private static Double tempReator = new Double(0);
+	private static Double tempBalao1 = new Double(0);
 	private static ObservableList<String> availablePorts;
 
 	private static Ensaio ensaio1;
@@ -227,8 +239,11 @@ public class InicialController implements Initializable, ControlledScreen {
 			@Override
 			protected Void call() throws Exception {
 				prog1.setVisible(true);
-				// leituras.clear();
-				ensaio1 = new Ensaio(null, null, txtLoteBalao1.getText(), "Balão 1", 0, 0, null, null);
+				btSaveBalao1.setDisable(true);
+				btAdd1.setDisable(true);
+				txtLoteBalao1.setDisable(true);
+				ensaio1 = new Ensaio(null, new ArrayList<Leitura>(), txtLoteBalao1.getText(), "Balão 1", 0, 0, null,
+						null);
 				ensaioDAO.saveEnsaio(ensaio1);
 				return null;
 			}
@@ -238,10 +253,9 @@ public class InicialController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				prog1.setVisible(false);
 				btPlay1.setDisable(false);
-				btStop1.setDisable(false);
 				btChart1.setDisable(false);
 				btReport1.setDisable(false);
-				txtLoteBalao1.setDisable(true);
+				isBalaoReady1 = true;
 				makeToast("Ensaio salvo com sucesso.");
 			}
 		});
@@ -249,18 +263,11 @@ public class InicialController implements Initializable, ControlledScreen {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				prog1.setVisible(true);
-				// isAdding = false;
-				// txtProcesso.setText(null);
-				// txtProcesso.setDisable(true);
-				// btNovo.setDisable(true);
-				// btSalvar.setDisable(true);
-				// btCancelar.setDisable(true);
-				// progressSave.setVisible(false);
+				isBalaoReady1 = false;
 			}
 		});
 		Thread t = new Thread(saveTask);
 		t.start();
-		isBalaoReady1 = true;
 	}
 
 	@FXML
@@ -268,9 +275,12 @@ public class InicialController implements Initializable, ControlledScreen {
 		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				// leituras.clear();
 				prog2.setVisible(true);
-				ensaio2 = new Ensaio(null, null, txtLoteBalao2.getText(), "Balão 2", 0, 0, null, null);
+				btSaveBalao2.setDisable(true);
+				btAdd2.setDisable(true);
+				txtLoteBalao2.setDisable(true);
+				ensaio2 = new Ensaio(null, new ArrayList<Leitura>(), txtLoteBalao2.getText(), "Balão 2", 0, 0, null,
+						null);
 				ensaioDAO.saveEnsaio(ensaio2);
 				return null;
 			}
@@ -280,9 +290,9 @@ public class InicialController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				prog2.setVisible(false);
 				btPlay2.setDisable(false);
-				btStop2.setDisable(false);
 				btChart2.setDisable(false);
 				btReport2.setDisable(false);
+				isBalaoReady2 = true;
 				makeToast("Ensaio salvo com sucesso.");
 			}
 		});
@@ -290,18 +300,12 @@ public class InicialController implements Initializable, ControlledScreen {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				prog2.setVisible(false);
-				// isAdding = false;
-				// txtProcesso.setText(null);
-				// txtProcesso.setDisable(true);
-				// btNovo.setDisable(true);
-				// btSalvar.setDisable(true);
-				// btCancelar.setDisable(true);
-				// progressSave.setVisible(false);
+				btSaveBalao2.setDisable(false);
+				isBalaoReady2 = false;
 			}
 		});
 		Thread t = new Thread(saveTask);
 		t.start();
-		isBalaoReady2 = true;
 	}
 
 	@FXML
@@ -309,9 +313,12 @@ public class InicialController implements Initializable, ControlledScreen {
 		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				// leituras.clear();
 				prog3.setVisible(true);
-				ensaio3 = new Ensaio(null, null, txtLoteBalao3.getText(), "Balão 3", 0, 0, null, null);
+				btSaveBalao3.setDisable(true);
+				btAdd3.setDisable(true);
+				txtLoteBalao3.setDisable(true);
+				ensaio3 = new Ensaio(null, new ArrayList<Leitura>(), txtLoteBalao3.getText(), "Balão 3", 0, 0, null,
+						null);
 				ensaioDAO.saveEnsaio(ensaio3);
 				return null;
 			}
@@ -321,10 +328,9 @@ public class InicialController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				prog3.setVisible(false);
 				btPlay3.setDisable(false);
-				btStop3.setDisable(false);
 				btChart3.setDisable(false);
 				btReport3.setDisable(false);
-				isBalaoReady1 = true;
+				isBalaoReady3 = true;
 				makeToast("Ensaio salvo com sucesso.");
 			}
 		});
@@ -332,14 +338,9 @@ public class InicialController implements Initializable, ControlledScreen {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				prog3.setVisible(false);
-				isBalaoReady1 = false;
-				// isAdding = false;
-				// txtProcesso.setText(null);
-				// txtProcesso.setDisable(true);
-				// btNovo.setDisable(true);
-				// btSalvar.setDisable(true);
-				// btCancelar.setDisable(true);
-				// progressSave.setVisible(false);
+				btSaveBalao3.setDisable(false);
+				btAdd3.setDisable(false);
+				isBalaoReady3 = false;
 			}
 		});
 		Thread t = new Thread(saveTask);
@@ -372,6 +373,8 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void initProc1() {
+		btPlay1.setDisable(true);
+		btStop1.setDisable(false);
 		imgGlass1.setImage(gifGlassFile);
 		imgMola1.setEffect(sepia1);
 		chapaTransition1.play();
@@ -383,50 +386,103 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void initProc2() {
+		btPlay2.setDisable(true);
+		btStop2.setDisable(false);
 		imgGlass2.setImage(gifGlassFile);
 		imgMola2.setEffect(sepia2);
 		chapaTransition2.play();
 		tmlHeater2.play();
 		chrono2.start(lblCrono2);
+		isBalaoRunning2 = true;
+		isBalaoReady2 = false;
 	}
 
 	@FXML
 	private void initProc3() {
+		btPlay3.setDisable(true);
+		btStop3.setDisable(false);
 		imgGlass3.setImage(gifGlassFile);
 		imgMola3.setEffect(sepia3);
 		tmlHeater3.play();
 		chapaTransition3.play();
 		chrono3.start(lblCrono3);
+		isBalaoRunning3 = true;
+		isBalaoReady3 = false;
 	}
 
 	@FXML
 	private void stopProc1() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar encerramento");
+		alert.setHeaderText("Deseja realmente encerrar o ensaio em andamento?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() != ButtonType.OK) {
+			return;
+		}
 		imgGlass1.setImage(imgGlassFile);
 		chapaTransition1.stop();
 		tmlHeater1.stop();
 		imgMola1.setEffect(null);
 		lnChapa1.setStroke(Color.RED);
 		chrono1.stop();
+		btAdd1.setDisable(false);
+		btPlay1.setDisable(true);
+		btStop1.setDisable(true);
+		btChart1.setDisable(true);
+		btReport1.setDisable(true);
+		isBalaoRunning1 = false;
+		isBalaoFinished1 = true;
+		makeToast("Balão 1: Ensaio encerrado.");
 	}
 
 	@FXML
 	private void stopProc2() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar encerramento");
+		alert.setHeaderText("Deseja realmente encerrar o ensaio em andamento?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() != ButtonType.OK) {
+			return;
+		}
 		imgGlass2.setImage(imgGlassFile);
 		tmlHeater2.stop();
 		chapaTransition2.stop();
 		imgMola2.setEffect(null);
 		lnChapa2.setStroke(Color.RED);
 		chrono2.stop();
+		btAdd2.setDisable(false);
+		btPlay2.setDisable(true);
+		btStop2.setDisable(true);
+		btChart2.setDisable(true);
+		btReport2.setDisable(true);
+		isBalaoRunning2 = false;
+		isBalaoFinished2 = true;
+		makeToast("Balão 2: Ensaio encerrado.");
 	}
 
 	@FXML
 	private void stopProc3() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar encerramento");
+		alert.setHeaderText("Deseja realmente encerrar o ensaio em andamento?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() != ButtonType.OK) {
+			return;
+		}
 		imgGlass3.setImage(imgGlassFile);
 		tmlHeater3.stop();
 		chapaTransition3.stop();
 		imgMola3.setEffect(null);
 		lnChapa3.setStroke(Color.RED);
 		chrono3.stop();
+		btAdd3.setDisable(false);
+		btPlay3.setDisable(true);
+		btStop3.setDisable(true);
+		btChart3.setDisable(true);
+		btReport3.setDisable(true);
+		isBalaoRunning3 = false;
+		isBalaoFinished3 = true;
+		makeToast("Balão 3: Ensaio encerrado.");
 	}
 
 	@FXML
@@ -450,17 +506,34 @@ public class InicialController implements Initializable, ControlledScreen {
 	}
 
 	@FXML
-	public void openConfigEnsaio() throws IOException {
-		Stage stage;
-		Parent root;
-		stage = new Stage();
-		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/ConfigEnsaio.fxml"));
-		stage.setScene(new Scene(root));
-		stage.setTitle("Informações sobre o cliente");
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.initOwner(btConnect.getScene().getWindow());
-		stage.setResizable(Boolean.FALSE);
-		stage.showAndWait();
+	private void addEnsaio1() {
+		ensaio1 = null;
+		isBalaoFinished1 = false;
+		txtLoteBalao1.setDisable(false);
+		btSaveBalao1.setDisable(false);
+		txtLoteBalao1.setText(null);
+		txtLoteBalao1.requestFocus();
+	}
+
+	@FXML
+	private void addEnsaio2() {
+		ensaio2 = null;
+		isBalaoFinished2 = false;
+		txtLoteBalao2.setDisable(false);
+		btSaveBalao2.setDisable(false);
+		txtLoteBalao2.setText(null);
+		txtLoteBalao2.requestFocus();
+	}
+
+	@FXML
+	private void addEnsaio3() {
+		ensaio3 = null;
+		isBalaoFinished3 = false;
+		txtLoteBalao3.setDisable(false);
+		btSaveBalao3.setDisable(false);
+		txtLoteBalao3.setText(null);
+		txtLoteBalao3.requestFocus();
+
 	}
 
 	private void configLayout() {
@@ -527,25 +600,31 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void initModbusReadSlaves() {
 		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				tempReator = modService.readMultipleRegisters(1, 0, 1);
-				lblTemp1.setText(tempReator.toString());
+				tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
+				lblTemp1.setText(tempBalao1.toString());
+				lblTemp2.setText(tempBalao1.toString());
+				lblTemp3.setText(tempBalao1.toString());
 				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
 				// 1);
 
 				if (isBalaoRunning1) {
-					leituraDAO.saveLeitura(new Leitura(null, ensaio1, Calendar.getInstance().getTime(), tempReator, 0));
+					Leitura l = new Leitura(null, ensaio1, Calendar.getInstance().getTime(), tempBalao1, 0);
+					leituraDAO.saveLeitura(l);
+					ensaio1.getLeituras().add(l);
+				}
+				if (isBalaoRunning2) {
+					Leitura l = new Leitura(null, ensaio2, Calendar.getInstance().getTime(), tempBalao1, 0);
+					leituraDAO.saveLeitura(l);
+					ensaio2.getLeituras().add(l);
+				}
+				if (isBalaoRunning3) {
+					Leitura l = new Leitura(null, ensaio3, Calendar.getInstance().getTime(), tempBalao1, 0);
+					leituraDAO.saveLeitura(l);
+					ensaio3.getLeituras().add(l);
 				}
 			}
 		}));
 		scanModbusSlaves.setCycleCount(Timeline.INDEFINITE);
-	}
-
-	private void enableForm() {
-
-	}
-
-	private void disableForm() {
-
 	}
 
 	private void makeToast(String message) {
@@ -555,6 +634,13 @@ public class InicialController implements Initializable, ControlledScreen {
 		int fadeOutTime = 600;
 		Stage stage = (Stage) tabForm.getScene().getWindow();
 		Toast.makeToast(stage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
+	}
+
+	private void toggleButtons3(Boolean enabled) {
+		btPlay3.setDisable(enabled);
+		btStop3.setDisable(enabled);
+		btChart3.setDisable(enabled);
+		btReport3.setDisable(enabled);
 	}
 
 }
