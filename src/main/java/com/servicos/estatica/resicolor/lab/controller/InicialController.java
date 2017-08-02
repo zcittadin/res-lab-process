@@ -14,6 +14,7 @@ import com.servicos.estatica.resicolor.lab.dao.LeituraDAO;
 import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
 import com.servicos.estatica.resicolor.lab.model.Ensaio;
 import com.servicos.estatica.resicolor.lab.model.Leitura;
+import com.servicos.estatica.resicolor.lab.property.EnsaioProperty;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 import com.servicos.estatica.resicolor.lab.util.Toast;
@@ -192,6 +193,10 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Boolean isBalaoFinished1 = false;
 	private static Boolean isBalaoFinished2 = false;
 	private static Boolean isBalaoFinished3 = false;
+
+	private static Boolean tempEnsaio1Changed = false;
+	private static Boolean tempEnsaio2Changed = false;
+	private static Boolean tempEnsaio3Changed = false;
 
 	private static ModbusRTUService modService = new ModbusRTUService();
 
@@ -598,7 +603,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	}
 
 	private void initModbusReadSlaves() {
-		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
+		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
 				lblTemp1.setText(tempBalao1.toString());
@@ -611,16 +616,22 @@ public class InicialController implements Initializable, ControlledScreen {
 					Leitura l = new Leitura(null, ensaio1, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
 					ensaio1.getLeituras().add(l);
+					EnsaioProperty.ensaio1Property().set(!tempEnsaio1Changed);
+					tempEnsaio1Changed = !tempEnsaio1Changed;
 				}
 				if (isBalaoRunning2) {
 					Leitura l = new Leitura(null, ensaio2, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
 					ensaio2.getLeituras().add(l);
+					EnsaioProperty.ensaio2Property().set(!tempEnsaio2Changed);
+					tempEnsaio2Changed = !tempEnsaio2Changed;
 				}
 				if (isBalaoRunning3) {
 					Leitura l = new Leitura(null, ensaio3, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
 					ensaio3.getLeituras().add(l);
+					EnsaioProperty.ensaio3Property().set(!tempEnsaio3Changed);
+					tempEnsaio3Changed = !tempEnsaio3Changed;
 				}
 			}
 		}));
@@ -636,11 +647,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		Toast.makeToast(stage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
 	}
 
-	private void toggleButtons3(Boolean enabled) {
-		btPlay3.setDisable(enabled);
-		btStop3.setDisable(enabled);
-		btChart3.setDisable(enabled);
-		btReport3.setDisable(enabled);
+	public Double getTemp() {
+		return tempBalao1;
 	}
 
 }

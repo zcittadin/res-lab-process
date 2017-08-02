@@ -11,6 +11,36 @@
 		rgba(0.0, 0.0, 0.0, 1.0) 100.0%);
 }
 
+.chart-title {
+  -fx-text-fill: #09156f;
+  -fx-font-size: 20.0px;
+  -fx-font-weight: bold;
+  -fx-font-family: Consolas;
+}
+
+.axis-label {
+	-fx-text-fill: #09156f;
+	-fx-font-size: 19.0px;
+	-fx-font-weight: bold
+}
+
+.chart-series-line {    
+    -fx-stroke-width: 1.0px;
+    -fx-effect: null;
+}
+
+/* .chart-plot-background {
+    -fx-background-color:  rgba(0.0,255.0,126.0,0.0);
+}*/
+
+.default-color0.chart-series-line { 
+	-fx-stroke: #FF0000; 
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: rgba(0.0,255.0,126.0,0.0);
+}
+
 .btStyleAdd {
   -fx-graphic: url('add.png');
 }

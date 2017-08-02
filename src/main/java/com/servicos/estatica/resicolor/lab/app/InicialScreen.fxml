@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.InicialController">
+<AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle fx:id="rect1" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="615.0" layoutX="363.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="823.0" />
       <AnchorPane fx:id="pane3" layoutX="431.0" layoutY="437.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">

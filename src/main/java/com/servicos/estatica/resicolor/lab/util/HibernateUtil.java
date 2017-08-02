@@ -40,7 +40,7 @@ public class HibernateUtil {
 		configuration.setProperty("hibernate.connection.password", "root");
 
 		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-		configuration.setProperty("hibernate.show_sql", "true");
+		// configuration.setProperty("hibernate.show_sql", "true");
 		configuration.setProperty("hibernate.format_sql", "true");
 	}
 

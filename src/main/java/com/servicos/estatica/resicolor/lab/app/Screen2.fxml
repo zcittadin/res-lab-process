@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="664.0" prefWidth="1208.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.Screen2Controller">
+<AnchorPane fx:id="mainPane" prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="590.0" layoutY="324.0" text="Label 2" />
-      <ImageView fx:id="imgEstatica" fitHeight="42.0" fitWidth="138.0" layoutX="1083.0" layoutY="607.0" onMouseClicked="#handleImgEstaticaAction" onMouseEntered="#hoverImgEstatica" onMouseExited="#unhoverImgEstatica" opacity="0.2" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../style/logotipo.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
+      <LineChart fx:id="chartTemp" createSymbols="false" layoutX="14.0" layoutY="178.0" legendVisible="false" prefHeight="429.0" prefWidth="1184.0" title="Temperatura x tempo">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" tickLabelFill="#09156f" fx:id="xAxis">
+               <tickLabelFont>
+                  <Font size="12.0" />
+               </tickLabelFont></CategoryAxis>
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yAxis" label="ºC" side="LEFT" tickLabelFill="#09156f">
+               <tickLabelFont>
+                  <Font size="17.0" />
+               </tickLabelFont>
+            </NumberAxis>
+        </yAxis>
+      </LineChart>
+      <Separator orientation="VERTICAL" prefHeight="664.0" />
    </children>
 </AnchorPane>

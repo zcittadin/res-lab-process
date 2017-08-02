@@ -6,10 +6,13 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.property.CurrentScreenProperty;
+import com.servicos.estatica.resicolor.lab.property.EnsaioProperty;
 import com.servicos.estatica.resicolor.lab.util.EstaticaInfoUtil;
 
 import eu.hansolo.medusa.Clock;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -57,11 +60,16 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 	private static ImageViewResizer imgClienteResizer;
 	private static ImageViewResizer imgExitResizer;
 
+	private InicialController inicialController = new InicialController();
+	private Screen1Controller screen1Controller = new Screen1Controller();
+	private Screen2Controller screen2Controller = new Screen2Controller();
+	private Screen3Controller screen3Controller = new Screen3Controller();
+
 	ScreensController mainContainer = new ScreensController();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		initEstaticaInfo();
 
 		rectClock.setFill(Color.TRANSPARENT);
@@ -75,15 +83,36 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 		imgExitResizer.setLayoutY(633);
 		mainPane.getChildren().addAll(imgClienteResizer, imgExitResizer);
 
-		mainContainer.loadScreen(screenInicialID, screenInicialFile);
-		mainContainer.loadScreen(screen1ID, screen1File);
-		mainContainer.loadScreen(screen2ID, screen2File);
-		mainContainer.loadScreen(screen3ID, screen3File);
+		mainContainer.loadScreenAndController(screenInicialID, screenInicialFile, inicialController);
+		mainContainer.loadScreenAndController(screen1ID, screen1File, screen1Controller);
+		mainContainer.loadScreenAndController(screen2ID, screen2File, screen2Controller);
+		mainContainer.loadScreenAndController(screen3ID, screen3File, screen3Controller);
 		mainContainer.loadScreen(screenConsultaID, screenConsultaFile);
 
 		CurrentScreenProperty.setScreen(screenInicialID);
 		mainContainer.setScreen(screenInicialID);
 		centralPane.getChildren().addAll(mainContainer);
+
+		EnsaioProperty.ensaio1Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen1Controller.plotTemp(inicialController.getTemp());
+			}
+		});
+
+		EnsaioProperty.ensaio2Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen2Controller.plotTemp(inicialController.getTemp());
+			}
+		});
+
+		EnsaioProperty.ensaio3Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen3Controller.plotTemp(inicialController.getTemp());
+			}
+		});
 	}
 
 	@FXML
