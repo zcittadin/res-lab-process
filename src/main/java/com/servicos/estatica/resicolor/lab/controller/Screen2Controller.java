@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
-import com.servicos.estatica.resicolor.lab.util.EstaticaInfoUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,6 +58,10 @@ public class Screen2Controller implements Initializable, ControlledScreen {
 		final XYChart.Data<String, Number> data = new XYChart.Data<>(dataHoraFormatter.format(LocalDateTime.now()),
 				temp);
 		tempSeries.getData().add(data);
+	}
+
+	public void clearLineChart() {
+		tempSeries.getData().clear();
 	}
 
 }

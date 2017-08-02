@@ -60,4 +60,8 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 		tempSeries.getData().add(data);
 	}
 
+	public void clearLineChart() {
+		tempSeries.getData().clear();
+	}
+
 }

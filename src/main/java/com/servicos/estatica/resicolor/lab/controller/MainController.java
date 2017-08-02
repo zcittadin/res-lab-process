@@ -93,26 +93,8 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 		mainContainer.setScreen(screenInicialID);
 		centralPane.getChildren().addAll(mainContainer);
 
-		EnsaioProperty.ensaio1Property().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				screen1Controller.plotTemp(inicialController.getTemp());
-			}
-		});
+		initListeners();
 
-		EnsaioProperty.ensaio2Property().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				screen2Controller.plotTemp(inicialController.getTemp());
-			}
-		});
-
-		EnsaioProperty.ensaio3Property().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				screen3Controller.plotTemp(inicialController.getTemp());
-			}
-		});
 	}
 
 	@FXML
@@ -163,6 +145,50 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 		if (result.get() == ButtonType.OK) {
 			Platform.exit();
 		}
+	}
+
+	private void initListeners() {
+		EnsaioProperty.ensaioTemp1Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen1Controller.plotTemp(inicialController.getTemp());
+			}
+		});
+
+		EnsaioProperty.ensaioTemp2Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen2Controller.plotTemp(inicialController.getTemp());
+			}
+		});
+
+		EnsaioProperty.ensaioTemp3Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen3Controller.plotTemp(inicialController.getTemp());
+			}
+		});
+
+		EnsaioProperty.ensaioClear1Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen1Controller.clearLineChart();
+			}
+		});
+
+		EnsaioProperty.ensaioClear2Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen2Controller.clearLineChart();
+			}
+		});
+
+		EnsaioProperty.ensaioClear3Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				screen3Controller.clearLineChart();
+			}
+		});
 	}
 
 }

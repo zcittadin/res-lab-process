@@ -198,6 +198,10 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Boolean tempEnsaio2Changed = false;
 	private static Boolean tempEnsaio3Changed = false;
 
+	private static Boolean ensaio1Clear = false;
+	private static Boolean ensaio2Clear = false;
+	private static Boolean ensaio3Clear = false;
+
 	private static ModbusRTUService modService = new ModbusRTUService();
 
 	private static Double tempBalao1 = new Double(0);
@@ -512,6 +516,8 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void addEnsaio1() {
+		EnsaioProperty.ensaioClear1Property().set(!ensaio1Clear);
+		ensaio1Clear = !ensaio1Clear;
 		ensaio1 = null;
 		isBalaoFinished1 = false;
 		txtLoteBalao1.setDisable(false);
@@ -522,6 +528,8 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void addEnsaio2() {
+		EnsaioProperty.ensaioClear2Property().set(!ensaio2Clear);
+		ensaio2Clear = !ensaio2Clear;
 		ensaio2 = null;
 		isBalaoFinished2 = false;
 		txtLoteBalao2.setDisable(false);
@@ -532,13 +540,14 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void addEnsaio3() {
+		EnsaioProperty.ensaioClear3Property().set(!ensaio3Clear);
+		ensaio3Clear = !ensaio3Clear;
 		ensaio3 = null;
 		isBalaoFinished3 = false;
 		txtLoteBalao3.setDisable(false);
 		btSaveBalao3.setDisable(false);
 		txtLoteBalao3.setText(null);
 		txtLoteBalao3.requestFocus();
-
 	}
 
 	private void configLayout() {
@@ -616,21 +625,21 @@ public class InicialController implements Initializable, ControlledScreen {
 					Leitura l = new Leitura(null, ensaio1, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
 					ensaio1.getLeituras().add(l);
-					EnsaioProperty.ensaio1Property().set(!tempEnsaio1Changed);
+					EnsaioProperty.ensaioTemp1Property().set(!tempEnsaio1Changed);
 					tempEnsaio1Changed = !tempEnsaio1Changed;
 				}
 				if (isBalaoRunning2) {
 					Leitura l = new Leitura(null, ensaio2, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
 					ensaio2.getLeituras().add(l);
-					EnsaioProperty.ensaio2Property().set(!tempEnsaio2Changed);
+					EnsaioProperty.ensaioTemp2Property().set(!tempEnsaio2Changed);
 					tempEnsaio2Changed = !tempEnsaio2Changed;
 				}
 				if (isBalaoRunning3) {
 					Leitura l = new Leitura(null, ensaio3, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
 					ensaio3.getLeituras().add(l);
-					EnsaioProperty.ensaio3Property().set(!tempEnsaio3Changed);
+					EnsaioProperty.ensaioTemp3Property().set(!tempEnsaio3Changed);
 					tempEnsaio3Changed = !tempEnsaio3Changed;
 				}
 			}

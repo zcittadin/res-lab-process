@@ -4,47 +4,89 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class EnsaioProperty {
 
-	private static SimpleBooleanProperty ensaio1 = new SimpleBooleanProperty();
-	private static SimpleBooleanProperty ensaio2 = new SimpleBooleanProperty();
-	private static SimpleBooleanProperty ensaio3 = new SimpleBooleanProperty();
+	private static SimpleBooleanProperty ensaioTemp1 = new SimpleBooleanProperty();
+	private static SimpleBooleanProperty ensaioTemp2 = new SimpleBooleanProperty();
+	private static SimpleBooleanProperty ensaioTemp3 = new SimpleBooleanProperty();
+	private static SimpleBooleanProperty ensaioClear1 = new SimpleBooleanProperty();
+	private static SimpleBooleanProperty ensaioClear2 = new SimpleBooleanProperty();
+	private static SimpleBooleanProperty ensaioClear3 = new SimpleBooleanProperty();
 
-	//========================================
-	public static SimpleBooleanProperty ensaio1Property() {
-		return ensaio1;
+	// ========================================
+	public static SimpleBooleanProperty ensaioTemp1Property() {
+		return ensaioTemp1;
 	}
 
-	public static Boolean getEnsaio1() {
-		return ensaio1.get();
+	public static Boolean getEnsaioTemp1() {
+		return ensaioTemp1.get();
 	}
 
-	public final void setEnsaio1(Boolean ensaio1) {
-		ensaio1Property().set(ensaio1);
-	}
-
-	//========================================
-	public static SimpleBooleanProperty ensaio2Property() {
-		return ensaio2;
-	}
-
-	public static Boolean getEnsaio2() {
-		return ensaio2.get();
-	}
-
-	public final void setEnsaio2(Boolean ensaio2) {
-		ensaio2Property().set(ensaio2);
+	public final void setEnsaioTemp1(Boolean ensaioTemp1) {
+		ensaioTemp1Property().set(ensaioTemp1);
 	}
 
 	// ========================================
-	public static SimpleBooleanProperty ensaio3Property() {
-		return ensaio3;
+	public static SimpleBooleanProperty ensaioTemp2Property() {
+		return ensaioTemp2;
 	}
 
-	public static Boolean getEnsaio3() {
-		return ensaio3.get();
+	public static Boolean getEnsaioTemp2() {
+		return ensaioTemp2.get();
 	}
 
-	public final void setEnsaio3(Boolean ensaio3) {
-		ensaio3Property().set(ensaio3);
+	public final void setEnsaioTemp2(Boolean ensaioTemp2) {
+		ensaioTemp2Property().set(ensaioTemp2);
+	}
+
+	// ========================================
+	public static SimpleBooleanProperty ensaioTemp3Property() {
+		return ensaioTemp3;
+	}
+
+	public static Boolean getEnsaioTemp3() {
+		return ensaioTemp3.get();
+	}
+
+	public final void setEnsaioTemp3(Boolean ensaioTemp3) {
+		ensaioTemp3Property().set(ensaioTemp3);
+	}
+
+	// ========================================
+	public static SimpleBooleanProperty ensaioClear1Property() {
+		return ensaioClear1;
+	}
+
+	public static Boolean getEnsaioClear1() {
+		return ensaioClear1.get();
+	}
+
+	public final void setEnsaioClear1(Boolean ensaioClear1) {
+		ensaioClear1Property().set(ensaioClear1);
+	}
+
+	// ========================================
+	public static SimpleBooleanProperty ensaioClear2Property() {
+		return ensaioClear2;
+	}
+
+	public static Boolean getEnsaioClear2() {
+		return ensaioClear2.get();
+	}
+
+	public final void setEnsaioClear2(Boolean ensaioClear2) {
+		ensaioClear2Property().set(ensaioClear2);
+	}
+
+	// ========================================
+	public static SimpleBooleanProperty ensaioClear3Property() {
+		return ensaioClear3;
+	}
+
+	public static Boolean getEnsaioClear3() {
+		return ensaioClear3.get();
+	}
+
+	public final void setEnsaioClear3(Boolean ensaioClear3) {
+		ensaioClear3Property().set(ensaioClear3);
 	}
 
 }
