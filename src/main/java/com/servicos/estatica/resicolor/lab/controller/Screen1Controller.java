@@ -6,15 +6,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
+import com.servicos.estatica.resicolor.lab.util.HoverDataChart;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.CheckBox;
 
 public class Screen1Controller implements Initializable, ControlledScreen {
 
@@ -24,11 +29,14 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 	private CategoryAxis xAxis;
 	@FXML
 	private NumberAxis yAxis;
+	@FXML
+	private CheckBox chkMarcadores;
 
 	private static XYChart.Series<String, Number> tempSeries;
 	private static DateTimeFormatter dataHoraFormatter = DateTimeFormatter.ofPattern("HH:mm:ss - dd/MM/yy");
 
 	final ObservableList<XYChart.Series<String, Number>> plotValuesList = FXCollections.observableArrayList();
+	// final List<Node> valueMarks = new ArrayList<>();
 
 	ScreensController myController;
 
@@ -57,11 +65,27 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 	public void plotTemp(Double temp) {
 		final XYChart.Data<String, Number> data = new XYChart.Data<>(dataHoraFormatter.format(LocalDateTime.now()),
 				temp);
+		Node mark = new HoverDataChart(0, temp);
+		// mark.managedProperty().bind(mark.visibleProperty());
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				mark.setVisible(true);
+			}
+		});
+		data.setNode(mark);
 		tempSeries.getData().add(data);
+		// chartTemp.applyCss();
+		// chartTemp.layout();
+		// valueMarks.add(mark);
 	}
 
 	public void clearLineChart() {
 		tempSeries.getData().clear();
+	}
+
+	public Series<String, Number> getTempSeries() {
+		return tempSeries;
 	}
 
 }
