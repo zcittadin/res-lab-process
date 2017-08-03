@@ -17,7 +17,7 @@
       </AnchorPane>
       <LineChart fx:id="chartTemp" createSymbols="false" layoutX="14.0" layoutY="178.0" legendVisible="false" prefHeight="429.0" prefWidth="1184.0" stylesheets="@../style/style.css" title="Temperatura x tempo">
         <xAxis>
-          <CategoryAxis side="BOTTOM" tickLabelFill="#09156f" fx:id="xAxis">
+          <CategoryAxis gapStartAndEnd="false" side="BOTTOM" tickLabelFill="#09156f" fx:id="xAxis">
                <tickLabelFont>
                   <Font size="12.0" />
                </tickLabelFont></CategoryAxis>

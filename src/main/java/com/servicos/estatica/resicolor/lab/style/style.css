@@ -72,3 +72,6 @@
 .btStyleUp {
   -fx-graphic: url('pyramid.png');
 }
+.btStyleSearch {
+  -fx-graphic: url('zoom.png');
+}
