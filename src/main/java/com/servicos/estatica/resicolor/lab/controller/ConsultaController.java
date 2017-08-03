@@ -4,11 +4,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
-import com.servicos.estatica.resicolor.lab.util.EstaticaInfoUtil;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
-public class ConsultaController extends EstaticaInfoUtil implements Initializable, ControlledScreen {
+public class ConsultaController implements Initializable, ControlledScreen {
+
+	@FXML
+	private Rectangle rectForm;
 
 	ScreensController myController;
 
@@ -19,7 +24,7 @@ public class ConsultaController extends EstaticaInfoUtil implements Initializabl
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		initEstaticaInfo();
+		rectForm.setFill(Color.TRANSPARENT);
 	}
 
 }
