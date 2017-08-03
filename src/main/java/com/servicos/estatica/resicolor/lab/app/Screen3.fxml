@@ -3,14 +3,20 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" prefHeight="664.0" prefWidth="1208.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css">
+         <children>
+            <CheckBox fx:id="chkMarcadores" layoutX="102.0" layoutY="104.0" mnemonicParsing="false" onAction="#toggleMarks" text="Visualizar marcadores" textFill="#09156f" />
+         </children>
+      </AnchorPane>
       <Separator orientation="VERTICAL" prefHeight="664.0" />
-      <LineChart fx:id="chartTemp" createSymbols="false" layoutX="14.0" layoutY="178.0" legendVisible="false" prefHeight="429.0" prefWidth="1184.0" title="Temperatura x tempo">
+      <LineChart fx:id="chartTemp" createSymbols="false" layoutX="14.0" layoutY="178.0" legendVisible="false" prefHeight="429.0" prefWidth="1184.0" stylesheets="@../style/style.css" title="Temperatura x tempo">
         <xAxis>
           <CategoryAxis side="BOTTOM" tickLabelFill="#09156f" fx:id="xAxis">
                <tickLabelFont>

@@ -3,12 +3,14 @@ package com.servicos.estatica.resicolor.lab.controller;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
 import com.servicos.estatica.resicolor.lab.util.HoverDataChart;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +20,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.CheckBox;
 
 public class Screen1Controller implements Initializable, ControlledScreen {
@@ -36,8 +37,10 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 	private static DateTimeFormatter dataHoraFormatter = DateTimeFormatter.ofPattern("HH:mm:ss - dd/MM/yy");
 
 	final ObservableList<XYChart.Series<String, Number>> plotValuesList = FXCollections.observableArrayList();
-	// final List<Node> valueMarks = new ArrayList<>();
+	final List<Node> valueMarks = new ArrayList<>();
 
+	Random randomGenerator = new Random();
+	int randomInt = 0;
 	ScreensController myController;
 
 	@Override
@@ -50,12 +53,18 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 		configLineChart();
 	}
 
+	@FXML
+	private void toggleMarks() {
+		for (Node node : valueMarks) {
+			node.setVisible(chkMarcadores.isSelected());
+		}
+	}
+
 	private void configLineChart() {
 		yAxis.setAutoRanging(false);
 		yAxis.setLowerBound(0);
 		yAxis.setUpperBound(150);
 		yAxis.setTickUnit(15);
-
 		tempSeries = new XYChart.Series<String, Number>();
 		plotValuesList.add(tempSeries);
 		chartTemp.setData(plotValuesList);
@@ -66,26 +75,14 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 		final XYChart.Data<String, Number> data = new XYChart.Data<>(dataHoraFormatter.format(LocalDateTime.now()),
 				temp);
 		Node mark = new HoverDataChart(0, temp);
-		// mark.managedProperty().bind(mark.visibleProperty());
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				mark.setVisible(true);
-			}
-		});
+		mark.setVisible(chkMarcadores.isSelected());
 		data.setNode(mark);
 		tempSeries.getData().add(data);
-		// chartTemp.applyCss();
-		// chartTemp.layout();
-		// valueMarks.add(mark);
+		valueMarks.add(mark);
 	}
 
 	public void clearLineChart() {
 		tempSeries.getData().clear();
-	}
-
-	public Series<String, Number> getTempSeries() {
-		return tempSeries;
 	}
 
 }
