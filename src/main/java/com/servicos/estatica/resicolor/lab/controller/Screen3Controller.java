@@ -62,7 +62,6 @@ public class Screen3Controller implements Initializable, ControlledScreen {
 		yAxis.setLowerBound(0);
 		yAxis.setUpperBound(150);
 		yAxis.setTickUnit(15);
-
 		tempSeries = new XYChart.Series<String, Number>();
 		plotValuesList.add(tempSeries);
 		chartTemp.setData(plotValuesList);

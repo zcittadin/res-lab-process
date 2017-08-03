@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css">
          <children>
-            <CheckBox fx:id="chkMarcadores" layoutX="102.0" layoutY="104.0" mnemonicParsing="false" onAction="#toggleMarks" text="Visualizar marcadores" textFill="#09156f" />
+            <CheckBox fx:id="chkMarcadores" layoutX="99.0" layoutY="97.0" mnemonicParsing="false" onAction="#toggleMarks" text="Visualizar marcadores" textFill="#09156f" />
          </children>
       </AnchorPane>
       <Separator orientation="VERTICAL" prefHeight="664.0" />
