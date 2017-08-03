@@ -68,7 +68,6 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 		tempSeries = new XYChart.Series<String, Number>();
 		plotValuesList.add(tempSeries);
 		chartTemp.setData(plotValuesList);
-
 	}
 
 	public void plotTemp(Double temp) {
