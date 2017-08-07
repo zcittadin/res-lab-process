@@ -226,20 +226,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		configLayout();
 		configAnimations();
 		initModbusReadSlaves();
-
-		SerialPort[] ports = modService.getComPorts();
-		availablePorts = FXCollections.observableArrayList();
-		for (SerialPort port : ports) {
-			availablePorts.add(port.getSystemPortName());
-		}
-		if (!availablePorts.isEmpty()) {
-			comboPorts.setItems(availablePorts);
-			comboPorts.setValue(availablePorts.get(0));
-		} else {
-			btConnect.setDisable(Boolean.TRUE);
-			comboPorts.setValue("COM indisponível");
-		}
-		tabForm.setDisable(true);
+		getComPorts();
 	}
 
 	@FXML
@@ -645,6 +632,22 @@ public class InicialController implements Initializable, ControlledScreen {
 			}
 		}));
 		scanModbusSlaves.setCycleCount(Timeline.INDEFINITE);
+	}
+
+	private void getComPorts() {
+		SerialPort[] ports = modService.getComPorts();
+		availablePorts = FXCollections.observableArrayList();
+		for (SerialPort port : ports) {
+			availablePorts.add(port.getSystemPortName());
+		}
+		if (!availablePorts.isEmpty()) {
+			comboPorts.setItems(availablePorts);
+			comboPorts.setValue(availablePorts.get(0));
+		} else {
+			btConnect.setDisable(Boolean.TRUE);
+			comboPorts.setValue("COM indisponível");
+		}
+		tabForm.setDisable(true);
 	}
 
 	private void makeToast(String message) {
