@@ -320,7 +320,7 @@
          </effect>
       </Label>
       <Label layoutX="1016.0" layoutY="98.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="txtSp1" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="98.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
+      <Label fx:id="lblSp1" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="98.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="25.0" />
          </font>
@@ -329,7 +329,7 @@
          </effect>
       </Label>
       <Label layoutX="1016.0" layoutY="301.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="txtSp2" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="301.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
+      <Label fx:id="lblSp2" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="301.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="25.0" />
          </font>
@@ -338,7 +338,7 @@
          </effect>
       </Label>
       <Label layoutX="1016.0" layoutY="506.0" prefHeight="32.0" prefWidth="120.0" styleClass="displayGradient" stylesheets="@../style/style.css" />
-      <Label fx:id="txtSp3" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="506.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
+      <Label fx:id="lblSp3" alignment="CENTER_RIGHT" layoutX="1016.0" layoutY="506.0" prefHeight="32.0" prefWidth="120.0" text="000.0" textFill="#12f500">
          <font>
             <Font name="DSEG7 Classic-Bold" size="25.0" />
          </font>

@@ -71,7 +71,7 @@ public class ModbusRTUService {
 			ex.printStackTrace();
 		}
 		res = (ReadMultipleRegistersResponse) trans.getResponse();
-		return new Double(res.getRegisterValue(0) / (double) 10);
+		return new Double(res.getRegisterValue(0));
 	}
 
 	public Boolean readCoil(int unitId, int register, int quantity) {

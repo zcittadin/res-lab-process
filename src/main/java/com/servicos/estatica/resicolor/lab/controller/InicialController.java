@@ -74,11 +74,11 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private Label lblTemp3;
 	@FXML
-	private Label txtSp1;
+	private Label lblSp1;
 	@FXML
-	private Label txtSp2;
+	private Label lblSp2;
 	@FXML
-	private Label txtSp3;
+	private Label lblSp3;
 	@FXML
 	private Label lblCrono1;
 	@FXML
@@ -205,6 +205,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static ModbusRTUService modService = new ModbusRTUService();
 
 	private static Double tempBalao1 = new Double(0);
+	private static Double spBalao1 = new Double(0);
 	private static ObservableList<String> availablePorts;
 
 	private static Ensaio ensaio1;
@@ -225,7 +226,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		configLayout();
 		configAnimations();
-		initModbusReadSlaves();
+		configModbusReadSlaves();
 		getComPorts();
 	}
 
@@ -347,7 +348,8 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void changeSp1() {
 		String sp = FxDialogs.showTextInput("Set-point", "Balão 1", "Digite o set-point:", "");
 		if (sp != null) {
-			txtSp1.setText(sp);
+			modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
+			lblSp1.setText(sp);
 		}
 	}
 
@@ -355,7 +357,8 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void changeSp2() {
 		String sp = FxDialogs.showTextInput("Set-point", "Balão 2", "Digite o set-point:", "");
 		if (sp != null) {
-			txtSp2.setText(sp);
+			modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
+			lblSp2.setText(sp);
 		}
 	}
 
@@ -363,7 +366,8 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void changeSp3() {
 		String sp = FxDialogs.showTextInput("Set-point", "Balão 3", "Digite o set-point:", "");
 		if (sp != null) {
-			txtSp3.setText(sp);
+			modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
+			lblSp3.setText(sp);
 		}
 	}
 
@@ -493,6 +497,18 @@ public class InicialController implements Initializable, ControlledScreen {
 		} else {
 			modService.setConnectionParams(comboPorts.getValue(), 9600);
 			modService.openConnection();
+			
+			tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
+			Integer i = tempBalao1.intValue();
+			lblTemp1.setText(i.toString());
+			lblTemp2.setText(i.toString());
+			lblTemp3.setText(i.toString());
+			spBalao1 = modService.readMultipleRegisters(1, 0, 1);
+			Integer sp = spBalao1.intValue();
+			lblSp1.setText(sp.toString());
+			lblSp2.setText(sp.toString());
+			lblSp3.setText(sp.toString());
+			
 			scanModbusSlaves.play();
 			isConnected = true;
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
@@ -598,13 +614,14 @@ public class InicialController implements Initializable, ControlledScreen {
 		chapaTransition3.setAutoReverse(true);
 	}
 
-	private void initModbusReadSlaves() {
+	private void configModbusReadSlaves() {
 		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
-				lblTemp1.setText(tempBalao1.toString());
-				lblTemp2.setText(tempBalao1.toString());
-				lblTemp3.setText(tempBalao1.toString());
+				tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
+				Integer i = tempBalao1.intValue();
+				lblTemp1.setText(i.toString());
+				lblTemp2.setText(i.toString());
+				lblTemp3.setText(i.toString());
 				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
 				// 1);
 
