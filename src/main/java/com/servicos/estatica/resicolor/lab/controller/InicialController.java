@@ -33,6 +33,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -67,12 +68,6 @@ public class InicialController implements Initializable, ControlledScreen {
 	private TabPane tabForm;
 	@FXML
 	private AnchorPane pane3;
-	@FXML
-	private TextField txtProdutoBalao1;
-	@FXML
-	private TextField txtProdutoBalao2;
-	@FXML
-	private TextField txtProdutoBalao3;
 	@FXML
 	private TextField txtProjeto1;
 	@FXML
@@ -278,10 +273,9 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog1.setVisible(true);
 				btSaveBalao1.setDisable(true);
 				btAddProjeto1.setDisable(true);
-				txtProdutoBalao1.setDisable(true);
-				// ensaio1 = new Prova(null, new ArrayList<Leitura>(),
-				// txtProdutoBalao1.getText(), "Balão 1", 0, 0, null,
-				// null);
+				txtProduto1.setDisable(true);
+				prova1 = new Prova(null, projeto1, null, null, txtProduto1.getText(), txtObjetivo1.getText(),
+						txtExecutor1.getText(), txtNumero1.getText(), "Balão 1", 0, 0, null, null);
 				provaDAO.saveProva(prova1);
 				return null;
 			}
@@ -316,10 +310,9 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog2.setVisible(true);
 				btSaveBalao2.setDisable(true);
 				btAddProjeto2.setDisable(true);
-				txtProdutoBalao2.setDisable(true);
-				// ensaio2 = new Prova(null, new ArrayList<Leitura>(),
-				// txtProdutoBalao2.getText(), "Balão 2", 0, 0, null,
-				// null);
+				txtProduto2.setDisable(true);
+				prova2 = new Prova(null, projeto2, null, null, txtProduto2.getText(), txtObjetivo2.getText(),
+						txtExecutor2.getText(), txtNumero2.getText(), "Balão 2", 0, 0, null, null);
 				provaDAO.saveProva(prova2);
 				return null;
 			}
@@ -355,10 +348,9 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog3.setVisible(true);
 				btSaveBalao3.setDisable(true);
 				btAddProjeto3.setDisable(true);
-				txtProdutoBalao3.setDisable(true);
-				// ensaio3 = new Prova(null, new ArrayList<Leitura>(),
-				// txtProdutoBalao3.getText(), "Balão 3", 0, 0, null,
-				// null);
+				txtProduto3.setDisable(true);
+				prova3 = new Prova(null, projeto3, null, null, txtProduto3.getText(), txtObjetivo3.getText(),
+						txtExecutor3.getText(), txtNumero3.getText(), "Balão 3", 0, 0, null, null);
 				provaDAO.saveProva(prova3);
 				return null;
 			}
@@ -576,7 +568,9 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (ProvaProperty.provaProjetoProperty().get() != null) {
 			projeto1 = ProvaProperty.provaProjetoProperty().get();
 			txtProjeto1.setText(projeto1.getNome());
+			enableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
 		} else {
+			disableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
 			System.out.println("Objeto nulo!");
 		}
 
@@ -606,8 +600,10 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (ProvaProperty.provaProjetoProperty().get() != null) {
 			projeto2 = ProvaProperty.provaProjetoProperty().get();
 			txtProjeto2.setText(projeto2.getNome());
+			enableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		} else {
 			System.out.println("Objeto nulo!");
+			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		}
 
 		// ProvaProperty.provaClear2Property().set(!prova2Clear);
@@ -636,8 +632,10 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (ProvaProperty.provaProjetoProperty().get() != null) {
 			projeto3 = ProvaProperty.provaProjetoProperty().get();
 			txtProjeto3.setText(projeto3.getNome());
+			enableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		} else {
 			System.out.println("Objeto nulo!");
+			disableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		}
 
 		// ProvaProperty.provaClear3Property().set(!prova3Clear);
@@ -762,6 +760,18 @@ public class InicialController implements Initializable, ControlledScreen {
 			comboPorts.setValue("COM indisponível");
 		}
 		tabForm.setDisable(true);
+	}
+
+	private void disableForm(Node... nodes) {
+		for (Node node : nodes) {
+			node.setDisable(true);
+		}
+	}
+
+	private void enableForm(Node... nodes) {
+		for (Node node : nodes) {
+			node.setDisable(false);
+		}
 	}
 
 	private void makeToast(String message) {
