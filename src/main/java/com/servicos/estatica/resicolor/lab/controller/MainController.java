@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.property.CurrentScreenProperty;
-import com.servicos.estatica.resicolor.lab.property.EnsaioProperty;
+import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 import com.servicos.estatica.resicolor.lab.util.EstaticaInfoUtil;
 
 import eu.hansolo.medusa.Clock;
@@ -148,42 +148,42 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 	}
 
 	private void initListeners() {
-		EnsaioProperty.ensaioTemp1Property().addListener(new ChangeListener<Boolean>() {
+		ProvaProperty.ensaioTemp1Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				screen1Controller.plotTemp(inicialController.getTemp());
 			}
 		});
 
-		EnsaioProperty.ensaioTemp2Property().addListener(new ChangeListener<Boolean>() {
+		ProvaProperty.ensaioTemp2Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				screen2Controller.plotTemp(inicialController.getTemp());
 			}
 		});
 
-		EnsaioProperty.ensaioTemp3Property().addListener(new ChangeListener<Boolean>() {
+		ProvaProperty.ensaioTemp3Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				screen3Controller.plotTemp(inicialController.getTemp());
 			}
 		});
 
-		EnsaioProperty.ensaioClear1Property().addListener(new ChangeListener<Boolean>() {
+		ProvaProperty.provaClear1Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				screen1Controller.clearLineChart();
 			}
 		});
 
-		EnsaioProperty.ensaioClear2Property().addListener(new ChangeListener<Boolean>() {
+		ProvaProperty.provaClear2Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				screen2Controller.clearLineChart();
 			}
 		});
 
-		EnsaioProperty.ensaioClear3Property().addListener(new ChangeListener<Boolean>() {
+		ProvaProperty.provaClear3Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				screen3Controller.clearLineChart();

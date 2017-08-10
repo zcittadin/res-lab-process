@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.servicos.estatica.resicolor.lab.controller.ProjetosController">
+   <children>
+      <Rectangle fx:id="rect2" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="110.0" layoutX="405.0" layoutY="13.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="369.0" />
+      <Rectangle fx:id="rect1" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="110.0" layoutX="29.0" layoutY="13.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="369.0" />
+      <TextField fx:id="txtBuscar" layoutX="62.0" layoutY="44.0" prefHeight="25.0" prefWidth="305.0" promptText="Nome do projeto" />
+      <Button fx:id="btBuscar" layoutX="179.0" layoutY="80.0" mnemonicParsing="false" onAction="#findProjetoByNome" styleClass="btStyleSearch" stylesheets="@../style/style.css" text="Buscar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="txtNovo" layoutX="442.0" layoutY="44.0" prefHeight="25.0" prefWidth="305.0" promptText="Nome do projeto" />
+      <Button fx:id="btSalvar" layoutX="560.0" layoutY="80.0" mnemonicParsing="false" onAction="#saveProjeto" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TableView fx:id="tblProjetos" layoutX="29.0" layoutY="136.0" prefHeight="400.0" prefWidth="742.0">
+        <columns>
+          <TableColumn fx:id="colNome" prefWidth="583.0" text="Nome do projeto" />
+          <TableColumn fx:id="colData" minWidth="0.0" prefWidth="158.0" text="Data de criação" />
+        </columns>
+      </TableView>
+      <Button fx:id="btOk" layoutX="375.0" layoutY="556.0" mnemonicParsing="false" onAction="#ok" styleClass="btStyleOk" stylesheets="@../style/style.css" text="Ok">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="62.0" layoutY="27.0" text="Localizar um projeto existente" textFill="#09156f" />
+      <Label layoutX="442.0" layoutY="27.0" text="Cadastrar um novo projeto" textFill="#09156f" />
+      <ProgressIndicator fx:id="progProjetos" layoutX="334.0" layoutY="271.0" prefHeight="122.0" prefWidth="129.0" visible="false" />
+   </children>
+</AnchorPane>

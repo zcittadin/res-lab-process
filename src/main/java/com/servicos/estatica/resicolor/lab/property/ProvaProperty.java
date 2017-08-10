@@ -2,7 +2,7 @@ package com.servicos.estatica.resicolor.lab.property;
 
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class EnsaioProperty {
+public class ProvaProperty {
 
 	private static SimpleBooleanProperty ensaioTemp1 = new SimpleBooleanProperty();
 	private static SimpleBooleanProperty ensaioTemp2 = new SimpleBooleanProperty();
@@ -51,7 +51,7 @@ public class EnsaioProperty {
 	}
 
 	// ========================================
-	public static SimpleBooleanProperty ensaioClear1Property() {
+	public static SimpleBooleanProperty provaClear1Property() {
 		return ensaioClear1;
 	}
 
@@ -60,11 +60,11 @@ public class EnsaioProperty {
 	}
 
 	public final void setEnsaioClear1(Boolean ensaioClear1) {
-		ensaioClear1Property().set(ensaioClear1);
+		provaClear1Property().set(ensaioClear1);
 	}
 
 	// ========================================
-	public static SimpleBooleanProperty ensaioClear2Property() {
+	public static SimpleBooleanProperty provaClear2Property() {
 		return ensaioClear2;
 	}
 
@@ -73,11 +73,11 @@ public class EnsaioProperty {
 	}
 
 	public final void setEnsaioClear2(Boolean ensaioClear2) {
-		ensaioClear2Property().set(ensaioClear2);
+		provaClear2Property().set(ensaioClear2);
 	}
 
 	// ========================================
-	public static SimpleBooleanProperty ensaioClear3Property() {
+	public static SimpleBooleanProperty provaClear3Property() {
 		return ensaioClear3;
 	}
 
@@ -86,7 +86,7 @@ public class EnsaioProperty {
 	}
 
 	public final void setEnsaioClear3(Boolean ensaioClear3) {
-		ensaioClear3Property().set(ensaioClear3);
+		provaClear3Property().set(ensaioClear3);
 	}
 
 }

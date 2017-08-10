@@ -81,3 +81,6 @@
 .btStyleAmostra {
   -fx-graphic: url('retort.png');
 }
+.btStyleOk {
+  -fx-graphic: url('Yes.png');
+}

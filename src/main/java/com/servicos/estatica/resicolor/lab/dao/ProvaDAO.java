@@ -5,12 +5,12 @@ import org.hibernate.Session;
 import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.util.HibernateUtil;
 
-public class EnsaioDAO {
+public class ProvaDAO {
 
-	public void saveEnsaio(Prova ensaio) {
+	public void saveProva(Prova prova) {
 		Session session = HibernateUtil.openSession();
 		session.beginTransaction();
-		session.save(ensaio);
+		session.save(prova);
 		session.getTransaction().commit();
 		session.clear();
 		session.close();
