@@ -2,7 +2,6 @@ package com.servicos.estatica.resicolor.lab.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -10,11 +9,12 @@ import java.util.ResourceBundle;
 import com.fazecast.jSerialComm.SerialPort;
 import com.jfoenix.effects.JFXDepthManager;
 import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
-import com.servicos.estatica.resicolor.lab.dao.ProvaDAO;
 import com.servicos.estatica.resicolor.lab.dao.LeituraDAO;
+import com.servicos.estatica.resicolor.lab.dao.ProvaDAO;
 import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
-import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.model.Leitura;
+import com.servicos.estatica.resicolor.lab.model.Projeto;
+import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
@@ -43,6 +43,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
@@ -72,6 +73,36 @@ public class InicialController implements Initializable, ControlledScreen {
 	private TextField txtProdutoBalao2;
 	@FXML
 	private TextField txtProdutoBalao3;
+	@FXML
+	private TextField txtProjeto1;
+	@FXML
+	private TextField txtProjeto2;
+	@FXML
+	private TextField txtProjeto3;
+	@FXML
+	private TextField txtProduto1;
+	@FXML
+	private TextField txtProduto2;
+	@FXML
+	private TextField txtProduto3;
+	@FXML
+	private TextField txtNumero1;
+	@FXML
+	private TextField txtNumero2;
+	@FXML
+	private TextField txtNumero3;
+	@FXML
+	private TextField txtExecutor1;
+	@FXML
+	private TextField txtExecutor2;
+	@FXML
+	private TextField txtExecutor3;
+	@FXML
+	private TextArea txtObjetivo1;
+	@FXML
+	private TextArea txtObjetivo2;
+	@FXML
+	private TextArea txtObjetivo3;
 	@FXML
 	private Label lblTemp1;
 	@FXML
@@ -199,13 +230,13 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Boolean isBalaoFinished2 = false;
 	private static Boolean isBalaoFinished3 = false;
 
-	private static Boolean tempEnsaio1Changed = false;
-	private static Boolean tempEnsaio2Changed = false;
-	private static Boolean tempEnsaio3Changed = false;
+	private static Boolean tempProva1Changed = false;
+	private static Boolean tempProva2Changed = false;
+	private static Boolean tempProva3Changed = false;
 
-	private static Boolean ensaio1Clear = false;
-	private static Boolean ensaio2Clear = false;
-	private static Boolean ensaio3Clear = false;
+	private static Boolean prova1Clear = false;
+	private static Boolean prova2Clear = false;
+	private static Boolean prova3Clear = false;
 
 	private static ModbusRTUService modService = new ModbusRTUService();
 
@@ -213,11 +244,15 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Double spBalao1 = new Double(0);
 	private static ObservableList<String> availablePorts;
 
-	private static Prova ensaio1;
-	private static Prova ensaio2;
-	private static Prova ensaio3;
+	private static Projeto projeto1;
+	private static Projeto projeto2;
+	private static Projeto projeto3;
 
-	private static ProvaDAO ensaioDAO = new ProvaDAO();
+	private static Prova prova1;
+	private static Prova prova2;
+	private static Prova prova3;
+
+	private static ProvaDAO provaDAO = new ProvaDAO();
 	private static LeituraDAO leituraDAO = new LeituraDAO();
 
 	ScreensController myController;
@@ -247,7 +282,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				// ensaio1 = new Prova(null, new ArrayList<Leitura>(),
 				// txtProdutoBalao1.getText(), "Balão 1", 0, 0, null,
 				// null);
-				ensaioDAO.saveProva(ensaio1);
+				provaDAO.saveProva(prova1);
 				return null;
 			}
 		};
@@ -259,7 +294,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				btChart1.setDisable(false);
 				btReport1.setDisable(false);
 				isBalaoReady1 = true;
-				makeToast("Ensaio salvo com sucesso.");
+				makeToast("Prova registrada com sucesso.");
 			}
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -285,7 +320,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				// ensaio2 = new Prova(null, new ArrayList<Leitura>(),
 				// txtProdutoBalao2.getText(), "Balão 2", 0, 0, null,
 				// null);
-				ensaioDAO.saveProva(ensaio2);
+				provaDAO.saveProva(prova2);
 				return null;
 			}
 		};
@@ -297,7 +332,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				btChart2.setDisable(false);
 				btReport2.setDisable(false);
 				isBalaoReady2 = true;
-				makeToast("Ensaio salvo com sucesso.");
+				makeToast("Prova registrada com sucesso.");
 			}
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -324,7 +359,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				// ensaio3 = new Prova(null, new ArrayList<Leitura>(),
 				// txtProdutoBalao3.getText(), "Balão 3", 0, 0, null,
 				// null);
-				ensaioDAO.saveProva(ensaio3);
+				provaDAO.saveProva(prova3);
 				return null;
 			}
 		};
@@ -336,7 +371,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				btChart3.setDisable(false);
 				btReport3.setDisable(false);
 				isBalaoReady3 = true;
-				makeToast("Ensaio salvo com sucesso.");
+				makeToast("Prova registrada com sucesso.");
 			}
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -422,7 +457,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void stopProc1() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar encerramento");
-		alert.setHeaderText("Deseja realmente encerrar o ensaio em andamento?");
+		alert.setHeaderText("Deseja realmente encerrar a prova em andamento?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() != ButtonType.OK) {
 			return;
@@ -440,14 +475,14 @@ public class InicialController implements Initializable, ControlledScreen {
 		btReport1.setDisable(true);
 		isBalaoRunning1 = false;
 		isBalaoFinished1 = true;
-		makeToast("Balão 1: Ensaio encerrado.");
+		makeToast("Balão 1: Prova encerrada.");
 	}
 
 	@FXML
 	private void stopProc2() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar encerramento");
-		alert.setHeaderText("Deseja realmente encerrar o ensaio em andamento?");
+		alert.setHeaderText("Deseja realmente encerrar a prova em andamento?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() != ButtonType.OK) {
 			return;
@@ -465,14 +500,14 @@ public class InicialController implements Initializable, ControlledScreen {
 		btReport2.setDisable(true);
 		isBalaoRunning2 = false;
 		isBalaoFinished2 = true;
-		makeToast("Balão 2: Ensaio encerrado.");
+		makeToast("Balão 2: Prova encerrada.");
 	}
 
 	@FXML
 	private void stopProc3() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar encerramento");
-		alert.setHeaderText("Deseja realmente encerrar o ensaio em andamento?");
+		alert.setHeaderText("Deseja realmente encerrar a prova em andamento?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() != ButtonType.OK) {
 			return;
@@ -490,7 +525,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btReport3.setDisable(true);
 		isBalaoRunning3 = false;
 		isBalaoFinished3 = true;
-		makeToast("Balão 3: Ensaio encerrado.");
+		makeToast("Balão 3: Prova encerrada.");
 	}
 
 	@FXML
@@ -527,7 +562,6 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void addProjeto1() throws IOException {
-
 		Stage stage;
 		Parent root;
 		stage = new Stage();
@@ -538,6 +572,13 @@ public class InicialController implements Initializable, ControlledScreen {
 		stage.initOwner(rect1.getScene().getWindow());
 		stage.setResizable(Boolean.FALSE);
 		stage.showAndWait();
+
+		if (ProvaProperty.provaProjetoProperty().get() != null) {
+			projeto1 = ProvaProperty.provaProjetoProperty().get();
+			txtProjeto1.setText(projeto1.getNome());
+		} else {
+			System.out.println("Objeto nulo!");
+		}
 
 		// ProvaProperty.provaClear1Property().set(!ensaio1Clear);
 		// ensaio1Clear = !ensaio1Clear;
@@ -550,27 +591,63 @@ public class InicialController implements Initializable, ControlledScreen {
 	}
 
 	@FXML
-	private void addProjeto2() {
-		ProvaProperty.provaClear2Property().set(!ensaio2Clear);
-		ensaio2Clear = !ensaio2Clear;
-		ensaio2 = null;
-		isBalaoFinished2 = false;
-		txtProdutoBalao2.setDisable(false);
-		btSaveBalao2.setDisable(false);
-		txtProdutoBalao2.setText(null);
-		txtProdutoBalao2.requestFocus();
+	private void addProjeto2() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/Projetos.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Gerenciamento de projetos");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(rect1.getScene().getWindow());
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
+
+		if (ProvaProperty.provaProjetoProperty().get() != null) {
+			projeto2 = ProvaProperty.provaProjetoProperty().get();
+			txtProjeto2.setText(projeto2.getNome());
+		} else {
+			System.out.println("Objeto nulo!");
+		}
+
+		// ProvaProperty.provaClear2Property().set(!prova2Clear);
+		// prova2Clear = !prova2Clear;
+		// prova2 = null;
+		// isBalaoFinished2 = false;
+		// txtProdutoBalao2.setDisable(false);
+		// btSaveBalao2.setDisable(false);
+		// txtProdutoBalao2.setText(null);
+		// txtProdutoBalao2.requestFocus();
 	}
 
 	@FXML
-	private void addProjeto3() {
-		ProvaProperty.provaClear3Property().set(!ensaio3Clear);
-		ensaio3Clear = !ensaio3Clear;
-		ensaio3 = null;
-		isBalaoFinished3 = false;
-		txtProdutoBalao3.setDisable(false);
-		btSaveBalao3.setDisable(false);
-		txtProdutoBalao3.setText(null);
-		txtProdutoBalao3.requestFocus();
+	private void addProjeto3() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/Projetos.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Gerenciamento de projetos");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(rect1.getScene().getWindow());
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
+
+		if (ProvaProperty.provaProjetoProperty().get() != null) {
+			projeto3 = ProvaProperty.provaProjetoProperty().get();
+			txtProjeto3.setText(projeto3.getNome());
+		} else {
+			System.out.println("Objeto nulo!");
+		}
+
+		// ProvaProperty.provaClear3Property().set(!prova3Clear);
+		// prova3Clear = !prova3Clear;
+		// prova3 = null;
+		// isBalaoFinished3 = false;
+		// txtProdutoBalao3.setDisable(false);
+		// btSaveBalao3.setDisable(false);
+		// txtProdutoBalao3.setText(null);
+		// txtProdutoBalao3.requestFocus();
 	}
 
 	private void configLayout() {
@@ -646,25 +723,25 @@ public class InicialController implements Initializable, ControlledScreen {
 				// 1);
 
 				if (isBalaoRunning1) {
-					Leitura l = new Leitura(null, ensaio1, Calendar.getInstance().getTime(), tempBalao1, 0);
+					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
-					ensaio1.getLeituras().add(l);
-					ProvaProperty.ensaioTemp1Property().set(!tempEnsaio1Changed);
-					tempEnsaio1Changed = !tempEnsaio1Changed;
+					prova1.getLeituras().add(l);
+					ProvaProperty.provaTemp1Property().set(!tempProva1Changed);
+					tempProva1Changed = !tempProva1Changed;
 				}
 				if (isBalaoRunning2) {
-					Leitura l = new Leitura(null, ensaio2, Calendar.getInstance().getTime(), tempBalao1, 0);
+					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
-					ensaio2.getLeituras().add(l);
-					ProvaProperty.ensaioTemp2Property().set(!tempEnsaio2Changed);
-					tempEnsaio2Changed = !tempEnsaio2Changed;
+					prova2.getLeituras().add(l);
+					ProvaProperty.provaTemp2Property().set(!tempProva2Changed);
+					tempProva2Changed = !tempProva2Changed;
 				}
 				if (isBalaoRunning3) {
-					Leitura l = new Leitura(null, ensaio3, Calendar.getInstance().getTime(), tempBalao1, 0);
+					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao1, 0);
 					leituraDAO.saveLeitura(l);
-					ensaio3.getLeituras().add(l);
-					ProvaProperty.ensaioTemp3Property().set(!tempEnsaio3Changed);
-					tempEnsaio3Changed = !tempEnsaio3Changed;
+					prova3.getLeituras().add(l);
+					ProvaProperty.provaTemp3Property().set(!tempProva3Changed);
+					tempProva3Changed = !tempProva3Changed;
 				}
 			}
 		}));

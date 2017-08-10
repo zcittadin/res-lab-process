@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.dao.ProjetoDAO;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
+import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -50,6 +51,8 @@ public class ProjetosController implements Initializable {
 	@FXML
 	private TextField txtNovo;
 	@FXML
+	private TextField txtSelecionado;
+	@FXML
 	private ProgressIndicator progProjetos;
 	@FXML
 	private Button btBuscar;
@@ -67,6 +70,12 @@ public class ProjetosController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		rect1.setFill(Color.TRANSPARENT);
 		rect2.setFill(Color.TRANSPARENT);
+
+		tblProjetos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if (newSelection != null) {
+				selectProjeto(null);
+			}
+		});
 
 		findProjetos();
 	}
@@ -209,6 +218,16 @@ public class ProjetosController implements Initializable {
 
 	}
 
+	private void selectProjeto(ActionEvent event) {
+		projeto = (Projeto) tblProjetos.getSelectionModel().getSelectedItem();
+		if (projeto == null) {
+			tblProjetos.getSelectionModel().clearSelection();
+			return;
+		}
+		txtSelecionado.setText(projeto.getNome());
+		ProvaProperty.provaProjetoProperty().set(projeto);
+	}
+
 	private void fetch(Boolean b) {
 		tblProjetos.setDisable(b);
 		progProjetos.setVisible(b);
@@ -217,6 +236,7 @@ public class ProjetosController implements Initializable {
 		btOk.setDisable(b);
 		txtBuscar.setDisable(b);
 		txtNovo.setDisable(b);
+		txtSelecionado.setDisable(b);
 	}
 
 	private void makeAlert(AlertType type, String title, String message) {
