@@ -371,7 +371,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btChart3" disable="true" layoutX="399.0" layoutY="484.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+      <Button fx:id="btAmostra3" layoutX="399.0" layoutY="484.0" mnemonicParsing="false" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -386,11 +386,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btReport3" disable="true" layoutX="399.0" layoutY="508.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Button fx:id="btPlay1" disable="true" layoutX="399.0" layoutY="28.0" mnemonicParsing="false" onAction="#initProc1" styleClass="btStylePlay" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -401,12 +396,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btChart1" layoutX="399.0" layoutY="76.0" mnemonicParsing="false" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="btReport1" disable="true" layoutX="399.0" layoutY="100.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+      <Button fx:id="btAmostra1" layoutX="399.0" layoutY="76.0" mnemonicParsing="false" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -421,12 +411,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btChart2" disable="true" layoutX="399.0" layoutY="279.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="btReport2" disable="true" layoutX="399.0" layoutY="303.0" mnemonicParsing="false" styleClass="btStyleReport" stylesheets="@../style/style.css">
+      <Button fx:id="btAmostra2" layoutX="399.0" layoutY="279.0" mnemonicParsing="false" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

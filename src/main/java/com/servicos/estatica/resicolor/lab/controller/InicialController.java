@@ -2,6 +2,7 @@ package com.servicos.estatica.resicolor.lab.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -139,17 +140,11 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private Button btStop3;
 	@FXML
-	private Button btChart1;
+	private Button btAmostra1;
 	@FXML
-	private Button btChart2;
+	private Button btAmostra2;
 	@FXML
-	private Button btChart3;
-	@FXML
-	private Button btReport1;
-	@FXML
-	private Button btReport2;
-	@FXML
-	private Button btReport3;
+	private Button btAmostra3;
 	@FXML
 	private Button btSaveBalao1;
 	@FXML
@@ -236,7 +231,11 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static ModbusRTUService modService = new ModbusRTUService();
 
 	private static Double tempBalao1 = new Double(0);
+	private static Double tempBalao2 = new Double(0);
+	private static Double tempBalao3 = new Double(0);
 	private static Double spBalao1 = new Double(0);
+	private static Double spBalao2 = new Double(0);
+	private static Double spBalao3 = new Double(0);
 	private static ObservableList<String> availablePorts;
 
 	private static Projeto projeto1;
@@ -285,8 +284,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				prog1.setVisible(false);
 				btPlay1.setDisable(false);
-				btChart1.setDisable(false);
-				btReport1.setDisable(false);
+				btAmostra1.setDisable(false);
 				isBalaoReady1 = true;
 				makeToast("Prova registrada com sucesso.");
 			}
@@ -322,8 +320,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				prog2.setVisible(false);
 				btPlay2.setDisable(false);
-				btChart2.setDisable(false);
-				btReport2.setDisable(false);
+				btAmostra2.setDisable(false);
 				isBalaoReady2 = true;
 				makeToast("Prova registrada com sucesso.");
 			}
@@ -360,8 +357,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				prog3.setVisible(false);
 				btPlay3.setDisable(false);
-				btChart3.setDisable(false);
-				btReport3.setDisable(false);
+				btAmostra3.setDisable(false);
 				isBalaoReady3 = true;
 				makeToast("Prova registrada com sucesso.");
 			}
@@ -463,8 +459,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto1.setDisable(false);
 		btPlay1.setDisable(true);
 		btStop1.setDisable(true);
-		btChart1.setDisable(true);
-		btReport1.setDisable(true);
+		btAmostra1.setDisable(true);
 		isBalaoRunning1 = false;
 		isBalaoFinished1 = true;
 		makeToast("Balão 1: Prova encerrada.");
@@ -488,8 +483,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto2.setDisable(false);
 		btPlay2.setDisable(true);
 		btStop2.setDisable(true);
-		btChart2.setDisable(true);
-		btReport2.setDisable(true);
+		btAmostra2.setDisable(true);
 		isBalaoRunning2 = false;
 		isBalaoFinished2 = true;
 		makeToast("Balão 2: Prova encerrada.");
@@ -513,8 +507,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto3.setDisable(false);
 		btPlay3.setDisable(true);
 		btStop3.setDisable(true);
-		btChart3.setDisable(true);
-		btReport3.setDisable(true);
+		btAmostra3.setDisable(true);
 		isBalaoRunning3 = false;
 		isBalaoFinished3 = true;
 		makeToast("Balão 3: Prova encerrada.");
@@ -574,8 +567,9 @@ public class InicialController implements Initializable, ControlledScreen {
 			System.out.println("Objeto nulo!");
 		}
 
-		// ProvaProperty.provaClear1Property().set(!ensaio1Clear);
-		// ensaio1Clear = !ensaio1Clear;
+		ProvaProperty.provaClear1Property().set(!prova1Clear);
+		prova1Clear = !prova1Clear;
+
 		// ensaio1 = null;
 		// isBalaoFinished1 = false;
 		// txtProdutoBalao1.setDisable(false);
@@ -606,8 +600,9 @@ public class InicialController implements Initializable, ControlledScreen {
 			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		}
 
-		// ProvaProperty.provaClear2Property().set(!prova2Clear);
-		// prova2Clear = !prova2Clear;
+		ProvaProperty.provaClear2Property().set(!prova2Clear);
+		prova2Clear = !prova2Clear;
+
 		// prova2 = null;
 		// isBalaoFinished2 = false;
 		// txtProdutoBalao2.setDisable(false);
@@ -638,8 +633,9 @@ public class InicialController implements Initializable, ControlledScreen {
 			disableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		}
 
-		// ProvaProperty.provaClear3Property().set(!prova3Clear);
-		// prova3Clear = !prova3Clear;
+		ProvaProperty.provaClear1Property().set(!prova3Clear);
+		prova3Clear = !prova3Clear;
+
 		// prova3 = null;
 		// isBalaoFinished3 = false;
 		// txtProdutoBalao3.setDisable(false);
@@ -713,29 +709,41 @@ public class InicialController implements Initializable, ControlledScreen {
 		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
-				Integer i = tempBalao1.intValue();
-				lblTemp1.setText(i.toString());
-				lblTemp2.setText(i.toString());
-				lblTemp3.setText(i.toString());
+				Integer i1 = tempBalao1.intValue();
+				tempBalao2 = modService.readMultipleRegisters(1, 1, 1);
+				Integer i2 = tempBalao1.intValue();
+				tempBalao3 = modService.readMultipleRegisters(1, 1, 1);
+				Integer i3 = tempBalao1.intValue();
+
+				spBalao1 = modService.readMultipleRegisters(1, 0, 1);
+				Integer sp1 = spBalao1.intValue();
+				spBalao2 = modService.readMultipleRegisters(1, 0, 1);
+				Integer sp2 = spBalao2.intValue();
+				spBalao3 = modService.readMultipleRegisters(1, 0, 1);
+				Integer sp3 = spBalao3.intValue();
+
+				lblTemp1.setText(i1.toString());
+				lblTemp2.setText(i2.toString());
+				lblTemp3.setText(i3.toString());
 				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
 				// 1);
 
 				if (isBalaoRunning1) {
-					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, 0);
+					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, sp1);
 					leituraDAO.saveLeitura(l);
 					prova1.getLeituras().add(l);
 					ProvaProperty.provaTemp1Property().set(!tempProva1Changed);
 					tempProva1Changed = !tempProva1Changed;
 				}
 				if (isBalaoRunning2) {
-					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao1, 0);
+					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao1, sp2);
 					leituraDAO.saveLeitura(l);
 					prova2.getLeituras().add(l);
 					ProvaProperty.provaTemp2Property().set(!tempProva2Changed);
 					tempProva2Changed = !tempProva2Changed;
 				}
 				if (isBalaoRunning3) {
-					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao1, 0);
+					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao1, sp3);
 					leituraDAO.saveLeitura(l);
 					prova3.getLeituras().add(l);
 					ProvaProperty.provaTemp3Property().set(!tempProva3Changed);
