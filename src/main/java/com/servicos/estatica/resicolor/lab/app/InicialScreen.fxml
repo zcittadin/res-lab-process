@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
@@ -400,7 +401,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btChart1" disable="true" layoutX="399.0" layoutY="76.0" mnemonicParsing="false" styleClass="btStyleChart" stylesheets="@../style/style.css">
+      <Button fx:id="btChart1" layoutX="399.0" layoutY="76.0" mnemonicParsing="false" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -430,9 +431,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle fx:id="rect2" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="112.0" layoutX="25.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="320.0" />
-      <ComboBox fx:id="comboPorts" layoutX="58.0" layoutY="76.0" prefWidth="110.0" />
-      <Button fx:id="btConnect" layoutX="181.0" layoutY="76.0" mnemonicParsing="false" onAction="#toggleConnect" prefHeight="25.0" prefWidth="132.0" styleClass="btStyleDisconnect" stylesheets="@../style/style.css" text="Conectar">
+      <Rectangle fx:id="rect2" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="95.0" layoutX="25.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="320.0" />
+      <ComboBox fx:id="comboPorts" layoutX="58.0" layoutY="66.0" prefWidth="110.0" />
+      <Button fx:id="btConnect" layoutX="181.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleConnect" prefHeight="25.0" prefWidth="132.0" styleClass="btStyleDisconnect" stylesheets="@../style/style.css" text="Conectar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -441,26 +442,34 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rect3" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="485.0" layoutX="25.0" layoutY="143.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="320.0" />
-      <TabPane fx:id="tabForm" layoutX="40.0" layoutY="197.0" prefHeight="411.0" prefWidth="291.0" tabClosingPolicy="UNAVAILABLE">
+      <Rectangle fx:id="rect3" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="502.0" layoutX="25.0" layoutY="126.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="320.0" />
+      <TabPane fx:id="tabForm" layoutX="40.0" layoutY="160.0" prefHeight="448.0" prefWidth="291.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Balão 1">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="myGradient" stylesheets="@../style/style.css">
                      <children>
-                        <Label layoutX="30.0" layoutY="40.0" text="Lote" textFill="#09156f" />
-                        <TextField fx:id="txtLoteBalao1" layoutX="71.0" layoutY="36.0" />
-                        <Button fx:id="btSaveBalao1" layoutX="120.0" layoutY="315.0" mnemonicParsing="false" onAction="#saveBalao1" text="Salvar">
+                        <Label layoutX="21.0" layoutY="86.0" text="Produto:" textFill="#09156f" />
+                        <TextField fx:id="txtProdutoBalao1" layoutX="20.0" layoutY="103.0" prefHeight="25.0" prefWidth="250.0" />
+                        <Button fx:id="btSaveBalao1" layoutX="102.0" layoutY="381.0" mnemonicParsing="false" onAction="#saveBalao1" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
                         <ProgressIndicator fx:id="prog1" layoutX="49.0" layoutY="107.0" prefHeight="180.0" prefWidth="191.0" style="-fx-progress-color: #E0FFFF;" visible="false" />
-                        <Button fx:id="btAdd1" layoutX="219.0" layoutY="37.0" mnemonicParsing="false" onAction="#addEnsaio1" styleClass="btStyleAdd" stylesheets="@../style/style.css">
+                        <Button fx:id="btAdd1" layoutX="241.0" layoutY="29.0" mnemonicParsing="false" onAction="#addEnsaio1" prefHeight="25.0" styleClass="btStyleAdd" stylesheets="@../style/style.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
+                        <ComboBox layoutX="20.0" layoutY="29.0" prefHeight="25.0" prefWidth="221.0" promptText="Selecione ou adicione um projeto" />
+                        <Label layoutX="21.0" layoutY="12.0" text="Projeto:" textFill="#09156f" />
+                        <TextField layoutX="21.0" layoutY="207.0" prefHeight="25.0" prefWidth="250.0" />
+                        <TextArea layoutX="20.0" layoutY="259.0" prefHeight="101.0" prefWidth="250.0" />
+                        <Label layoutX="21.0" layoutY="241.0" text="Objetivo:" textFill="#09156f" />
+                        <Label layoutX="21.0" layoutY="139.0" text="Nº do projeto:" textFill="#09156f" />
+                        <Label layoutX="20.0" layoutY="190.0" text="Executor:" textFill="#09156f" />
+                        <TextField layoutX="20.0" layoutY="156.0" prefHeight="25.0" prefWidth="250.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -468,7 +477,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="myGradient" stylesheets="@../style/style.css">
                      <children>
-                        <TextField fx:id="txtLoteBalao2" layoutX="71.0" layoutY="36.0" />
+                        <TextField fx:id="txtProdutoBalao2" layoutX="71.0" layoutY="36.0" />
                         <Label layoutX="30.0" layoutY="40.0" text="Lote" textFill="#09156f" />
                         <Button fx:id="btSaveBalao2" layoutX="120.0" layoutY="315.0" mnemonicParsing="false" onAction="#saveBalao2" text="Salvar">
                            <cursor>
@@ -488,7 +497,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="myGradient" stylesheets="@../style/style.css">
                      <children>
-                        <TextField fx:id="txtLoteBalao3" layoutX="71.0" layoutY="36.0" />
+                        <TextField fx:id="txtProdutoBalao3" layoutX="71.0" layoutY="36.0" />
                         <Label layoutX="30.0" layoutY="40.0" text="Lote" textFill="#09156f" />
                         <Button fx:id="btSaveBalao3" layoutX="120.0" layoutY="315.0" mnemonicParsing="false" onAction="#saveBalao3" text="Salvar">
                            <cursor>
@@ -506,8 +515,8 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="60.0" layoutY="56.0" text="Porta" textFill="#09156f" />
-      <Label layoutX="88.0" layoutY="147.0" text="Parâmetros de ensaio" textFill="#09156f">
+      <Label layoutX="60.0" layoutY="46.0" text="Porta:" textFill="#09156f" />
+      <Label layoutX="88.0" layoutY="128.0" text="Parâmetros de ensaio" textFill="#09156f">
          <font>
             <Font size="20.0" />
          </font>

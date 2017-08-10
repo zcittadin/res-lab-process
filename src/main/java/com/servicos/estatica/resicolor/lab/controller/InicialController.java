@@ -12,7 +12,7 @@ import com.servicos.estatica.resicolor.lab.app.ControlledScreen;
 import com.servicos.estatica.resicolor.lab.dao.EnsaioDAO;
 import com.servicos.estatica.resicolor.lab.dao.LeituraDAO;
 import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
-import com.servicos.estatica.resicolor.lab.model.Ensaio;
+import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.model.Leitura;
 import com.servicos.estatica.resicolor.lab.property.EnsaioProperty;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
@@ -62,11 +62,11 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private AnchorPane pane3;
 	@FXML
-	private TextField txtLoteBalao1;
+	private TextField txtProdutoBalao1;
 	@FXML
-	private TextField txtLoteBalao2;
+	private TextField txtProdutoBalao2;
 	@FXML
-	private TextField txtLoteBalao3;
+	private TextField txtProdutoBalao3;
 	@FXML
 	private Label lblTemp1;
 	@FXML
@@ -208,9 +208,9 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Double spBalao1 = new Double(0);
 	private static ObservableList<String> availablePorts;
 
-	private static Ensaio ensaio1;
-	private static Ensaio ensaio2;
-	private static Ensaio ensaio3;
+	private static Prova ensaio1;
+	private static Prova ensaio2;
+	private static Prova ensaio3;
 
 	private static EnsaioDAO ensaioDAO = new EnsaioDAO();
 	private static LeituraDAO leituraDAO = new LeituraDAO();
@@ -238,9 +238,9 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog1.setVisible(true);
 				btSaveBalao1.setDisable(true);
 				btAdd1.setDisable(true);
-				txtLoteBalao1.setDisable(true);
-				ensaio1 = new Ensaio(null, new ArrayList<Leitura>(), txtLoteBalao1.getText(), "Balão 1", 0, 0, null,
-						null);
+				txtProdutoBalao1.setDisable(true);
+//				ensaio1 = new Prova(null, new ArrayList<Leitura>(), txtProdutoBalao1.getText(), "Balão 1", 0, 0, null,
+//						null);
 				ensaioDAO.saveEnsaio(ensaio1);
 				return null;
 			}
@@ -275,9 +275,9 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog2.setVisible(true);
 				btSaveBalao2.setDisable(true);
 				btAdd2.setDisable(true);
-				txtLoteBalao2.setDisable(true);
-				ensaio2 = new Ensaio(null, new ArrayList<Leitura>(), txtLoteBalao2.getText(), "Balão 2", 0, 0, null,
-						null);
+				txtProdutoBalao2.setDisable(true);
+//				ensaio2 = new Prova(null, new ArrayList<Leitura>(), txtProdutoBalao2.getText(), "Balão 2", 0, 0, null,
+//						null);
 				ensaioDAO.saveEnsaio(ensaio2);
 				return null;
 			}
@@ -313,9 +313,9 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog3.setVisible(true);
 				btSaveBalao3.setDisable(true);
 				btAdd3.setDisable(true);
-				txtLoteBalao3.setDisable(true);
-				ensaio3 = new Ensaio(null, new ArrayList<Leitura>(), txtLoteBalao3.getText(), "Balão 3", 0, 0, null,
-						null);
+				txtProdutoBalao3.setDisable(true);
+//				ensaio3 = new Prova(null, new ArrayList<Leitura>(), txtProdutoBalao3.getText(), "Balão 3", 0, 0, null,
+//						null);
 				ensaioDAO.saveEnsaio(ensaio3);
 				return null;
 			}
@@ -497,7 +497,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		} else {
 			modService.setConnectionParams(comboPorts.getValue(), 9600);
 			modService.openConnection();
-			
+
 			tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
 			Integer i = tempBalao1.intValue();
 			lblTemp1.setText(i.toString());
@@ -508,7 +508,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			lblSp1.setText(sp.toString());
 			lblSp2.setText(sp.toString());
 			lblSp3.setText(sp.toString());
-			
+
 			scanModbusSlaves.play();
 			isConnected = true;
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
@@ -523,10 +523,10 @@ public class InicialController implements Initializable, ControlledScreen {
 		ensaio1Clear = !ensaio1Clear;
 		ensaio1 = null;
 		isBalaoFinished1 = false;
-		txtLoteBalao1.setDisable(false);
+		txtProdutoBalao1.setDisable(false);
 		btSaveBalao1.setDisable(false);
-		txtLoteBalao1.setText(null);
-		txtLoteBalao1.requestFocus();
+		txtProdutoBalao1.setText(null);
+		txtProdutoBalao1.requestFocus();
 	}
 
 	@FXML
@@ -535,10 +535,10 @@ public class InicialController implements Initializable, ControlledScreen {
 		ensaio2Clear = !ensaio2Clear;
 		ensaio2 = null;
 		isBalaoFinished2 = false;
-		txtLoteBalao2.setDisable(false);
+		txtProdutoBalao2.setDisable(false);
 		btSaveBalao2.setDisable(false);
-		txtLoteBalao2.setText(null);
-		txtLoteBalao2.requestFocus();
+		txtProdutoBalao2.setText(null);
+		txtProdutoBalao2.requestFocus();
 	}
 
 	@FXML
@@ -547,10 +547,10 @@ public class InicialController implements Initializable, ControlledScreen {
 		ensaio3Clear = !ensaio3Clear;
 		ensaio3 = null;
 		isBalaoFinished3 = false;
-		txtLoteBalao3.setDisable(false);
+		txtProdutoBalao3.setDisable(false);
 		btSaveBalao3.setDisable(false);
-		txtLoteBalao3.setText(null);
-		txtLoteBalao3.requestFocus();
+		txtProdutoBalao3.setText(null);
+		txtProdutoBalao3.requestFocus();
 	}
 
 	private void configLayout() {

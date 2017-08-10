@@ -75,3 +75,9 @@
 .btStyleSearch {
   -fx-graphic: url('zoom.png');
 }
+.btStyleSave {
+  -fx-graphic: url('disk.png');
+}
+.btStyleAmostra {
+  -fx-graphic: url('retort.png');
+}

@@ -17,15 +17,15 @@ import javax.persistence.Table;
 @Table(name = "leituras")
 public class Leitura implements Serializable {
 
-	private static final long serialVersionUID = 2251146769552878052L;
+	private static final long serialVersionUID = 1037189383987764759L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_ensaio")
-	private Ensaio ensaio;
+	@JoinColumn(name = "id_prova")
+	private Prova provaLeituras;
 	@Column(name = "dt_leitura")
 	private Date dtProc;
 	@Column(name = "temp")
@@ -37,9 +37,9 @@ public class Leitura implements Serializable {
 
 	}
 
-	public Leitura(Long id, Ensaio ensaio, Date dtProc, double temp, double sp) {
+	public Leitura(Long id, Prova provaLeituras, Date dtProc, double temp, double sp) {
 		this.id = id;
-		this.ensaio = ensaio;
+		this.provaLeituras = provaLeituras;
 		this.dtProc = dtProc;
 		this.temp = temp;
 		this.sp = sp;
@@ -53,12 +53,12 @@ public class Leitura implements Serializable {
 		this.id = id;
 	}
 
-	public Ensaio getEnsaio() {
-		return ensaio;
+	public Prova getProvaLeituras() {
+		return provaLeituras;
 	}
 
-	public void setEnsaio(Ensaio ensaio) {
-		this.ensaio = ensaio;
+	public void setProvaLeituras(Prova provaLeituras) {
+		this.provaLeituras = provaLeituras;
 	}
 
 	public Date getDtProc() {
@@ -87,8 +87,8 @@ public class Leitura implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Leitura [id=" + id + ", ensaio=" + ensaio + ", dtProc=" + dtProc + ", temp=" + temp + ", sp=" + sp
-				+ "]";
+		return "Leitura [id=" + id + ", provaLeituras=" + provaLeituras + ", dtProc=" + dtProc + ", temp=" + temp
+				+ ", sp=" + sp + "]";
 	}
 
 	@Override

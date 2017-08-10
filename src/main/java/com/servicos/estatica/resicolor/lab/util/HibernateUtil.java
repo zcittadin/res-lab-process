@@ -6,8 +6,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.servicos.estatica.resicolor.lab.model.Ensaio;
+import com.servicos.estatica.resicolor.lab.model.Amostra;
 import com.servicos.estatica.resicolor.lab.model.Leitura;
+import com.servicos.estatica.resicolor.lab.model.Projeto;
+import com.servicos.estatica.resicolor.lab.model.Prova;
 
 public class HibernateUtil {
 
@@ -30,8 +32,10 @@ public class HibernateUtil {
 	}
 
 	private static void getConfiguration() {
-		configuration.addPackage("com.servicos.estatica.resicolor.model");
-		configuration.addAnnotatedClass(Ensaio.class);
+		configuration.addPackage("com.servicos.estatica.resicolor.lab.model");
+		configuration.addAnnotatedClass(Projeto.class);
+		configuration.addAnnotatedClass(Prova.class);
+		configuration.addAnnotatedClass(Amostra.class);
 		configuration.addAnnotatedClass(Leitura.class);
 		configuration.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
 
