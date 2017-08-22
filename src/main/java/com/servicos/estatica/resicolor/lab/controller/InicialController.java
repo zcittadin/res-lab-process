@@ -16,6 +16,7 @@ import com.servicos.estatica.resicolor.lab.modbus.ModbusRTUService;
 import com.servicos.estatica.resicolor.lab.model.Leitura;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.model.Prova;
+import com.servicos.estatica.resicolor.lab.property.AmostraProperty;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
@@ -577,19 +578,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		// txtProdutoBalao1.setText(null);
 		// txtProdutoBalao1.requestFocus();
 	}
-	
-	@FXML
-	private void openAmostra() throws IOException {
-		Stage stage;
-		Parent root;
-		stage = new Stage();
-		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/Amostra.fxml"));
-		stage.setScene(new Scene(root));
-		stage.setTitle("Gerenciamento de amostras");
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setResizable(Boolean.FALSE);
-		stage.showAndWait();
-	}
 
 	@FXML
 	private void addProjeto2() throws IOException {
@@ -655,6 +643,39 @@ public class InicialController implements Initializable, ControlledScreen {
 		// btSaveBalao3.setDisable(false);
 		// txtProdutoBalao3.setText(null);
 		// txtProdutoBalao3.requestFocus();
+	}
+
+	@FXML
+	private void addOrManageAmostra1() throws IOException {
+		AmostraProperty.tempProperty().set(70);
+		AmostraProperty.setPointProperty().set(75);
+		openAmostra();
+	}
+
+	@FXML
+	private void addOrManageAmostra2() throws IOException {
+		AmostraProperty.tempProperty().set(80);
+		AmostraProperty.setPointProperty().set(85);
+		openAmostra();
+	}
+	
+	@FXML
+	private void addOrManageAmostra3() throws IOException {
+		AmostraProperty.tempProperty().set(90);
+		AmostraProperty.setPointProperty().set(95);
+		openAmostra();
+	}
+
+	private void openAmostra() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/Amostra.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Gerenciamento de amostras");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
 	}
 
 	private void configLayout() {

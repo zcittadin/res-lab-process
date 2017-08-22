@@ -84,3 +84,6 @@
 .btStyleOk {
   -fx-graphic: url('Yes.png');
 }
+.btStyleDelete {
+  -fx-graphic: url('Delete.png');
+}
