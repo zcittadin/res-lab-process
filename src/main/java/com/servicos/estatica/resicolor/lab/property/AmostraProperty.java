@@ -10,7 +10,7 @@ public class AmostraProperty {
 	private static SimpleIntegerProperty temp = new SimpleIntegerProperty();
 	private static SimpleIntegerProperty setPoint = new SimpleIntegerProperty();
 
-	private static SimpleObjectProperty<Prova> prova = new SimpleObjectProperty();
+	private static SimpleObjectProperty<Prova> prova = new SimpleObjectProperty<Prova>();
 
 	// ========================================
 	public static SimpleIntegerProperty tempProperty() {

@@ -14,20 +14,20 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1300.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.AmostraController">
    <children>
-      <TableView layoutX="37.0" layoutY="427.0" prefHeight="211.0" prefWidth="1226.0">
+      <TableView fx:id="tblAmostra" layoutX="37.0" layoutY="427.0" prefHeight="211.0" prefWidth="1226.0">
         <columns>
-          <TableColumn prefWidth="91.99996948242188" text="Hora" />
-          <TableColumn prefWidth="85.00003051757812" text="°C" />
-            <TableColumn prefWidth="89.0" text="Set-point" />
-            <TableColumn prefWidth="91.0" text="IA sobre NV" />
-            <TableColumn prefWidth="97.0" text="Visc. Gardner" />
-            <TableColumn prefWidth="105.0" text="Cor Gardner" />
-            <TableColumn prefWidth="109.0" text="NV%" />
-            <TableColumn prefWidth="103.0" text="Gel time (seg)" />
-            <TableColumn prefWidth="99.0" text="Água (ml)" />
-            <TableColumn prefWidth="91.0" text="Amostra (g)" />
-            <TableColumn text="PH" />
-            <TableColumn prefWidth="184.0" text="Descrição do processo" />
+          <TableColumn fx:id="colHora" prefWidth="91.99996948242188" resizable="false" text="Hora" />
+          <TableColumn fx:id="colTemp" prefWidth="85.00003051757812" resizable="false" text="°C" />
+            <TableColumn fx:id="colSetPoint" prefWidth="89.0" resizable="false" text="Set-point" />
+            <TableColumn fx:id="colIAsobreNV" prefWidth="91.0" resizable="false" text="IA sobre NV" />
+            <TableColumn fx:id="colViscGardner" prefWidth="97.0" resizable="false" text="Visc. Gardner" />
+            <TableColumn fx:id="colCorGardner" prefWidth="105.0" resizable="false" text="Cor Gardner" />
+            <TableColumn fx:id="colNv" prefWidth="109.0" resizable="false" text="NV%" />
+            <TableColumn fx:id="colGelTime" prefWidth="103.0" resizable="false" text="Gel time (seg)" />
+            <TableColumn fx:id="colAgua" prefWidth="99.0" resizable="false" text="Água (ml)" />
+            <TableColumn fx:id="colAmostra" prefWidth="91.0" resizable="false" text="Amostra (g)" />
+            <TableColumn fx:id="colPh" resizable="false" text="PH" />
+            <TableColumn fx:id="colDescricao" prefWidth="184.0" resizable="false" text="Descrição do processo" />
         </columns>
       </TableView>
       <Rectangle fx:id="rectangle" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="360.0" layoutX="223.0" layoutY="28.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="854.0" />
@@ -55,17 +55,17 @@
       <Label layoutX="876.0" layoutY="128.0" text="PH:" textFill="#09156f" />
       <TextArea fx:id="txtDescricao" layoutX="266.0" layoutY="271.0" prefHeight="96.0" prefWidth="442.0" />
       <Label layoutX="266.0" layoutY="254.0" text="Descrição do processo:" textFill="#09156f" />
-      <Button layoutX="739.0" layoutY="287.0" mnemonicParsing="false" onAction="#novaAmostra" styleClass="btStyleAdd" stylesheets="@../style/style.css" text="Nova amostra">
+      <Button layoutX="759.0" layoutY="287.0" mnemonicParsing="false" onAction="#novaAmostra" styleClass="btStyleAdd" stylesheets="@../style/style.css" text="Nova amostra">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="740.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
+      <Button layoutX="760.0" layoutY="328.0" mnemonicParsing="false" onAction="#saveAmostra" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="881.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleDelete" stylesheets="@../style/style.css" text="Excluir">
+      <Button layoutX="901.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleDelete" stylesheets="@../style/style.css" text="Excluir">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -77,7 +77,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="880.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleVoltar" stylesheets="@../style/style.css" text="Voltar">
+      <Button layoutX="900.0" layoutY="328.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleVoltar" stylesheets="@../style/style.css" text="Voltar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

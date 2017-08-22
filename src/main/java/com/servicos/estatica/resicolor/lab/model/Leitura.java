@@ -29,15 +29,15 @@ public class Leitura implements Serializable {
 	@Column(name = "dt_leitura")
 	private Date dtProc;
 	@Column(name = "temp")
-	private double temp;
+	private int temp;
 	@Column(name = "sp")
-	private double sp;
+	private int sp;
 
 	public Leitura() {
 
 	}
 
-	public Leitura(Long id, Prova provaLeituras, Date dtProc, double temp, double sp) {
+	public Leitura(Long id, Prova provaLeituras, Date dtProc, int temp, int sp) {
 		this.id = id;
 		this.provaLeituras = provaLeituras;
 		this.dtProc = dtProc;
@@ -73,7 +73,7 @@ public class Leitura implements Serializable {
 		return temp;
 	}
 
-	public void setTemp(double temp) {
+	public void setTemp(int temp) {
 		this.temp = temp;
 	}
 
@@ -81,7 +81,7 @@ public class Leitura implements Serializable {
 		return sp;
 	}
 
-	public void setSp(double sp) {
+	public void setSp(int sp) {
 		this.sp = sp;
 	}
 

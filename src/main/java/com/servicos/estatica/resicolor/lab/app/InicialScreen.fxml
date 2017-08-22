@@ -371,7 +371,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btAmostra3" layoutX="399.0" layoutY="484.0" mnemonicParsing="false" onAction="#addOrManageAmostra3" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
+      <Button fx:id="btAmostra3" disable="true" layoutX="399.0" layoutY="484.0" mnemonicParsing="false" onAction="#addOrManageAmostra3" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -396,7 +396,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btAmostra1" layoutX="399.0" layoutY="76.0" mnemonicParsing="false" onAction="#addOrManageAmostra1" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
+      <Button fx:id="btAmostra1" disable="true" layoutX="399.0" layoutY="76.0" mnemonicParsing="false" onAction="#addOrManageAmostra1" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -411,7 +411,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btAmostra2" layoutX="399.0" layoutY="279.0" mnemonicParsing="false" onAction="#addOrManageAmostra2" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
+      <Button fx:id="btAmostra2" disable="true" layoutX="399.0" layoutY="279.0" mnemonicParsing="false" onAction="#addOrManageAmostra2" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -2,7 +2,9 @@ package com.servicos.estatica.resicolor.lab.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -59,6 +61,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+@SuppressWarnings("unused")
 public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
@@ -230,12 +233,12 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	private static ModbusRTUService modService = new ModbusRTUService();
 
-	private static Double tempBalao1 = new Double(0);
-	private static Double tempBalao2 = new Double(0);
-	private static Double tempBalao3 = new Double(0);
-	private static Double spBalao1 = new Double(0);
-	private static Double spBalao2 = new Double(0);
-	private static Double spBalao3 = new Double(0);
+	private static Integer tempBalao1 = new Integer(0);
+	private static Integer tempBalao2 = new Integer(0);
+	private static Integer tempBalao3 = new Integer(0);
+	private static Integer spBalao1 = new Integer(0);
+	private static Integer spBalao2 = new Integer(0);
+	private static Integer spBalao3 = new Integer(0);
 	private static ObservableList<String> availablePorts;
 
 	private static Projeto projeto1;
@@ -245,6 +248,10 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Prova prova1;
 	private static Prova prova2;
 	private static Prova prova3;
+
+	private static List<Leitura> leituras1;
+	private static List<Leitura> leituras2;
+	private static List<Leitura> leituras3;
 
 	private static ProvaDAO provaDAO = new ProvaDAO();
 	private static LeituraDAO leituraDAO = new LeituraDAO();
@@ -273,7 +280,8 @@ public class InicialController implements Initializable, ControlledScreen {
 				btSaveBalao1.setDisable(true);
 				btAddProjeto1.setDisable(true);
 				txtProduto1.setDisable(true);
-				prova1 = new Prova(null, projeto1, null, null, txtProduto1.getText(), txtObjetivo1.getText(),
+				leituras1 = new ArrayList<>();
+				prova1 = new Prova(null, projeto1, leituras1, null, txtProduto1.getText(), txtObjetivo1.getText(),
 						txtExecutor1.getText(), txtNumero1.getText(), "Balão 1", 0, 0, null, null);
 				provaDAO.saveProva(prova1);
 				return null;
@@ -309,7 +317,8 @@ public class InicialController implements Initializable, ControlledScreen {
 				btSaveBalao2.setDisable(true);
 				btAddProjeto2.setDisable(true);
 				txtProduto2.setDisable(true);
-				prova2 = new Prova(null, projeto2, null, null, txtProduto2.getText(), txtObjetivo2.getText(),
+				leituras2 = new ArrayList<>();
+				prova2 = new Prova(null, projeto2, leituras2, null, txtProduto2.getText(), txtObjetivo2.getText(),
 						txtExecutor2.getText(), txtNumero2.getText(), "Balão 2", 0, 0, null, null);
 				provaDAO.saveProva(prova2);
 				return null;
@@ -346,7 +355,8 @@ public class InicialController implements Initializable, ControlledScreen {
 				btSaveBalao3.setDisable(true);
 				btAddProjeto3.setDisable(true);
 				txtProduto3.setDisable(true);
-				prova3 = new Prova(null, projeto3, null, null, txtProduto3.getText(), txtObjetivo3.getText(),
+				leituras3 = new ArrayList<>();
+				prova3 = new Prova(null, projeto3, leituras3, null, txtProduto3.getText(), txtObjetivo3.getText(),
 						txtExecutor3.getText(), txtNumero3.getText(), "Balão 3", 0, 0, null, null);
 				provaDAO.saveProva(prova3);
 				return null;
@@ -526,16 +536,19 @@ public class InicialController implements Initializable, ControlledScreen {
 			modService.setConnectionParams(comboPorts.getValue(), 9600);
 			modService.openConnection();
 
-			tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
-			Integer i = tempBalao1.intValue();
-			lblTemp1.setText(i.toString());
-			lblTemp2.setText(i.toString());
-			lblTemp3.setText(i.toString());
-			spBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			Integer sp = spBalao1.intValue();
-			lblSp1.setText(sp.toString());
-			lblSp2.setText(sp.toString());
-			lblSp3.setText(sp.toString());
+			Double t = modService.readMultipleRegisters(1, 0, 1);
+			// tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
+			tempBalao1 = t.intValue();
+			lblTemp1.setText(tempBalao1.toString());
+			lblTemp2.setText(tempBalao1.toString());
+			lblTemp3.setText(tempBalao1.toString());
+
+			Double sp = modService.readMultipleRegisters(1, 0, 1);
+			// spBalao1 = modService.readMultipleRegisters(1, 0, 1);
+			spBalao1 = sp.intValue();
+			lblSp1.setText(spBalao1.toString());
+			lblSp2.setText(spBalao1.toString());
+			lblSp3.setText(spBalao1.toString());
 
 			scanModbusSlaves.play();
 			isConnected = true;
@@ -646,22 +659,25 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void addOrManageAmostra1() throws IOException {
-		AmostraProperty.tempProperty().set(70);
-		AmostraProperty.setPointProperty().set(75);
+		AmostraProperty.tempProperty().set(tempBalao1);
+		AmostraProperty.setPointProperty().set(spBalao1);
+		AmostraProperty.provaProperty().set(prova1);
 		openAmostra();
 	}
 
 	@FXML
 	private void addOrManageAmostra2() throws IOException {
-		AmostraProperty.tempProperty().set(80);
-		AmostraProperty.setPointProperty().set(85);
+		AmostraProperty.tempProperty().set(tempBalao2);
+		AmostraProperty.setPointProperty().set(spBalao2);
+		AmostraProperty.provaProperty().set(prova2);
 		openAmostra();
 	}
-	
+
 	@FXML
 	private void addOrManageAmostra3() throws IOException {
-		AmostraProperty.tempProperty().set(90);
-		AmostraProperty.setPointProperty().set(95);
+		AmostraProperty.tempProperty().set(tempBalao3);
+		AmostraProperty.setPointProperty().set(spBalao3);
+		AmostraProperty.provaProperty().set(prova3);
 		openAmostra();
 	}
 
@@ -699,7 +715,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		imgMola2.setEffect(sepia2);
 		sepia3.setInput(glow3);
 		imgMola3.setEffect(sepia3);
-
 	}
 
 	private void configAnimations() {
@@ -741,42 +756,43 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void configModbusReadSlaves() {
 		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
-				Integer i1 = tempBalao1.intValue();
-				tempBalao2 = modService.readMultipleRegisters(1, 1, 1);
-				Integer i2 = tempBalao1.intValue();
-				tempBalao3 = modService.readMultipleRegisters(1, 1, 1);
-				Integer i3 = tempBalao1.intValue();
 
-				spBalao1 = modService.readMultipleRegisters(1, 0, 1);
-				Integer sp1 = spBalao1.intValue();
-				spBalao2 = modService.readMultipleRegisters(1, 0, 1);
-				Integer sp2 = spBalao2.intValue();
-				spBalao3 = modService.readMultipleRegisters(1, 0, 1);
-				Integer sp3 = spBalao3.intValue();
+				Double t1 = modService.readMultipleRegisters(1, 0, 1);
+				tempBalao1 = t1.intValue();
+				Double t2 = modService.readMultipleRegisters(1, 0, 1);
+				tempBalao1 = t2.intValue();
+				Double t3 = modService.readMultipleRegisters(1, 0, 1);
+				tempBalao1 = t3.intValue();
 
-				lblTemp1.setText(i1.toString());
-				lblTemp2.setText(i2.toString());
-				lblTemp3.setText(i3.toString());
+				Double sp1 = modService.readMultipleRegisters(1, 0, 1);
+				spBalao1 = sp1.intValue();
+				Double sp2 = modService.readMultipleRegisters(1, 0, 1);
+				spBalao1 = sp2.intValue();
+				Double sp3 = modService.readMultipleRegisters(1, 0, 1);
+				spBalao1 = sp3.intValue();
+
+				lblTemp1.setText(tempBalao1.toString());
+				lblTemp2.setText(tempBalao1.toString());
+				lblTemp3.setText(tempBalao1.toString());
 				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
 				// 1);
 
 				if (isBalaoRunning1) {
-					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, sp1);
+					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, spBalao1);
 					leituraDAO.saveLeitura(l);
 					prova1.getLeituras().add(l);
 					ProvaProperty.provaTemp1Property().set(!tempProva1Changed);
 					tempProva1Changed = !tempProva1Changed;
 				}
 				if (isBalaoRunning2) {
-					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao1, sp2);
+					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao1, spBalao2);
 					leituraDAO.saveLeitura(l);
 					prova2.getLeituras().add(l);
 					ProvaProperty.provaTemp2Property().set(!tempProva2Changed);
 					tempProva2Changed = !tempProva2Changed;
 				}
 				if (isBalaoRunning3) {
-					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao1, sp3);
+					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao1, spBalao3);
 					leituraDAO.saveLeitura(l);
 					prova3.getLeituras().add(l);
 					ProvaProperty.provaTemp3Property().set(!tempProva3Changed);
@@ -824,7 +840,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		Toast.makeToast(stage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
 	}
 
-	public Double getTemp() {
+	public Integer getTemp() {
 		return tempBalao1;
 	}
 
