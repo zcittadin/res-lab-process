@@ -577,6 +577,19 @@ public class InicialController implements Initializable, ControlledScreen {
 		// txtProdutoBalao1.setText(null);
 		// txtProdutoBalao1.requestFocus();
 	}
+	
+	@FXML
+	private void openAmostra() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/Amostra.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Gerenciamento de amostras");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
+	}
 
 	@FXML
 	private void addProjeto2() throws IOException {
