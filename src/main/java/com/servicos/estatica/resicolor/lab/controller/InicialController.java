@@ -2,7 +2,6 @@ package com.servicos.estatica.resicolor.lab.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;

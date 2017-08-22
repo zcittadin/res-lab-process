@@ -87,3 +87,6 @@
 .btStyleDelete {
   -fx-graphic: url('Delete.png');
 }
+.btStyleVoltar {
+  -fx-graphic: url('back.png');
+}
