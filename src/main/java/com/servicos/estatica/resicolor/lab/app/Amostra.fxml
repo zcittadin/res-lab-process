@@ -65,7 +65,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="901.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleDelete" stylesheets="@../style/style.css" text="Excluir">
+      <Button fx:id="btExcluir" disable="true" layoutX="901.0" layoutY="287.0" mnemonicParsing="false" onAction="#removeAmostra" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleDelete" stylesheets="@../style/style.css" text="Excluir">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

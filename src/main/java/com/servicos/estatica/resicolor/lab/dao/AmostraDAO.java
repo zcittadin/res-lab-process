@@ -33,4 +33,23 @@ public class AmostraDAO {
 		session.close();
 		return list;
 	}
+
+	public void updateAmostra(Amostra amostra) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		session.update(amostra);
+		session.getTransaction().commit();
+		session.clear();
+		session.close();
+	}
+
+	public void removeAmostra(Amostra amostra) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		session.remove(amostra);
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
 }

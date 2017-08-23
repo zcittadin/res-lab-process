@@ -24,6 +24,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -90,6 +91,8 @@ public class AmostraController implements Initializable {
 	private TableColumn colPh;
 	@FXML
 	private TableColumn colDescricao;
+	@FXML
+	private Button btExcluir;
 
 	private static Amostra amostra;
 	private List<Amostra> amostras;
@@ -98,6 +101,9 @@ public class AmostraController implements Initializable {
 
 	private static DateTimeFormatter dataHoraFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 	private static DecimalFormat decimalFormat = new DecimalFormat("#.0");
+
+	private static String COMMA = ",";
+	private static String DOT = ".";
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -114,44 +120,55 @@ public class AmostraController implements Initializable {
 	@FXML
 	private void novaAmostra() {
 		prepareFields();
+		amostra = null;
+		btExcluir.setDisable(true);
 	}
 
 	@FXML
 	private void saveAmostra() {
 		Task<Void> saveTask = new Task<Void>() {
+			@SuppressWarnings("unchecked")
 			@Override
 			protected Void call() throws Exception {
-				amostra = new Amostra(null, AmostraProperty.getProva(), new Date(),
-						Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText(), ",", ".")),
-						Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText(), ",", ".")),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), ",", ".")),
-						txtViscGardner.getText(), txtCorGardner.getText(),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), ",", ".")),
-						Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText(), ",", ".")),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText(), ",", ".")),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText(), ",", ".")),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText(), ",", ".")),
-						txtDescricao.getText());
-				amostraDAO.saveAmostra(amostra);
+				if (amostra == null) {
+					amostra = new Amostra(null, AmostraProperty.getProva(), new Date(),
+							Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)),
+							Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)),
+							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)),
+							txtViscGardner.getText(), txtCorGardner.getText(),
+							Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), COMMA, DOT)),
+							Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText(), COMMA, DOT)),
+							Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText(), COMMA, DOT)),
+							Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText(), COMMA, DOT)),
+							Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText(), COMMA, DOT)),
+							txtDescricao.getText());
+					amostraDAO.saveAmostra(amostra);
+					amostras.add(amostra);
+					amostrasItens = FXCollections.observableArrayList(amostras);
+					tblAmostra.setItems(amostrasItens);
+				} else {
+					amostra.setDescricao(txtDescricao.getText());
+					amostra.setTemp(Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)));
+					amostra.setSetPoint(Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)));
+					amostra.setIaSobreNv(
+							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)));
+					amostra.setViscGardner(txtViscGardner.getText());
+					amostra.setCorGardner(txtCorGardner.getText());
+					amostra.setPercentualNv(Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), COMMA, DOT)));
+					amostra.setGelTime(Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText(), COMMA, DOT)));
+					amostra.setAgua(Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText(), COMMA, DOT)));
+					amostra.setAmostra(Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText(), COMMA, DOT)));
+					amostra.setPh(Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText(), COMMA, DOT)));
+					amostraDAO.updateAmostra(amostra);
+					tblAmostra.refresh();
+				}
 				return null;
 			}
 		};
 		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				txtDescricao.setText(null);
-				txtIAsobreNV.setText(null);
-				txtViscGardner.setText(null);
-				txtCorGardner.setText(null);
-				txtNV.setText(null);
-				txtGelTime.setText(null);
-				txtAgua.setText(null);
-				txtAmostra.setText(null);
-				txtPH.setText(null);
-				amostras = amostraDAO.findByProva(AmostraProperty.getProva());
-				amostrasItens = FXCollections.observableArrayList(amostras);
-				tblAmostra.setItems(amostrasItens);
+				clearFields();
 			}
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -164,6 +181,17 @@ public class AmostraController implements Initializable {
 		t.start();
 	}
 
+	@SuppressWarnings("unchecked")
+	@FXML
+	private void removeAmostra() {
+		amostraDAO.removeAmostra(amostra);
+		amostras.remove(amostra);
+		amostrasItens = FXCollections.observableArrayList(amostras);
+		tblAmostra.setItems(amostrasItens);
+		tblAmostra.refresh();
+		clearFields();
+	}
+
 	@FXML
 	public void selectAmostra() {
 		amostra = (Amostra) tblAmostra.getSelectionModel().getSelectedItem();
@@ -173,14 +201,15 @@ public class AmostraController implements Initializable {
 		}
 
 		txtDescricao.setText(amostra.getDescricao());
-		txtIAsobreNV.setText(NumberUtil.adjustDecimal(new Double(amostra.getIaSobreNv()).toString(), ".", ","));
+		txtIAsobreNV.setText(NumberUtil.adjustDecimal(new Double(amostra.getIaSobreNv()).toString(), DOT, COMMA));
 		txtViscGardner.setText(amostra.getViscGardner());
 		txtCorGardner.setText(amostra.getCorGardner());
-		txtNV.setText(NumberUtil.adjustDecimal(new Double(amostra.getPercentualNv()).toString(), ".", ","));
-		txtGelTime.setText(NumberUtil.adjustDecimal(new Integer(amostra.getGelTime()).toString(), ".", ","));
-		txtAgua.setText(NumberUtil.adjustDecimal(new Double(amostra.getAgua()).toString(), ".", ","));
-		txtAmostra.setText(NumberUtil.adjustDecimal(new Double(amostra.getAmostra()).toString(), ".", ","));
-		txtPH.setText(NumberUtil.adjustDecimal(new Double(amostra.getPh()).toString(), ".", ","));
+		txtNV.setText(NumberUtil.adjustDecimal(new Double(amostra.getPercentualNv()).toString(), DOT, COMMA));
+		txtGelTime.setText(NumberUtil.adjustDecimal(new Integer(amostra.getGelTime()).toString(), DOT, COMMA));
+		txtAgua.setText(NumberUtil.adjustDecimal(new Double(amostra.getAgua()).toString(), DOT, COMMA));
+		txtAmostra.setText(NumberUtil.adjustDecimal(new Double(amostra.getAmostra()).toString(), DOT, COMMA));
+		txtPH.setText(NumberUtil.adjustDecimal(new Double(amostra.getPh()).toString(), DOT, COMMA));
+		btExcluir.setDisable(false);
 	}
 
 	@FXML
@@ -343,6 +372,20 @@ public class AmostraController implements Initializable {
 				txtGelTime.setText(newValue.replaceAll("[^\\d]", ""));
 			}
 		});
+	}
+
+	private void clearFields() {
+		txtDescricao.setText(null);
+		txtIAsobreNV.setText(null);
+		txtViscGardner.setText(null);
+		txtCorGardner.setText(null);
+		txtNV.setText(null);
+		txtGelTime.setText(null);
+		txtAgua.setText(null);
+		txtAmostra.setText(null);
+		txtPH.setText(null);
+		amostra = null;
+		btExcluir.setDisable(true);
 	}
 
 	private void formatNumberField(TextField txtField) {
