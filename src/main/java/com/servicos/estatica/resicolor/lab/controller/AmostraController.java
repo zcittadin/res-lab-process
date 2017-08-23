@@ -1,6 +1,8 @@
 package com.servicos.estatica.resicolor.lab.controller;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +13,7 @@ import java.util.ResourceBundle;
 import com.servicos.estatica.resicolor.lab.dao.AmostraDAO;
 import com.servicos.estatica.resicolor.lab.model.Amostra;
 import com.servicos.estatica.resicolor.lab.property.AmostraProperty;
+import com.servicos.estatica.resicolor.lab.util.NumberUtil;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -26,6 +29,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -93,14 +97,15 @@ public class AmostraController implements Initializable {
 	private static AmostraDAO amostraDAO = new AmostraDAO();
 
 	private static DateTimeFormatter dataHoraFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+	private static DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		rectangle.setFill(Color.TRANSPARENT);
-		initListeners();
 		prepareFields();
 		configTable();
+		configNumberFields();
 		amostras = amostraDAO.findByProva(AmostraProperty.getProva());
 		amostrasItens = FXCollections.observableArrayList(amostras);
 		tblAmostra.setItems(amostrasItens);
@@ -121,29 +126,20 @@ public class AmostraController implements Initializable {
 				// btAddProjeto1.setDisable(true);
 				// txtProduto1.setDisable(true);
 				amostra = new Amostra(null, AmostraProperty.getProva(), new Date(),
-						txtTemp.getText() != null && txtTemp.getText().trim() != ""
-								? Integer.parseInt(txtTemp.getText()) : 0,
-						txtSetPoint.getText() != null && txtSetPoint.getText().trim() != ""
-								? Integer.parseInt(txtSetPoint.getText()) : 0,
-						txtIAsobreNV.getText() != null && txtIAsobreNV.getText().trim() != ""
-								? Double.parseDouble(txtIAsobreNV.getText()) : 0,
-						txtViscGardner.getText(), txtCorGardner.getText(),
-						txtNV.getText() != null && txtNV.getText().trim() != "" ? Double.parseDouble(txtNV.getText())
-								: 0,
-						txtGelTime.getText() != null && txtGelTime.getText().trim() != ""
-								? Integer.parseInt(txtGelTime.getText()) : 0,
-						txtAgua.getText() != null && txtAgua.getText().trim() != ""
-								? Double.parseDouble(txtAgua.getText()) : 0,
-						txtAmostra.getText() != null && txtAmostra.getText().trim() != ""
-								? Double.parseDouble(txtAmostra.getText()) : 0,
-						txtPH.getText() != null && txtPH.getText().trim() != "" ? Double.parseDouble(txtPH.getText())
-								: 0,
-						txtDescricao.getText());
+						Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText())),
+						Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText())),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText())), txtViscGardner.getText(),
+						txtCorGardner.getText(), Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText())),
+						Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText())),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText())),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText())),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText())), txtDescricao.getText());
 				amostraDAO.saveAmostra(amostra);
 				return null;
 			}
 		};
 		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				// prog1.setVisible(false);
@@ -151,6 +147,9 @@ public class AmostraController implements Initializable {
 				// btAmostra1.setDisable(false);
 				// isBalaoReady1 = true;
 				// makeToast("Prova registrada com sucesso.");
+				amostras = amostraDAO.findByProva(AmostraProperty.getProva());
+				amostrasItens = FXCollections.observableArrayList(amostras);
+				tblAmostra.setItems(amostrasItens);
 			}
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -183,7 +182,6 @@ public class AmostraController implements Initializable {
 		txtAgua.setText(null);
 		txtAmostra.setText(null);
 		txtPH.setText(null);
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -296,31 +294,49 @@ public class AmostraController implements Initializable {
 						return simpleObject;
 					}
 				});
+
+		colAgua.setStyle("-fx-alignment: CENTER;");
+		colAmostra.setStyle("-fx-alignment: CENTER;");
+		colCorGardner.setStyle("-fx-alignment: CENTER;");
+		colDescricao.setStyle("-fx-alignment: CENTER;");
+		colGelTime.setStyle("-fx-alignment: CENTER;");
+		colHora.setStyle("-fx-alignment: CENTER;");
+		colIAsobreNV.setStyle("-fx-alignment: CENTER;");
+		colNv.setStyle("-fx-alignment: CENTER;");
+		colPh.setStyle("-fx-alignment: CENTER;");
+		colSetPoint.setStyle("-fx-alignment: CENTER;");
+		colTemp.setStyle("-fx-alignment: CENTER;");
+		colViscGardner.setStyle("-fx-alignment: CENTER;");
 	}
 
-	private void initListeners() {
-		/*
-		 * txtIAsobreNV.textProperty().addListener((observable, oldValue,
-		 * newValue) -> { if
-		 * (!newValue.matches("[0-9]{1,3}(,([0-9]{3}))*(.[0-9]+)?")) {
-		 * txtIAsobreNV.setText(newValue.replaceAll("[^\\d]", "")); } });
-		 * txtNV.textProperty().addListener((observable, oldValue, newValue) ->
-		 * { if (!newValue.matches("\\d*")) {
-		 * txtNV.setText(newValue.replaceAll("[^\\d]", "")); } });
-		 * txtGelTime.textProperty().addListener((observable, oldValue,
-		 * newValue) -> { if (!newValue.matches("\\d*")) {
-		 * txtGelTime.setText(newValue.replaceAll("[^\\d]", "")); } });
-		 * txtAgua.textProperty().addListener((observable, oldValue, newValue)
-		 * -> { if (!newValue.matches("\\d*")) {
-		 * txtAgua.setText(newValue.replaceAll("[^\\d]", "")); } });
-		 * txtAmostra.textProperty().addListener((observable, oldValue,
-		 * newValue) -> { if (!newValue.matches("\\d*")) {
-		 * txtAmostra.setText(newValue.replaceAll("[^\\d]", "")); } });
-		 * txtPH.textProperty().addListener((observable, oldValue, newValue) ->
-		 * { if (!newValue.matches("\\d*")) {
-		 * txtPH.setText(newValue.replaceAll("[^\\d]", "")); } });
-		 */
+	private void configNumberFields() {
+		formatNumberField(txtIAsobreNV);
+		formatNumberField(txtNV);
+		formatNumberField(txtAgua);
+		formatNumberField(txtAmostra);
+		formatNumberField(txtPH);
 
+		txtGelTime.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue.matches("\\d*")) {
+				txtGelTime.setText(newValue.replaceAll("[^\\d]", ""));
+			}
+		});
+	}
+
+	private void formatNumberField(TextField txtField) {
+		txtField.setTextFormatter(new TextFormatter<>(c -> {
+			if (c.getControlNewText().isEmpty()) {
+				return c;
+			}
+			ParsePosition parsePosition = new ParsePosition(0);
+			Object object = decimalFormat.parse(c.getControlNewText(), parsePosition);
+
+			if (object == null || parsePosition.getIndex() < c.getControlNewText().length()) {
+				return null;
+			} else {
+				return c;
+			}
+		}));
 	}
 
 }

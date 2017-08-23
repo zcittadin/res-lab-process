@@ -69,32 +69,10 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
 		initEstaticaInfo();
-
-		rectClock.setFill(Color.TRANSPARENT);
-
-		imgCliente.setImage(new Image("/com/servicos/estatica/resicolor/lab/style/resicolor.png"));
-		imgClienteResizer = new ImageViewResizer(imgCliente, 126, 70);
-		imgClienteResizer.setLayoutX(16);
-		imgClienteResizer.setLayoutY(6);
-		imgExitResizer = new ImageViewResizer(imgExit, 70, 71);
-		imgExitResizer.setLayoutX(50);
-		imgExitResizer.setLayoutY(633);
-		mainPane.getChildren().addAll(imgClienteResizer, imgExitResizer);
-
-		mainContainer.loadScreenAndController(screenInicialID, screenInicialFile, inicialController);
-		mainContainer.loadScreenAndController(screen1ID, screen1File, screen1Controller);
-		mainContainer.loadScreenAndController(screen2ID, screen2File, screen2Controller);
-		mainContainer.loadScreenAndController(screen3ID, screen3File, screen3Controller);
-		mainContainer.loadScreen(screenConsultaID, screenConsultaFile);
-
-		CurrentScreenProperty.setScreen(screenInicialID);
-		mainContainer.setScreen(screenInicialID);
-		centralPane.getChildren().addAll(mainContainer);
-
+		initClienteInfo();
+		initScreens();
 		initListeners();
-
 	}
 
 	@FXML
@@ -189,6 +167,29 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 				screen3Controller.clearLineChart();
 			}
 		});
+	}
+
+	private void initScreens() {
+		rectClock.setFill(Color.TRANSPARENT);
+		mainContainer.loadScreenAndController(screenInicialID, screenInicialFile, inicialController);
+		mainContainer.loadScreenAndController(screen1ID, screen1File, screen1Controller);
+		mainContainer.loadScreenAndController(screen2ID, screen2File, screen2Controller);
+		mainContainer.loadScreenAndController(screen3ID, screen3File, screen3Controller);
+		mainContainer.loadScreen(screenConsultaID, screenConsultaFile);
+		CurrentScreenProperty.setScreen(screenInicialID);
+		mainContainer.setScreen(screenInicialID);
+		centralPane.getChildren().addAll(mainContainer);
+	}
+
+	private void initClienteInfo() {
+		imgCliente.setImage(new Image("/com/servicos/estatica/resicolor/lab/style/resicolor.png"));
+		imgClienteResizer = new ImageViewResizer(imgCliente, 126, 70);
+		imgClienteResizer.setLayoutX(16);
+		imgClienteResizer.setLayoutY(6);
+		imgExitResizer = new ImageViewResizer(imgExit, 70, 71);
+		imgExitResizer.setLayoutX(50);
+		imgExitResizer.setLayoutY(633);
+		mainPane.getChildren().addAll(imgClienteResizer, imgExitResizer);
 	}
 
 }

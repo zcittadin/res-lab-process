@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import zan.inc.custom.components.ImageViewResizer;
 
 public class EstaticaInfoUtil {
@@ -31,8 +30,9 @@ public class EstaticaInfoUtil {
 		estaticaResizer.setLayoutX(1223);
 		estaticaResizer.setLayoutY(13);
 		mainPane.getChildren().addAll(estaticaResizer);
-		estaticaFadeTransition = new FadeTransition(Duration.millis(1000), imgEstatica);
-		estaticaFadeTransition.setCycleCount(1);
+		// estaticaFadeTransition = new FadeTransition(Duration.millis(1000),
+		// imgEstatica);
+		// estaticaFadeTransition.setCycleCount(1);
 	}
 
 	@FXML
@@ -47,9 +47,9 @@ public class EstaticaInfoUtil {
 		stage.initOwner(imgEstatica.getScene().getWindow());
 		stage.setResizable(Boolean.FALSE);
 		stage.showAndWait();
-		estaticaFadeTransition.setFromValue(imgEstatica.getOpacity());
-		estaticaFadeTransition.setToValue(0.2);
-		estaticaFadeTransition.play();
+		// estaticaFadeTransition.setFromValue(imgEstatica.getOpacity());
+		// estaticaFadeTransition.setToValue(0.2);
+		// estaticaFadeTransition.play();
 	}
 
 	@FXML
