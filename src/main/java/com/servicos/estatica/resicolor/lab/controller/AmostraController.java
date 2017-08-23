@@ -121,19 +121,17 @@ public class AmostraController implements Initializable {
 		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				// prog1.setVisible(true);
-				// btSaveBalao1.setDisable(true);
-				// btAddProjeto1.setDisable(true);
-				// txtProduto1.setDisable(true);
 				amostra = new Amostra(null, AmostraProperty.getProva(), new Date(),
-						Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText())),
-						Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText())),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText())), txtViscGardner.getText(),
-						txtCorGardner.getText(), Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText())),
-						Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText())),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText())),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText())),
-						Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText())), txtDescricao.getText());
+						Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText(), ",", ".")),
+						Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText(), ",", ".")),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), ",", ".")),
+						txtViscGardner.getText(), txtCorGardner.getText(),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), ",", ".")),
+						Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText(), ",", ".")),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText(), ",", ".")),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText(), ",", ".")),
+						Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText(), ",", ".")),
+						txtDescricao.getText());
 				amostraDAO.saveAmostra(amostra);
 				return null;
 			}
@@ -142,11 +140,15 @@ public class AmostraController implements Initializable {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				// prog1.setVisible(false);
-				// btPlay1.setDisable(false);
-				// btAmostra1.setDisable(false);
-				// isBalaoReady1 = true;
-				// makeToast("Prova registrada com sucesso.");
+				txtDescricao.setText(null);
+				txtIAsobreNV.setText(null);
+				txtViscGardner.setText(null);
+				txtCorGardner.setText(null);
+				txtNV.setText(null);
+				txtGelTime.setText(null);
+				txtAgua.setText(null);
+				txtAmostra.setText(null);
+				txtPH.setText(null);
 				amostras = amostraDAO.findByProva(AmostraProperty.getProva());
 				amostrasItens = FXCollections.observableArrayList(amostras);
 				tblAmostra.setItems(amostrasItens);
@@ -155,12 +157,30 @@ public class AmostraController implements Initializable {
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				// prog1.setVisible(true);
-				// isBalaoReady1 = false;
+
 			}
 		});
 		Thread t = new Thread(saveTask);
 		t.start();
+	}
+
+	@FXML
+	public void selectAmostra() {
+		amostra = (Amostra) tblAmostra.getSelectionModel().getSelectedItem();
+		if (amostra == null) {
+			tblAmostra.getSelectionModel().clearSelection();
+			return;
+		}
+
+		txtDescricao.setText(amostra.getDescricao());
+		txtIAsobreNV.setText(NumberUtil.adjustDecimal(new Double(amostra.getIaSobreNv()).toString(), ".", ","));
+		txtViscGardner.setText(amostra.getViscGardner());
+		txtCorGardner.setText(amostra.getCorGardner());
+		txtNV.setText(NumberUtil.adjustDecimal(new Double(amostra.getPercentualNv()).toString(), ".", ","));
+		txtGelTime.setText(NumberUtil.adjustDecimal(new Integer(amostra.getGelTime()).toString(), ".", ","));
+		txtAgua.setText(NumberUtil.adjustDecimal(new Double(amostra.getAgua()).toString(), ".", ","));
+		txtAmostra.setText(NumberUtil.adjustDecimal(new Double(amostra.getAmostra()).toString(), ".", ","));
+		txtPH.setText(NumberUtil.adjustDecimal(new Double(amostra.getPh()).toString(), ".", ","));
 	}
 
 	@FXML
@@ -317,6 +337,8 @@ public class AmostraController implements Initializable {
 		formatNumberField(txtPH);
 
 		txtGelTime.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue == null)
+				return;
 			if (!newValue.matches("\\d*")) {
 				txtGelTime.setText(newValue.replaceAll("[^\\d]", ""));
 			}

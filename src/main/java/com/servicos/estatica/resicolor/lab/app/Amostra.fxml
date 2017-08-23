@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1300.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.resicolor.lab.controller.AmostraController">
    <children>
-      <TableView fx:id="tblAmostra" layoutX="37.0" layoutY="427.0" prefHeight="211.0" prefWidth="1226.0">
+      <TableView fx:id="tblAmostra" layoutX="37.0" layoutY="427.0" onMouseClicked="#selectAmostra" prefHeight="211.0" prefWidth="1226.0">
         <columns>
           <TableColumn fx:id="colHora" prefWidth="91.99996948242188" resizable="false" text="Hora" />
           <TableColumn fx:id="colTemp" prefWidth="85.00003051757812" resizable="false" text="°C" />
