@@ -411,17 +411,65 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void removeProva1() {
-		System.out.println("Removendo prova 1.");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar exclusão");
+		alert.setHeaderText("Deseja realmente excluir esta prova?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() != ButtonType.OK) {
+			return;
+		}
+		if (prova1 != null) {
+			provaDAO.removeProva(prova1);
+			txtProjeto1.clear();
+			txtProduto1.clear();
+			txtNumero1.clear();
+			txtExecutor1.clear();
+			txtObjetivo1.clear();
+			btAmostra1.setDisable(true);
+			btExcluir1.setDisable(true);
+			makeToast("Prova removida com sucesso.");
+			prova1 = null;
+		}
 	}
 
 	@FXML
 	private void removeProva2() {
-		System.out.println("Removendo prova 2.");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar exclusão");
+		alert.setHeaderText("Deseja realmente excluir esta prova?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (prova2 != null) {
+			txtProjeto2.clear();
+			txtProduto2.clear();
+			txtNumero2.clear();
+			txtExecutor2.clear();
+			txtObjetivo2.clear();
+			btAmostra2.setDisable(true);
+			btExcluir2.setDisable(true);
+			provaDAO.removeProva(prova2);
+			makeToast("Prova removida com sucesso.");
+			prova2 = null;
+		}
 	}
 
 	@FXML
 	private void removeProva3() {
-		System.out.println("Removendo prova 3.");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar exclusão");
+		alert.setHeaderText("Deseja realmente excluir esta prova?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (prova3 != null) {
+			txtProjeto3.clear();
+			txtProduto3.clear();
+			txtNumero3.clear();
+			txtExecutor3.clear();
+			txtObjetivo3.clear();
+			btAmostra3.setDisable(true);
+			btExcluir3.setDisable(true);
+			provaDAO.removeProva(prova3);
+			makeToast("Prova removida com sucesso.");
+			prova3 = null;
+		}
 	}
 
 	@FXML

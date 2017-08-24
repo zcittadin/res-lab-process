@@ -22,18 +22,6 @@ public class AmostraDAO {
 		session.close();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Amostra> findByProva(Prova prova) {
-		Session session = HibernateUtil.openSession();
-		session.beginTransaction();
-		Query query = session.createQuery("SELECT a FROM Amostra a WHERE provaAmostras = :idProva");
-		query.setParameter("idProva", prova);
-		List<Amostra> list = new ArrayList<>();
-		list = query.getResultList();
-		session.close();
-		return list;
-	}
-
 	public void updateAmostra(Amostra amostra) {
 		Session session = HibernateUtil.openSession();
 		session.beginTransaction();
@@ -50,6 +38,18 @@ public class AmostraDAO {
 		session.getTransaction().commit();
 		session.close();
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Amostra> findByProva(Prova prova) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("SELECT a FROM Amostra a WHERE provaAmostras = :idProva");
+		query.setParameter("idProva", prova);
+		List<Amostra> list = new ArrayList<>();
+		list = query.getResultList();
+		session.close();
+		return list;
 	}
 
 }

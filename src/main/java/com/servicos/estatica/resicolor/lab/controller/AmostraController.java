@@ -162,6 +162,7 @@ public class AmostraController implements Initializable {
 					amostraDAO.updateAmostra(amostra);
 					tblAmostra.refresh();
 				}
+				// AmostraProperty.provaProperty().get().getAmostras().add(amostra);
 				return null;
 			}
 		};
