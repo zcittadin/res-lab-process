@@ -444,7 +444,7 @@
                         <TextField fx:id="txtNumero1" disable="true" layoutX="20.0" layoutY="156.0" prefHeight="25.0" prefWidth="250.0" />
                         <TextField fx:id="txtExecutor1" disable="true" layoutX="20.0" layoutY="207.0" prefHeight="25.0" prefWidth="250.0" />
                         <TextArea fx:id="txtObjetivo1" disable="true" layoutX="20.0" layoutY="259.0" prefHeight="101.0" prefWidth="250.0" />
-                        <Button fx:id="btSaveBalao1" disable="true" layoutX="102.0" layoutY="381.0" mnemonicParsing="false" onAction="#saveBalao1" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
+                        <Button fx:id="btSaveBalao1" disable="true" layoutX="27.0" layoutY="381.0" mnemonicParsing="false" onAction="#saveBalao1" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -456,6 +456,11 @@
                         <Label layoutX="21.0" layoutY="190.0" text="Executor:" textFill="#09156f" />
                         <TextField fx:id="txtProjeto1" editable="false" layoutX="20.0" layoutY="30.0" prefHeight="25.0" prefWidth="221.0" style="-fx-background-color: #87CEFA;" />
                         <Separator layoutX="1.0" layoutY="69.0" prefWidth="290.0" />
+                        <Button fx:id="btExcluir1" disable="true" layoutX="149.0" layoutY="381.0" mnemonicParsing="false" onAction="#removeProva1" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleDelete" stylesheets="@../style/style.css" text="Excluir">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -465,7 +470,7 @@
                      <children>
                         <TextField fx:id="txtProjeto2" editable="false" layoutX="20.0" layoutY="30.0" prefHeight="25.0" prefWidth="221.0" style="-fx-background-color: #87CEFA;" />
                         <Label layoutX="21.0" layoutY="12.0" text="Projeto:" textFill="#09156f" />
-                        <Button fx:id="btSaveBalao2" disable="true" layoutX="102.0" layoutY="381.0" mnemonicParsing="false" onAction="#saveBalao2" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
+                        <Button fx:id="btSaveBalao2" disable="true" layoutX="27.0" layoutY="381.0" mnemonicParsing="false" onAction="#saveBalao2" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -485,6 +490,11 @@
                         <TextField fx:id="txtNumero2" disable="true" layoutX="20.0" layoutY="156.0" prefHeight="25.0" prefWidth="250.0" />
                         <TextField fx:id="txtExecutor2" disable="true" layoutX="20.0" layoutY="207.0" prefHeight="25.0" prefWidth="250.0" />
                         <TextArea fx:id="txtObjetivo2" disable="true" layoutX="20.0" layoutY="259.0" prefHeight="101.0" prefWidth="250.0" />
+                        <Button fx:id="btExcluir2" disable="true" layoutX="149.0" layoutY="381.0" mnemonicParsing="false" onAction="#removeProva2" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleDelete" stylesheets="@../style/style.css" text="Excluir">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -494,7 +504,7 @@
                      <children>
                         <TextField fx:id="txtProjeto3" editable="false" layoutX="20.0" layoutY="30.0" prefHeight="25.0" prefWidth="221.0" style="-fx-background-color: #87CEFA;" />
                         <Label layoutX="21.0" layoutY="12.0" text="Projeto:" textFill="#09156f" />
-                        <Button fx:id="btSaveBalao3" disable="true" layoutX="102.0" layoutY="381.0" mnemonicParsing="false" onAction="#saveBalao3" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
+                        <Button fx:id="btSaveBalao3" disable="true" layoutX="27.0" layoutY="381.0" mnemonicParsing="false" onAction="#saveBalao3" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -514,6 +524,11 @@
                         <TextField fx:id="txtNumero3" disable="true" layoutX="20.0" layoutY="156.0" prefHeight="25.0" prefWidth="250.0" />
                         <TextField fx:id="txtExecutor3" disable="true" layoutX="20.0" layoutY="207.0" prefHeight="25.0" prefWidth="250.0" />
                         <TextArea fx:id="txtObjetivo3" disable="true" layoutX="20.0" layoutY="259.0" prefHeight="101.0" prefWidth="250.0" />
+                        <Button fx:id="btExcluir3" disable="true" layoutX="149.0" layoutY="381.0" mnemonicParsing="false" onAction="#removeProva3" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleDelete" stylesheets="@../style/style.css" text="Excluir">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children></AnchorPane>
               </content>
             </Tab>

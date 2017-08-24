@@ -155,6 +155,12 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private Button btSaveBalao3;
 	@FXML
+	private Button btExcluir1;
+	@FXML
+	private Button btExcluir2;
+	@FXML
+	private Button btExcluir3;
+	@FXML
 	private ImageView imgGlass1;
 	@FXML
 	private ImageView imgMola1;
@@ -278,12 +284,12 @@ public class InicialController implements Initializable, ControlledScreen {
 			protected Void call() throws Exception {
 				prog1.setVisible(true);
 				btSaveBalao1.setDisable(true);
+				btExcluir1.setDisable(true);
 				btAddProjeto1.setDisable(true);
 				txtProduto1.setDisable(true);
 				txtNumero1.setDisable(true);
 				txtExecutor1.setDisable(true);
 				txtObjetivo1.setDisable(true);
-				btSaveBalao1.setDisable(true);
 				leituras1 = new ArrayList<>();
 				prova1 = new Prova(null, projeto1, leituras1, null, txtProduto1.getText(), txtObjetivo1.getText(),
 						txtExecutor1.getText(), txtNumero1.getText(), "Balão 1", 0, 0, null, null);
@@ -297,6 +303,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog1.setVisible(false);
 				btPlay1.setDisable(false);
 				btAmostra1.setDisable(false);
+				btExcluir1.setDisable(false);
 				isBalaoReady1 = true;
 				makeToast("Prova registrada com sucesso.");
 			}
@@ -321,12 +328,12 @@ public class InicialController implements Initializable, ControlledScreen {
 			protected Void call() throws Exception {
 				prog2.setVisible(true);
 				btSaveBalao2.setDisable(true);
+				btExcluir2.setDisable(true);
 				btAddProjeto2.setDisable(true);
 				txtProduto2.setDisable(true);
 				txtNumero2.setDisable(true);
 				txtExecutor2.setDisable(true);
 				txtObjetivo2.setDisable(true);
-				btSaveBalao2.setDisable(true);
 				leituras2 = new ArrayList<>();
 				prova2 = new Prova(null, projeto2, leituras2, null, txtProduto2.getText(), txtObjetivo2.getText(),
 						txtExecutor2.getText(), txtNumero2.getText(), "Balão 2", 0, 0, null, null);
@@ -340,6 +347,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog2.setVisible(false);
 				btPlay2.setDisable(false);
 				btAmostra2.setDisable(false);
+				btExcluir2.setDisable(false);
 				isBalaoReady2 = true;
 				makeToast("Prova registrada com sucesso.");
 			}
@@ -364,12 +372,12 @@ public class InicialController implements Initializable, ControlledScreen {
 			protected Void call() throws Exception {
 				prog3.setVisible(true);
 				btSaveBalao3.setDisable(true);
+				btExcluir3.setDisable(true);
 				btAddProjeto3.setDisable(true);
 				txtProduto3.setDisable(true);
 				txtNumero3.setDisable(true);
 				txtExecutor3.setDisable(true);
 				txtObjetivo3.setDisable(true);
-				btSaveBalao3.setDisable(true);
 				leituras3 = new ArrayList<>();
 				prova3 = new Prova(null, projeto3, leituras3, null, txtProduto3.getText(), txtObjetivo3.getText(),
 						txtExecutor3.getText(), txtNumero3.getText(), "Balão 3", 0, 0, null, null);
@@ -383,6 +391,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				prog3.setVisible(false);
 				btPlay3.setDisable(false);
 				btAmostra3.setDisable(false);
+				btExcluir3.setDisable(false);
 				isBalaoReady3 = true;
 				makeToast("Prova registrada com sucesso.");
 			}
@@ -398,6 +407,21 @@ public class InicialController implements Initializable, ControlledScreen {
 		});
 		Thread t = new Thread(saveTask);
 		t.start();
+	}
+
+	@FXML
+	private void removeProva1() {
+		System.out.println("Removendo prova 1.");
+	}
+
+	@FXML
+	private void removeProva2() {
+		System.out.println("Removendo prova 2.");
+	}
+
+	@FXML
+	private void removeProva3() {
+		System.out.println("Removendo prova 3.");
 	}
 
 	@FXML
@@ -431,6 +455,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void initProc1() {
 		btPlay1.setDisable(true);
 		btStop1.setDisable(false);
+		btExcluir1.setDisable(true);
 		imgGlass1.setImage(gifGlassFile);
 		imgMola1.setEffect(sepia1);
 		chapaTransition1.play();
@@ -444,6 +469,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void initProc2() {
 		btPlay2.setDisable(true);
 		btStop2.setDisable(false);
+		btExcluir2.setDisable(true);
 		imgGlass2.setImage(gifGlassFile);
 		imgMola2.setEffect(sepia2);
 		chapaTransition2.play();
@@ -457,6 +483,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private void initProc3() {
 		btPlay3.setDisable(true);
 		btStop3.setDisable(false);
+		btExcluir3.setDisable(true);
 		imgGlass3.setImage(gifGlassFile);
 		imgMola3.setEffect(sepia3);
 		tmlHeater3.play();
@@ -484,6 +511,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto1.setDisable(false);
 		btPlay1.setDisable(true);
 		btStop1.setDisable(true);
+		btExcluir1.setDisable(false);
 		isBalaoRunning1 = false;
 		isBalaoFinished1 = true;
 		makeToast("Balão 1: Prova encerrada.");
@@ -507,6 +535,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto2.setDisable(false);
 		btPlay2.setDisable(true);
 		btStop2.setDisable(true);
+		btExcluir2.setDisable(false);
 		isBalaoRunning2 = false;
 		isBalaoFinished2 = true;
 		makeToast("Balão 2: Prova encerrada.");
@@ -530,6 +559,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto3.setDisable(false);
 		btPlay3.setDisable(true);
 		btStop3.setDisable(true);
+		btExcluir3.setDisable(false);
 		isBalaoRunning3 = false;
 		isBalaoFinished3 = true;
 		makeToast("Balão 3: Prova encerrada.");
@@ -592,6 +622,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			System.out.println("Objeto nulo!");
 		}
 		btAmostra1.setDisable(true);
+		btExcluir1.setDisable(true);
 		ProvaProperty.provaClear1Property().set(!prova1Clear);
 		prova1Clear = !prova1Clear;
 
@@ -629,6 +660,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		}
 		btAmostra2.setDisable(true);
+		btExcluir2.setDisable(true);
 		ProvaProperty.provaClear2Property().set(!prova2Clear);
 		prova2Clear = !prova2Clear;
 
@@ -668,6 +700,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			disableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		}
 		btAmostra3.setDisable(true);
+		btExcluir3.setDisable(true);
 		ProvaProperty.provaClear1Property().set(!prova3Clear);
 		prova3Clear = !prova3Clear;
 
