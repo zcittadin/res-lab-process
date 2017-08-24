@@ -280,6 +280,10 @@ public class InicialController implements Initializable, ControlledScreen {
 				btSaveBalao1.setDisable(true);
 				btAddProjeto1.setDisable(true);
 				txtProduto1.setDisable(true);
+				txtNumero1.setDisable(true);
+				txtExecutor1.setDisable(true);
+				txtObjetivo1.setDisable(true);
+				btSaveBalao1.setDisable(true);
 				leituras1 = new ArrayList<>();
 				prova1 = new Prova(null, projeto1, leituras1, null, txtProduto1.getText(), txtObjetivo1.getText(),
 						txtExecutor1.getText(), txtNumero1.getText(), "Balão 1", 0, 0, null, null);
@@ -301,6 +305,8 @@ public class InicialController implements Initializable, ControlledScreen {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				prog1.setVisible(true);
+				btSaveBalao1.setDisable(false);
+				btAddProjeto1.setDisable(false);
 				isBalaoReady1 = false;
 			}
 		});
@@ -317,6 +323,10 @@ public class InicialController implements Initializable, ControlledScreen {
 				btSaveBalao2.setDisable(true);
 				btAddProjeto2.setDisable(true);
 				txtProduto2.setDisable(true);
+				txtNumero2.setDisable(true);
+				txtExecutor2.setDisable(true);
+				txtObjetivo2.setDisable(true);
+				btSaveBalao2.setDisable(true);
 				leituras2 = new ArrayList<>();
 				prova2 = new Prova(null, projeto2, leituras2, null, txtProduto2.getText(), txtObjetivo2.getText(),
 						txtExecutor2.getText(), txtNumero2.getText(), "Balão 2", 0, 0, null, null);
@@ -339,6 +349,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				prog2.setVisible(false);
 				btSaveBalao2.setDisable(false);
+				btAddProjeto2.setDisable(false);
 				isBalaoReady2 = false;
 			}
 		});
@@ -355,6 +366,10 @@ public class InicialController implements Initializable, ControlledScreen {
 				btSaveBalao3.setDisable(true);
 				btAddProjeto3.setDisable(true);
 				txtProduto3.setDisable(true);
+				txtNumero3.setDisable(true);
+				txtExecutor3.setDisable(true);
+				txtObjetivo3.setDisable(true);
+				btSaveBalao3.setDisable(true);
 				leituras3 = new ArrayList<>();
 				prova3 = new Prova(null, projeto3, leituras3, null, txtProduto3.getText(), txtObjetivo3.getText(),
 						txtExecutor3.getText(), txtNumero3.getText(), "Balão 3", 0, 0, null, null);
@@ -469,7 +484,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto1.setDisable(false);
 		btPlay1.setDisable(true);
 		btStop1.setDisable(true);
-		btAmostra1.setDisable(true);
 		isBalaoRunning1 = false;
 		isBalaoFinished1 = true;
 		makeToast("Balão 1: Prova encerrada.");
@@ -493,7 +507,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto2.setDisable(false);
 		btPlay2.setDisable(true);
 		btStop2.setDisable(true);
-		btAmostra2.setDisable(true);
 		isBalaoRunning2 = false;
 		isBalaoFinished2 = true;
 		makeToast("Balão 2: Prova encerrada.");
@@ -517,7 +530,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		btAddProjeto3.setDisable(false);
 		btPlay3.setDisable(true);
 		btStop3.setDisable(true);
-		btAmostra3.setDisable(true);
 		isBalaoRunning3 = false;
 		isBalaoFinished3 = true;
 		makeToast("Balão 3: Prova encerrada.");
@@ -579,16 +591,20 @@ public class InicialController implements Initializable, ControlledScreen {
 			disableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
 			System.out.println("Objeto nulo!");
 		}
-
+		btAmostra1.setDisable(true);
 		ProvaProperty.provaClear1Property().set(!prova1Clear);
 		prova1Clear = !prova1Clear;
+
+		txtProduto1.setText(null);
+		txtNumero1.setText(null);
+		txtExecutor1.setText(null);
+		txtObjetivo1.setText(null);
+		txtProduto1.requestFocus();
 
 		// ensaio1 = null;
 		// isBalaoFinished1 = false;
 		// txtProdutoBalao1.setDisable(false);
 		// btSaveBalao1.setDisable(false);
-		// txtProdutoBalao1.setText(null);
-		// txtProdutoBalao1.requestFocus();
 	}
 
 	@FXML
@@ -612,9 +628,15 @@ public class InicialController implements Initializable, ControlledScreen {
 			System.out.println("Objeto nulo!");
 			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		}
-
+		btAmostra2.setDisable(true);
 		ProvaProperty.provaClear2Property().set(!prova2Clear);
 		prova2Clear = !prova2Clear;
+
+		txtProduto2.setText(null);
+		txtNumero2.setText(null);
+		txtExecutor2.setText(null);
+		txtObjetivo2.setText(null);
+		txtProduto2.requestFocus();
 
 		// prova2 = null;
 		// isBalaoFinished2 = false;
@@ -645,9 +667,15 @@ public class InicialController implements Initializable, ControlledScreen {
 			System.out.println("Objeto nulo!");
 			disableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		}
-
+		btAmostra3.setDisable(true);
 		ProvaProperty.provaClear1Property().set(!prova3Clear);
 		prova3Clear = !prova3Clear;
+
+		txtProduto3.setText(null);
+		txtNumero3.setText(null);
+		txtExecutor3.setText(null);
+		txtObjetivo3.setText(null);
+		txtProduto3.requestFocus();
 
 		// prova3 = null;
 		// isBalaoFinished3 = false;
