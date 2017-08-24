@@ -19,6 +19,7 @@ import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.property.AmostraProperty;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
+import com.servicos.estatica.resicolor.lab.property.UsedProjetosList;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 import com.servicos.estatica.resicolor.lab.util.Toast;
@@ -315,6 +316,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				leituras1 = new ArrayList<>();
 				prova1 = new Prova(null, projeto1, leituras1, null, txtProduto1.getText(), txtObjetivo1.getText(),
 						txtExecutor1.getText(), txtNumero1.getText(), "Balão 1", 0, 0, null, null);
+				UsedProjetosList.useProjeto(projeto1);
 				provaDAO.saveProva(prova1);
 				return null;
 			}
@@ -382,6 +384,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				prova2 = new Prova(null, projeto2, leituras2, null, txtProduto2.getText(), txtObjetivo2.getText(),
 						txtExecutor2.getText(), txtNumero2.getText(), "Balão 2", 0, 0, null, null);
 				provaDAO.saveProva(prova2);
+				UsedProjetosList.useProjeto(projeto2);
 				return null;
 			}
 		};
@@ -448,6 +451,7 @@ public class InicialController implements Initializable, ControlledScreen {
 				prova3 = new Prova(null, projeto3, leituras3, null, txtProduto3.getText(), txtObjetivo3.getText(),
 						txtExecutor3.getText(), txtNumero3.getText(), "Balão 3", 0, 0, null, null);
 				provaDAO.saveProva(prova3);
+				UsedProjetosList.useProjeto(projeto3);
 				return null;
 			}
 		};
@@ -506,6 +510,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		alert.setHeaderText("Deseja realmente excluir esta prova?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (prova2 != null) {
+			provaDAO.removeProva(prova2);
 			txtProjeto2.clear();
 			txtProduto2.clear();
 			txtNumero2.clear();
@@ -514,7 +519,6 @@ public class InicialController implements Initializable, ControlledScreen {
 			btAddProjeto2.setDisable(false);
 			btAmostra2.setDisable(true);
 			btExcluir2.setDisable(true);
-			provaDAO.removeProva(prova2);
 			makeToast("Prova removida com sucesso.");
 			prova2 = null;
 		}
@@ -527,6 +531,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		alert.setHeaderText("Deseja realmente excluir esta prova?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (prova3 != null) {
+			provaDAO.removeProva(prova3);
 			txtProjeto3.clear();
 			txtProduto3.clear();
 			txtNumero3.clear();
@@ -535,7 +540,6 @@ public class InicialController implements Initializable, ControlledScreen {
 			btAddProjeto3.setDisable(false);
 			btAmostra3.setDisable(true);
 			btExcluir3.setDisable(true);
-			provaDAO.removeProva(prova3);
 			makeToast("Prova removida com sucesso.");
 			prova3 = null;
 		}
@@ -619,6 +623,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
+		UsedProjetosList.discardProjeto(projeto1);
 		imgGlass1.setImage(imgGlassFile);
 		chapaTransition1.stop();
 		tmlHeater1.stop();
@@ -643,6 +648,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
+		UsedProjetosList.discardProjeto(projeto2);
 		imgGlass2.setImage(imgGlassFile);
 		tmlHeater2.stop();
 		chapaTransition2.stop();
@@ -667,6 +673,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
+		UsedProjetosList.discardProjeto(projeto3);
 		imgGlass3.setImage(imgGlassFile);
 		tmlHeater3.stop();
 		chapaTransition3.stop();

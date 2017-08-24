@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.servicos.estatica.resicolor.lab.dao.ProjetoDAO;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
+import com.servicos.estatica.resicolor.lab.property.UsedProjetosList;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
@@ -126,7 +127,6 @@ public class ProjetosController implements Initializable {
 
 	@FXML
 	private void findProjetoByNome(ActionEvent event) {
-
 		if (txtBuscar.getText() == null || "".equals(txtBuscar.getText().trim())) {
 			findProjetos();
 		}
@@ -236,6 +236,13 @@ public class ProjetosController implements Initializable {
 							setText(null);
 						} else {
 							btn.setOnAction(event -> {
+								if (UsedProjetosList.isProjetoUsed(projeto)) {
+									Alert alert = new Alert(AlertType.WARNING);
+									alert.setTitle("Atenção");
+									alert.setHeaderText("Existe uma prova deste projeto em andamento.");
+									alert.showAndWait();
+									return;
+								}
 								Alert alert = new Alert(AlertType.CONFIRMATION);
 								alert.setTitle("Confirmar cancelamento");
 								alert.setHeaderText("Os dados referentes a este processo serão perdidos. Confirmar?");
@@ -258,8 +265,7 @@ public class ProjetosController implements Initializable {
 										@Override
 										public void handle(WorkerStateEvent arg0) {
 											if (!projetos.isEmpty()) {
-												// makeToast("Processo removido
-												// com sucesso.");
+
 											}
 										}
 									});
