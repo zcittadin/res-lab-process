@@ -21,6 +21,15 @@ public class ProjetoDAO {
 		session.close();
 	}
 
+	public void removeProjeto(Projeto projeto) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		session.remove(projeto);
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Projeto> findLastProjetos() {
 		Session session = HibernateUtil.openSession();

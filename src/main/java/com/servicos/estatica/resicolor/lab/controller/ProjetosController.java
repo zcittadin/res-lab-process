@@ -4,6 +4,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.dao.ProjetoDAO;
@@ -20,10 +21,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -46,6 +50,8 @@ public class ProjetosController implements Initializable {
 	private TableColumn colNome;
 	@FXML
 	private TableColumn colData;
+	@FXML
+	private TableColumn colExclusao;
 	@FXML
 	private TextField txtBuscar;
 	@FXML
@@ -213,6 +219,67 @@ public class ProjetosController implements Initializable {
 						return simpleObject;
 					}
 				});
+
+		Callback<TableColumn<Projeto, String>, TableCell<Projeto, String>> cellExcluirFactory = new Callback<TableColumn<Projeto, String>, TableCell<Projeto, String>>() {
+			@Override
+			public TableCell call(final TableColumn<Projeto, String> param) {
+				final TableCell<Projeto, String> cell = new TableCell<Projeto, String>() {
+
+					final Button btn = new Button();
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(event -> {
+								Alert alert = new Alert(AlertType.CONFIRMATION);
+								alert.setTitle("Confirmar cancelamento");
+								alert.setHeaderText("Os dados referentes a este processo serão perdidos. Confirmar?");
+								Optional<ButtonType> result = alert.showAndWait();
+								if (result.get() == ButtonType.OK) {
+									Projeto projeto = getTableView().getItems().get(getIndex());
+									Task<Void> exclusionTask = new Task<Void>() {
+										@Override
+										protected Void call() throws Exception {
+											// leituraDAO.removeLeituras(projeto);
+											// processoDAO.removeProcesso(projeto);
+											// processos.remove(projeto);
+											// tblConsulta.refresh();
+											System.out.println("Excluindo: " + projeto.getNome());
+											return null;
+										}
+									};
+
+									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+										@Override
+										public void handle(WorkerStateEvent arg0) {
+											if (!projetos.isEmpty()) {
+												// makeToast("Processo removido
+												// com sucesso.");
+											}
+										}
+									});
+									Thread t = new Thread(exclusionTask);
+									t.start();
+								}
+							});
+							// Tooltip.install(btn, tooltipDelete);
+							btn.setStyle("-fx-graphic: url('com/servicos/estatica/resicolor/lab/style/Delete.png');");
+							btn.setCursor(Cursor.HAND);
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+		colExclusao.setCellFactory(cellExcluirFactory);
+		colExclusao.setStyle("-fx-alignment: CENTER;");
+
 		colData.setSortType(TableColumn.SortType.DESCENDING);
 		tblProjetos.getSortOrder().add(colData);
 

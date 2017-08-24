@@ -667,7 +667,6 @@ public class InicialController implements Initializable, ControlledScreen {
 			enableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
 		} else {
 			disableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
-			System.out.println("Objeto nulo!");
 		}
 		btAmostra1.setDisable(true);
 		btExcluir1.setDisable(true);
@@ -704,7 +703,6 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtProjeto2.setText(projeto2.getNome());
 			enableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		} else {
-			System.out.println("Objeto nulo!");
 			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		}
 		btAmostra2.setDisable(true);
@@ -744,7 +742,6 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtProjeto3.setText(projeto3.getNome());
 			enableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		} else {
-			System.out.println("Objeto nulo!");
 			disableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		}
 		btAmostra3.setDisable(true);

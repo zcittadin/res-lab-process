@@ -28,8 +28,9 @@
       </Button>
       <TableView fx:id="tblProjetos" layoutX="29.0" layoutY="136.0" prefHeight="400.0" prefWidth="742.0">
         <columns>
-          <TableColumn fx:id="colNome" prefWidth="583.0" text="Nome do projeto" />
-          <TableColumn fx:id="colData" minWidth="0.0" prefWidth="158.0" text="Data de criação" />
+          <TableColumn fx:id="colNome" prefWidth="499.0" text="Nome do projeto" />
+          <TableColumn fx:id="colData" minWidth="0.0" prefWidth="154.0" text="Data de criação" />
+            <TableColumn fx:id="colExclusao" prefWidth="87.0" text="Exclusão" />
         </columns>
       </TableView>
       <Button fx:id="btOk" layoutX="543.0" layoutY="571.0" mnemonicParsing="false" onAction="#ok" styleClass="btStyleOk" stylesheets="@../style/style.css" text="Ok">
