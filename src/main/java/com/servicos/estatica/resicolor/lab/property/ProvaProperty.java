@@ -103,7 +103,7 @@ public class ProvaProperty {
 		return provaProjeto.get();
 	}
 
-	public static void setProvaProjeto1(Projeto projeto) {
+	public static void setProvaProjeto(Projeto projeto) {
 		provaProjetoProperty().set(projeto);
 	}
 

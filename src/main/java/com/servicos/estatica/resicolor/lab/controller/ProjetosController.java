@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import com.servicos.estatica.resicolor.lab.dao.ProjetoDAO;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
-import com.servicos.estatica.resicolor.lab.property.UsedProjetosList;
+import com.servicos.estatica.resicolor.lab.property.UsedProjetosMap;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
@@ -236,11 +236,13 @@ public class ProjetosController implements Initializable {
 							setText(null);
 						} else {
 							btn.setOnAction(event -> {
-								if (UsedProjetosList.isProjetoUsed(projeto)) {
+								Projeto projeto = getTableView().getItems().get(getIndex());
+								if (UsedProjetosMap.isProjetoUsed(projeto)) {
 									Alert alert = new Alert(AlertType.WARNING);
 									alert.setTitle("Atenção");
 									alert.setHeaderText("Existe uma prova deste projeto em andamento.");
 									alert.showAndWait();
+									ProvaProperty.setProvaProjeto(null);
 									return;
 								}
 								Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -248,7 +250,6 @@ public class ProjetosController implements Initializable {
 								alert.setHeaderText("Os dados referentes a este processo serão perdidos. Confirmar?");
 								Optional<ButtonType> result = alert.showAndWait();
 								if (result.get() == ButtonType.OK) {
-									Projeto projeto = getTableView().getItems().get(getIndex());
 									Task<Void> exclusionTask = new Task<Void>() {
 										@Override
 										protected Void call() throws Exception {
@@ -256,6 +257,7 @@ public class ProjetosController implements Initializable {
 											// processoDAO.removeProcesso(projeto);
 											// processos.remove(projeto);
 											projetos.remove(projeto);
+											ProvaProperty.setProvaProjeto(null);
 											populateTable();
 											return null;
 										}

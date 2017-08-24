@@ -19,7 +19,8 @@ import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.property.AmostraProperty;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
-import com.servicos.estatica.resicolor.lab.property.UsedProjetosList;
+import com.servicos.estatica.resicolor.lab.property.UsedProjetosMap;
+import com.servicos.estatica.resicolor.lab.util.Baloes;
 import com.servicos.estatica.resicolor.lab.util.Chronometer;
 import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 import com.servicos.estatica.resicolor.lab.util.Toast;
@@ -280,7 +281,6 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	public void saveBalao1() {
-
 		if (txtProduto1.getText() == null || txtProduto1.getText().trim().equals("")) {
 			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
 			txtProduto1.requestFocus();
@@ -316,7 +316,6 @@ public class InicialController implements Initializable, ControlledScreen {
 				leituras1 = new ArrayList<>();
 				prova1 = new Prova(null, projeto1, leituras1, null, txtProduto1.getText(), txtObjetivo1.getText(),
 						txtExecutor1.getText(), txtNumero1.getText(), "Balão 1", 0, 0, null, null);
-				UsedProjetosList.useProjeto(projeto1);
 				provaDAO.saveProva(prova1);
 				return null;
 			}
@@ -347,7 +346,6 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	public void saveBalao2() {
-
 		if (txtProduto2.getText() == null || txtProduto2.getText().trim().equals("")) {
 			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
 			txtProduto2.requestFocus();
@@ -384,7 +382,6 @@ public class InicialController implements Initializable, ControlledScreen {
 				prova2 = new Prova(null, projeto2, leituras2, null, txtProduto2.getText(), txtObjetivo2.getText(),
 						txtExecutor2.getText(), txtNumero2.getText(), "Balão 2", 0, 0, null, null);
 				provaDAO.saveProva(prova2);
-				UsedProjetosList.useProjeto(projeto2);
 				return null;
 			}
 		};
@@ -414,7 +411,6 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	public void saveBalao3() {
-
 		if (txtProduto3.getText() == null || txtProduto3.getText().trim().equals("")) {
 			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
 			txtProduto3.requestFocus();
@@ -451,7 +447,6 @@ public class InicialController implements Initializable, ControlledScreen {
 				prova3 = new Prova(null, projeto3, leituras3, null, txtProduto3.getText(), txtObjetivo3.getText(),
 						txtExecutor3.getText(), txtNumero3.getText(), "Balão 3", 0, 0, null, null);
 				provaDAO.saveProva(prova3);
-				UsedProjetosList.useProjeto(projeto3);
 				return null;
 			}
 		};
@@ -623,7 +618,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
-		UsedProjetosList.discardProjeto(projeto1);
+		UsedProjetosMap.discardProjeto(Baloes.BALAO1, projeto1);
 		imgGlass1.setImage(imgGlassFile);
 		chapaTransition1.stop();
 		tmlHeater1.stop();
@@ -648,7 +643,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
-		UsedProjetosList.discardProjeto(projeto2);
+		UsedProjetosMap.discardProjeto(Baloes.BALAO2, projeto2);
 		imgGlass2.setImage(imgGlassFile);
 		tmlHeater2.stop();
 		chapaTransition2.stop();
@@ -673,7 +668,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
-		UsedProjetosList.discardProjeto(projeto3);
+		UsedProjetosMap.discardProjeto(Baloes.BALAO3, projeto3);
 		imgGlass3.setImage(imgGlassFile);
 		tmlHeater3.stop();
 		chapaTransition3.stop();
@@ -740,6 +735,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (ProvaProperty.provaProjetoProperty().get() != null) {
 			projeto1 = ProvaProperty.provaProjetoProperty().get();
 			txtProjeto1.setText(projeto1.getNome());
+			UsedProjetosMap.useProjeto(Baloes.BALAO1, projeto1);
 			enableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
 		} else {
 			disableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
@@ -777,6 +773,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (ProvaProperty.provaProjetoProperty().get() != null) {
 			projeto2 = ProvaProperty.provaProjetoProperty().get();
 			txtProjeto2.setText(projeto2.getNome());
+			UsedProjetosMap.useProjeto(Baloes.BALAO2, projeto2);
 			enableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		} else {
 			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
@@ -816,6 +813,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (ProvaProperty.provaProjetoProperty().get() != null) {
 			projeto3 = ProvaProperty.provaProjetoProperty().get();
 			txtProjeto3.setText(projeto3.getNome());
+			UsedProjetosMap.useProjeto(Baloes.BALAO3, projeto3);
 			enableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		} else {
 			disableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
