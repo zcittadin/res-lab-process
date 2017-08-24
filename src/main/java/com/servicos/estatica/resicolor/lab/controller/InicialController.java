@@ -279,6 +279,28 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	public void saveBalao1() {
+
+		if (txtProduto1.getText() == null || txtProduto1.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
+			txtProduto1.requestFocus();
+			return;
+		}
+		if (txtNumero1.getText() == null || txtNumero1.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o número do projeto.");
+			txtNumero1.requestFocus();
+			return;
+		}
+		if (txtExecutor1.getText() == null || txtExecutor1.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o executor da prova.");
+			txtExecutor1.requestFocus();
+			return;
+		}
+		if (txtObjetivo1.getText() == null || txtObjetivo1.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o objetivo da prova.");
+			txtObjetivo1.requestFocus();
+			return;
+		}
+
 		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
@@ -323,6 +345,28 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	public void saveBalao2() {
+
+		if (txtProduto2.getText() == null || txtProduto2.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
+			txtProduto2.requestFocus();
+			return;
+		}
+		if (txtNumero2.getText() == null || txtNumero2.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o número do projeto.");
+			txtNumero2.requestFocus();
+			return;
+		}
+		if (txtExecutor2.getText() == null || txtExecutor2.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o executor da prova.");
+			txtExecutor2.requestFocus();
+			return;
+		}
+		if (txtObjetivo2.getText() == null || txtObjetivo2.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o objetivo da prova.");
+			txtObjetivo2.requestFocus();
+			return;
+		}
+
 		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
@@ -367,6 +411,28 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	public void saveBalao3() {
+
+		if (txtProduto3.getText() == null || txtProduto3.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
+			txtProduto3.requestFocus();
+			return;
+		}
+		if (txtNumero3.getText() == null || txtNumero3.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o número do projeto.");
+			txtNumero3.requestFocus();
+			return;
+		}
+		if (txtExecutor3.getText() == null || txtExecutor3.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o executor da prova.");
+			txtExecutor3.requestFocus();
+			return;
+		}
+		if (txtObjetivo3.getText() == null || txtObjetivo3.getText().trim().equals("")) {
+			makeAlert(AlertType.WARNING, "Atenção", "Informe o objetivo da prova.");
+			txtObjetivo3.requestFocus();
+			return;
+		}
+
 		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
@@ -425,6 +491,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtNumero1.clear();
 			txtExecutor1.clear();
 			txtObjetivo1.clear();
+			btAddProjeto1.setDisable(false);
 			btAmostra1.setDisable(true);
 			btExcluir1.setDisable(true);
 			makeToast("Prova removida com sucesso.");
@@ -444,6 +511,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtNumero2.clear();
 			txtExecutor2.clear();
 			txtObjetivo2.clear();
+			btAddProjeto2.setDisable(false);
 			btAmostra2.setDisable(true);
 			btExcluir2.setDisable(true);
 			provaDAO.removeProva(prova2);
@@ -464,6 +532,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtNumero3.clear();
 			txtExecutor3.clear();
 			txtObjetivo3.clear();
+			btAddProjeto3.setDisable(false);
 			btAmostra3.setDisable(true);
 			btExcluir3.setDisable(true);
 			provaDAO.removeProva(prova3);
@@ -860,7 +929,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	}
 
 	private void configModbusReadSlaves() {
-		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
+		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(9000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 
 				Double t1 = modService.readMultipleRegisters(1, 0, 1);
@@ -948,6 +1017,13 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	public Integer getTemp() {
 		return tempBalao1;
+	}
+
+	private void makeAlert(AlertType type, String title, String message) {
+		Alert alert = new Alert(type);
+		alert.setTitle(title);
+		alert.setHeaderText(message);
+		alert.showAndWait();
 	}
 
 }

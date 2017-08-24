@@ -11,6 +11,7 @@ import com.servicos.estatica.resicolor.lab.dao.ProjetoDAO;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -244,11 +245,11 @@ public class ProjetosController implements Initializable {
 									Task<Void> exclusionTask = new Task<Void>() {
 										@Override
 										protected Void call() throws Exception {
-											// leituraDAO.removeLeituras(projeto);
+											projetoDAO.removeProjeto(projeto);
 											// processoDAO.removeProcesso(projeto);
 											// processos.remove(projeto);
-											// tblConsulta.refresh();
-											System.out.println("Excluindo: " + projeto.getNome());
+											projetos.remove(projeto);
+											populateTable();
 											return null;
 										}
 									};
@@ -277,11 +278,17 @@ public class ProjetosController implements Initializable {
 				return cell;
 			}
 		};
-		colExclusao.setCellFactory(cellExcluirFactory);
-		colExclusao.setStyle("-fx-alignment: CENTER;");
 
-		colData.setSortType(TableColumn.SortType.DESCENDING);
-		tblProjetos.getSortOrder().add(colData);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				colExclusao.setCellFactory(cellExcluirFactory);
+				colExclusao.setStyle("-fx-alignment: CENTER;");
+				colData.setSortType(TableColumn.SortType.DESCENDING);
+				tblProjetos.getSortOrder().add(colData);
+
+			}
+		});
 
 	}
 

@@ -449,7 +449,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ProgressIndicator fx:id="prog1" layoutX="49.0" layoutY="107.0" prefHeight="180.0" prefWidth="191.0" style="-fx-progress-color: #E0FFFF;" visible="false" />
+                        <ProgressIndicator fx:id="prog1" layoutX="72.0" layoutY="133.0" prefHeight="115.0" prefWidth="147.0" style="-fx-progress-color: #E0FFFF;" visible="false" />
                         <Label layoutX="21.0" layoutY="12.0" text="Projeto:" textFill="#09156f" />
                         <Label layoutX="21.0" layoutY="241.0" text="Objetivo:" textFill="#09156f" />
                         <Label layoutX="21.0" layoutY="139.0" text="Nº do projeto:" textFill="#09156f" />
@@ -475,7 +475,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ProgressIndicator fx:id="prog2" layoutX="49.0" layoutY="107.0" prefHeight="180.0" prefWidth="191.0" style="-fx-progress-color: #E0FFFF;" visible="false" />
+                        <ProgressIndicator fx:id="prog2" layoutX="72.0" layoutY="133.0" prefHeight="115.0" prefWidth="147.0" style="-fx-progress-color: #E0FFFF;" visible="false" />
                         <Button fx:id="btAddProjeto2" layoutX="241.0" layoutY="29.0" mnemonicParsing="false" onAction="#addProjeto2" prefHeight="25.0" styleClass="btStyleAdd" stylesheets="@../style/style.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -509,7 +509,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ProgressIndicator fx:id="prog3" layoutX="49.0" layoutY="107.0" prefHeight="180.0" prefWidth="191.0" style="-fx-progress-color: #E0FFFF;" visible="false" />
+                        <ProgressIndicator fx:id="prog3" layoutX="72.0" layoutY="133.0" prefHeight="115.0" prefWidth="147.0" style="-fx-progress-color: #E0FFFF;" visible="false" />
                         <Button fx:id="btAddProjeto3" layoutX="241.0" layoutY="29.0" mnemonicParsing="false" onAction="#addProjeto3" prefHeight="25.0" styleClass="btStyleAdd" stylesheets="@../style/style.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />

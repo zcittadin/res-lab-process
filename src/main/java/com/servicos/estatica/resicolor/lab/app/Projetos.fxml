@@ -15,13 +15,13 @@
       <Rectangle fx:id="rect2" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="110.0" layoutX="405.0" layoutY="13.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="369.0" />
       <Rectangle fx:id="rect1" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="110.0" layoutX="29.0" layoutY="13.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="369.0" />
       <TextField fx:id="txtBuscar" layoutX="62.0" layoutY="44.0" prefHeight="25.0" prefWidth="305.0" promptText="Nome do projeto" />
-      <Button fx:id="btBuscar" layoutX="179.0" layoutY="80.0" mnemonicParsing="false" onAction="#findProjetoByNome" styleClass="btStyleSearch" stylesheets="@../style/style.css" text="Buscar">
+      <Button fx:id="btBuscar" layoutX="159.0" layoutY="80.0" mnemonicParsing="false" onAction="#findProjetoByNome" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleSearch" stylesheets="@../style/style.css" text="Buscar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
       <TextField fx:id="txtNovo" layoutX="442.0" layoutY="44.0" prefHeight="25.0" prefWidth="305.0" promptText="Nome do projeto" />
-      <Button fx:id="btSalvar" layoutX="560.0" layoutY="80.0" mnemonicParsing="false" onAction="#saveProjeto" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
+      <Button fx:id="btSalvar" layoutX="540.0" layoutY="80.0" mnemonicParsing="false" onAction="#saveProjeto" prefHeight="25.0" prefWidth="111.0" styleClass="btStyleSave" stylesheets="@../style/style.css" text="Salvar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -33,7 +33,7 @@
             <TableColumn fx:id="colExclusao" prefWidth="87.0" text="Exclusão" />
         </columns>
       </TableView>
-      <Button fx:id="btOk" layoutX="543.0" layoutY="571.0" mnemonicParsing="false" onAction="#ok" styleClass="btStyleOk" stylesheets="@../style/style.css" text="Ok">
+      <Button fx:id="btOk" layoutX="542.0" layoutY="571.0" mnemonicParsing="false" onAction="#ok" styleClass="btStyleOk" stylesheets="@../style/style.css" text="Ok">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

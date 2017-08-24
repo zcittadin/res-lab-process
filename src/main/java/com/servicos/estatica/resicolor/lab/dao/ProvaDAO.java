@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.servicos.estatica.resicolor.lab.model.Amostra;
+import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.util.HibernateUtil;
 
@@ -38,5 +39,9 @@ public class ProvaDAO {
 				amostraDao.removeAmostra(amostra);
 			}
 		}
+	}
+
+	public List<Prova> findByProjeto(Projeto projeto) {
+		return null;
 	}
 }
