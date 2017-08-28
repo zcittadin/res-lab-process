@@ -527,6 +527,10 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtNumero1.clear();
 			txtExecutor1.clear();
 			txtObjetivo1.clear();
+			lblInicio1.setText("00:00:00");
+			lblCrono1.setText("00:00:00");
+			lblTempMax1.setText("000");
+			lblTempMin1.setText("000");
 			btAddProjeto1.setDisable(false);
 			btAmostra1.setDisable(true);
 			btExcluir1.setDisable(true);
@@ -549,6 +553,10 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtNumero2.clear();
 			txtExecutor2.clear();
 			txtObjetivo2.clear();
+			lblInicio2.setText("00:00:00");
+			lblCrono2.setText("00:00:00");
+			lblTempMax2.setText("000");
+			lblTempMin2.setText("000");
 			btAddProjeto2.setDisable(false);
 			btAmostra2.setDisable(true);
 			btExcluir2.setDisable(true);
@@ -571,6 +579,10 @@ public class InicialController implements Initializable, ControlledScreen {
 			txtNumero3.clear();
 			txtExecutor3.clear();
 			txtObjetivo3.clear();
+			lblInicio3.setText("00:00:00");
+			lblCrono3.setText("00:00:00");
+			lblTempMax3.setText("000");
+			lblTempMin3.setText("000");
 			btAddProjeto3.setDisable(false);
 			btAmostra3.setDisable(true);
 			btExcluir3.setDisable(true);
@@ -586,7 +598,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 1", "Digite o set-point:", "");
 			if (sp != null) {
 				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
-				lblSp1.setText(sp.replace(",", "."));
+				lblSp1.setText(sp.contains(",") ? sp.replace(",", ".") : sp.concat(".0"));
 			}
 		}
 	}
@@ -597,7 +609,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 2", "Digite o set-point:", "");
 			if (sp != null) {
 				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
-				lblSp2.setText(sp.replace(",", "."));
+				lblSp2.setText(sp.contains(",") ? sp.replace(",", ".") : sp.concat(".0"));
 			}
 		}
 	}
@@ -608,7 +620,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 3", "Digite o set-point:", "");
 			if (sp != null) {
 				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
-				lblSp3.setText(sp.replace(",", "."));
+				lblSp3.setText(sp.contains(",") ? sp.replace(",", ".") : sp.concat(".0"));
 			}
 		}
 	}
@@ -795,6 +807,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		} else {
 			disableForm(txtProduto1, txtNumero1, txtExecutor1, txtObjetivo1, btSaveBalao1);
 		}
+		tempMin1 = new Double(1900);
+		tempMax1 = new Double(0);
 		btAmostra1.setDisable(true);
 		btExcluir1.setDisable(true);
 		ProvaProperty.provaClear1Property().set(!prova1Clear);
@@ -804,12 +818,13 @@ public class InicialController implements Initializable, ControlledScreen {
 		txtNumero1.setText(null);
 		txtExecutor1.setText(null);
 		txtObjetivo1.setText(null);
+		lblInicio1.setText("00:00:00");
+		lblCrono1.setText("00:00:00");
+		lblTempMax1.setText("000");
+		lblTempMin1.setText("000");
 		txtProduto1.requestFocus();
-
 		// ensaio1 = null;
 		// isBalaoFinished1 = false;
-		// txtProdutoBalao1.setDisable(false);
-		// btSaveBalao1.setDisable(false);
 	}
 
 	@FXML
@@ -833,6 +848,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		} else {
 			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		}
+		tempMin2 = new Double(1900);
+		tempMax2 = new Double(0);
 		btAmostra2.setDisable(true);
 		btExcluir2.setDisable(true);
 		ProvaProperty.provaClear2Property().set(!prova2Clear);
@@ -842,14 +859,13 @@ public class InicialController implements Initializable, ControlledScreen {
 		txtNumero2.setText(null);
 		txtExecutor2.setText(null);
 		txtObjetivo2.setText(null);
+		lblInicio2.setText("00:00:00");
+		lblCrono2.setText("00:00:00");
+		lblTempMax2.setText("000");
+		lblTempMin2.setText("000");
 		txtProduto2.requestFocus();
-
 		// prova2 = null;
 		// isBalaoFinished2 = false;
-		// txtProdutoBalao2.setDisable(false);
-		// btSaveBalao2.setDisable(false);
-		// txtProdutoBalao2.setText(null);
-		// txtProdutoBalao2.requestFocus();
 	}
 
 	@FXML
@@ -873,6 +889,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		} else {
 			disableForm(txtProduto3, txtNumero3, txtExecutor3, txtObjetivo3, btSaveBalao3);
 		}
+		tempMin3 = new Double(1900);
+		tempMax3 = new Double(0);
 		btAmostra3.setDisable(true);
 		btExcluir3.setDisable(true);
 		ProvaProperty.provaClear1Property().set(!prova3Clear);
@@ -882,14 +900,13 @@ public class InicialController implements Initializable, ControlledScreen {
 		txtNumero3.setText(null);
 		txtExecutor3.setText(null);
 		txtObjetivo3.setText(null);
+		lblInicio3.setText("00:00:00");
+		lblCrono3.setText("00:00:00");
+		lblTempMax3.setText("000");
+		lblTempMin3.setText("000");
 		txtProduto3.requestFocus();
-
 		// prova3 = null;
 		// isBalaoFinished3 = false;
-		// txtProdutoBalao3.setDisable(false);
-		// btSaveBalao3.setDisable(false);
-		// txtProdutoBalao3.setText(null);
-		// txtProdutoBalao3.requestFocus();
 	}
 
 	@FXML
