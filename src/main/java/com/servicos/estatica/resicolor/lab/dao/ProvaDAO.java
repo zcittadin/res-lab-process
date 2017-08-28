@@ -2,7 +2,10 @@ package com.servicos.estatica.resicolor.lab.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.servicos.estatica.resicolor.lab.model.Amostra;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
@@ -39,6 +42,28 @@ public class ProvaDAO {
 				amostraDao.removeAmostra(amostra);
 			}
 		}
+	}
+
+	public void updateTemperaturaMin(Prova prova) {
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("UPDATE Prova set tempMin = :tempMin WHERE id = :id");
+		query.setParameter("tempMin", prova.getTempMin());
+		query.setParameter("id", prova.getId());
+		query.executeUpdate();
+		tx.commit();
+		session.close();
+	}
+
+	public void updateTemperaturaMax(Prova prova) {
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("UPDATE Prova set tempMax = :tempMax WHERE id = :id");
+		query.setParameter("tempMax", prova.getTempMax());
+		query.setParameter("id", prova.getId());
+		query.executeUpdate();
+		tx.commit();
+		session.close();
 	}
 
 	public List<Prova> findByProjeto(Projeto projeto) {

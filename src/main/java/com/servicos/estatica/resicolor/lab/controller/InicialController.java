@@ -123,6 +123,18 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private Label lblCrono3;
 	@FXML
+	private Label lblTempMin1;
+	@FXML
+	private Label lblTempMax1;
+	@FXML
+	private Label lblTempMin2;
+	@FXML
+	private Label lblTempMax2;
+	@FXML
+	private Label lblTempMin3;
+	@FXML
+	private Label lblTempMax3;
+	@FXML
 	private ComboBox<String> comboPorts;
 	@FXML
 	private Button btAddProjeto1;
@@ -247,6 +259,14 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static Integer spBalao1 = new Integer(0);
 	private static Integer spBalao2 = new Integer(0);
 	private static Integer spBalao3 = new Integer(0);
+
+	private static Double tempMin1 = new Double(1900);
+	private static Double tempMax1 = new Double(0);
+	private static Double tempMin2 = new Double(1900);
+	private static Double tempMax2 = new Double(0);
+	private static Double tempMin3 = new Double(1900);
+	private static Double tempMax3 = new Double(0);
+
 	private static ObservableList<String> availablePorts;
 
 	private static Projeto projeto1;
@@ -864,6 +884,61 @@ public class InicialController implements Initializable, ControlledScreen {
 		openAmostra();
 	}
 
+	private void calculaMinMax1() {
+		if (tempMin1 > tempBalao1) {
+			tempMin1 = tempBalao1.doubleValue();
+			Integer i = tempMin1.intValue();
+			lblTempMin1.setText(i.toString());
+			prova1.setTempMin(tempMin1.intValue());
+			provaDAO.updateTemperaturaMin(prova1);
+		}
+		if (tempMax1 < tempBalao1) {
+			tempMax1 = roundToHalf(tempBalao1);
+			Integer i = tempMax1.intValue();
+			lblTempMax1.setText(i.toString());
+			prova1.setTempMax(tempMax1.intValue());
+			provaDAO.updateTemperaturaMax(prova1);
+		}
+	}
+
+	private void calculaMinMax2() {
+		if (tempMin2 > tempBalao2) {
+			tempMin2 = tempBalao2.doubleValue();
+			Integer i = tempMin2.intValue();
+			lblTempMin2.setText(i.toString());
+			prova2.setTempMin(tempMin2.intValue());
+			provaDAO.updateTemperaturaMin(prova2);
+		}
+		if (tempMax2 < tempBalao2) {
+			tempMax2 = roundToHalf(tempBalao2);
+			Integer i = tempMax2.intValue();
+			lblTempMax2.setText(i.toString());
+			prova2.setTempMax(tempMax2.intValue());
+			provaDAO.updateTemperaturaMax(prova2);
+		}
+	}
+
+	private void calculaMinMax3() {
+		if (tempMin3 > tempBalao3) {
+			tempMin3 = tempBalao3.doubleValue();
+			Integer i = tempMin3.intValue();
+			lblTempMin3.setText(i.toString());
+			prova3.setTempMin(tempMin3.intValue());
+			provaDAO.updateTemperaturaMin(prova3);
+		}
+		if (tempMax3 < tempBalao3) {
+			tempMax3 = roundToHalf(tempBalao3);
+			Integer i = tempMax3.intValue();
+			lblTempMax3.setText(i.toString());
+			prova3.setTempMax(tempMax3.intValue());
+			provaDAO.updateTemperaturaMax(prova3);
+		}
+	}
+
+	public static double roundToHalf(double d) {
+		return (Math.ceil(d * 2) / 2);
+	}
+
 	private void openAmostra() throws IOException {
 		Stage stage;
 		Parent root;
@@ -943,20 +1018,20 @@ public class InicialController implements Initializable, ControlledScreen {
 				Double t1 = modService.readMultipleRegisters(1, 0, 1);
 				tempBalao1 = t1.intValue();
 				Double t2 = modService.readMultipleRegisters(1, 0, 1);
-				tempBalao1 = t2.intValue();
+				tempBalao2 = t2.intValue();
 				Double t3 = modService.readMultipleRegisters(1, 0, 1);
-				tempBalao1 = t3.intValue();
+				tempBalao3 = t3.intValue();
 
 				Double sp1 = modService.readMultipleRegisters(1, 0, 1);
 				spBalao1 = sp1.intValue();
 				Double sp2 = modService.readMultipleRegisters(1, 0, 1);
-				spBalao1 = sp2.intValue();
+				spBalao2 = sp2.intValue();
 				Double sp3 = modService.readMultipleRegisters(1, 0, 1);
-				spBalao1 = sp3.intValue();
+				spBalao3 = sp3.intValue();
 
 				lblTemp1.setText(tempBalao1.toString());
-				lblTemp2.setText(tempBalao1.toString());
-				lblTemp3.setText(tempBalao1.toString());
+				lblTemp2.setText(tempBalao2.toString());
+				lblTemp3.setText(tempBalao3.toString());
 				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
 				// 1);
 
@@ -964,20 +1039,23 @@ public class InicialController implements Initializable, ControlledScreen {
 					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, spBalao1);
 					leituraDAO.saveLeitura(l);
 					prova1.getLeituras().add(l);
+					calculaMinMax1();
 					ProvaProperty.provaTemp1Property().set(!tempProva1Changed);
 					tempProva1Changed = !tempProva1Changed;
 				}
 				if (isBalaoRunning2) {
-					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao1, spBalao2);
+					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao2, spBalao2);
 					leituraDAO.saveLeitura(l);
 					prova2.getLeituras().add(l);
+					calculaMinMax2();
 					ProvaProperty.provaTemp2Property().set(!tempProva2Changed);
 					tempProva2Changed = !tempProva2Changed;
 				}
 				if (isBalaoRunning3) {
-					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao1, spBalao3);
+					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao3, spBalao3);
 					leituraDAO.saveLeitura(l);
 					prova3.getLeituras().add(l);
+					calculaMinMax3();
 					ProvaProperty.provaTemp3Property().set(!tempProva3Changed);
 					tempProva3Changed = !tempProva3Changed;
 				}

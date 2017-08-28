@@ -56,7 +56,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Label fx:id="lblCrono311" alignment="CENTER" layoutX="164.0" layoutY="91.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblTempMin3" alignment="CENTER" layoutX="164.0" layoutY="91.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="000" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -64,15 +64,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Label fx:id="lblCrono3111" alignment="CENTER" layoutX="164.0" layoutY="115.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
-               <font>
-                  <Font name="DSEG7 Classic-Bold" size="14.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-            <Label fx:id="lblCrono31111" alignment="CENTER" layoutX="164.0" layoutY="139.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblTempMax3" alignment="CENTER" layoutX="164.0" layoutY="115.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="000" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -91,11 +83,6 @@
                </font>
             </Label>
             <Label layoutX="14.0" layoutY="118.0" text="Temperatura máxima:" textFill="#09156f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="142.0" text="Temperatura média:" textFill="#09156f">
                <font>
                   <Font size="14.0" />
                </font>
@@ -137,11 +124,6 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="15.0" layoutY="144.0" text="Temperatura média:" textFill="#09156f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
             <Label fx:id="lblCrono21" alignment="CENTER" layoutX="163.0" layoutY="69.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
@@ -150,7 +132,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Label fx:id="lblCrono211" alignment="CENTER" layoutX="163.0" layoutY="93.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblTempMin2" alignment="CENTER" layoutX="163.0" layoutY="93.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="000" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -158,15 +140,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Label fx:id="lblCrono2111" alignment="CENTER" layoutX="163.0" layoutY="117.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
-               <font>
-                  <Font name="DSEG7 Classic-Bold" size="14.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-            <Label fx:id="lblCrono21111" alignment="CENTER" layoutX="163.0" layoutY="141.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblTempMax2" alignment="CENTER" layoutX="163.0" layoutY="117.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="000" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -236,7 +210,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblCrono111" alignment="CENTER" layoutX="163.0" layoutY="92.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblTempMin1" alignment="CENTER" layoutX="163.0" layoutY="92.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="000" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -244,7 +218,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Label fx:id="lblCrono1111" alignment="CENTER" layoutX="163.0" layoutY="116.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblTempMax1" alignment="CENTER" layoutX="163.0" layoutY="116.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="000" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -256,19 +230,6 @@
                <font>
                   <Font size="14.0" />
                </font>
-            </Label>
-            <Label layoutX="10.0" layoutY="143.0" text="Temperatura média:" textFill="#09156f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblCrono11111" alignment="CENTER" layoutX="163.0" layoutY="140.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
-               <font>
-                  <Font name="DSEG7 Classic-Bold" size="14.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
             </Label>
             <Label layoutX="11.0" layoutY="3.0" text="Balão 1" textFill="#09156f">
                <font>
