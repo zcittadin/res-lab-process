@@ -493,6 +493,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			btAddProjeto1.setDisable(false);
 			btAmostra1.setDisable(true);
 			btExcluir1.setDisable(true);
+			UsedProjetosMap.discardProjetoByBalao(Baloes.BALAO1);
 			makeToast("Prova removida com sucesso.");
 			prova1 = null;
 		}
@@ -514,6 +515,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			btAddProjeto2.setDisable(false);
 			btAmostra2.setDisable(true);
 			btExcluir2.setDisable(true);
+			UsedProjetosMap.discardProjetoByBalao(Baloes.BALAO2);
 			makeToast("Prova removida com sucesso.");
 			prova2 = null;
 		}
@@ -535,6 +537,7 @@ public class InicialController implements Initializable, ControlledScreen {
 			btAddProjeto3.setDisable(false);
 			btAmostra3.setDisable(true);
 			btExcluir3.setDisable(true);
+			UsedProjetosMap.discardProjetoByBalao(Baloes.BALAO3);
 			makeToast("Prova removida com sucesso.");
 			prova3 = null;
 		}
@@ -934,7 +937,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	}
 
 	private void configModbusReadSlaves() {
-		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(9000), new EventHandler<ActionEvent>() {
+		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 
 				Double t1 = modService.readMultipleRegisters(1, 0, 1);
@@ -1020,8 +1023,16 @@ public class InicialController implements Initializable, ControlledScreen {
 		Toast.makeToast(stage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
 	}
 
-	public Integer getTemp() {
+	public Integer getTemp1() {
 		return tempBalao1;
+	}
+
+	public Integer getTemp2() {
+		return tempBalao2;
+	}
+
+	public Integer getTemp3() {
+		return tempBalao3;
 	}
 
 	private void makeAlert(AlertType type, String title, String message) {

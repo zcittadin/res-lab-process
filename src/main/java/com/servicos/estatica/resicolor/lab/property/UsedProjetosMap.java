@@ -23,9 +23,13 @@ public class UsedProjetosMap {
 			if (projeto.equals(entry.getValue()))
 				return true;
 		}
-
 		return false;
+	}
 
+	public static void discardProjetoByBalao(Baloes balao) {
+		Projeto p = usedProjetos.get(balao);
+		if (p != null)
+			usedProjetos.remove(p);
 	}
 
 }

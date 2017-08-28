@@ -129,21 +129,21 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 		ProvaProperty.provaTemp1Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				screen1Controller.plotTemp(inicialController.getTemp());
+				screen1Controller.plotTemp(inicialController.getTemp1());
 			}
 		});
 
 		ProvaProperty.provaTemp2Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				screen2Controller.plotTemp(inicialController.getTemp());
+				screen2Controller.plotTemp(inicialController.getTemp1());
 			}
 		});
 
 		ProvaProperty.provaTemp3Property().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				screen3Controller.plotTemp(inicialController.getTemp());
+				screen3Controller.plotTemp(inicialController.getTemp1());
 			}
 		});
 
