@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "amostras")
 public class Amostra implements Serializable {
 
-	private static final long serialVersionUID = 6150418213712955052L;
+	private static final long serialVersionUID = -9010782657198919757L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

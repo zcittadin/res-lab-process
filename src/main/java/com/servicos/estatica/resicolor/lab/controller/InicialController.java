@@ -978,10 +978,6 @@ public class InicialController implements Initializable, ControlledScreen {
 		}
 	}
 
-	public static double roundToHalf(double d) {
-		return (Math.ceil(d * 2) / 2);
-	}
-
 	private void openAmostra() throws IOException {
 		Stage stage;
 		Parent root;
