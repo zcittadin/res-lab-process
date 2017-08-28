@@ -183,6 +183,12 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private Button btExcluir3;
 	@FXML
+	private Button btSp1;
+	@FXML
+	private Button btSp2;
+	@FXML
+	private Button btSp3;
+	@FXML
 	private ImageView imgGlass1;
 	@FXML
 	private ImageView imgMola1;
@@ -292,7 +298,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	private static ProvaDAO provaDAO = new ProvaDAO();
 	private static LeituraDAO leituraDAO = new LeituraDAO();
 
-	private static DateTimeFormatter dataHoraFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+	private static DateTimeFormatter horaFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 	ScreensController myController;
 
@@ -575,35 +581,41 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void changeSp1() {
-		String sp = FxDialogs.showTextInput("Set-point", "Balão 1", "Digite o set-point:", "");
-		if (sp != null) {
-			modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
-			lblSp1.setText(sp);
+		if (isBalaoRunning1 || isBalaoReady1) {
+			String sp = FxDialogs.showNumericInput("Set-point", "Balão 1", "Digite o set-point:", "");
+			if (sp != null) {
+				modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
+				lblSp1.setText(sp);
+			}
 		}
 	}
 
 	@FXML
 	private void changeSp2() {
-		String sp = FxDialogs.showTextInput("Set-point", "Balão 2", "Digite o set-point:", "");
-		if (sp != null) {
-			modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
-			lblSp2.setText(sp);
+		if (isBalaoRunning2 || isBalaoReady2) {
+			String sp = FxDialogs.showNumericInput("Set-point", "Balão 2", "Digite o set-point:", "");
+			if (sp != null) {
+				modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
+				lblSp2.setText(sp);
+			}
 		}
 	}
 
 	@FXML
 	private void changeSp3() {
-		String sp = FxDialogs.showTextInput("Set-point", "Balão 3", "Digite o set-point:", "");
-		if (sp != null) {
-			modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
-			lblSp3.setText(sp);
+		if (isBalaoRunning3 || isBalaoReady3) {
+			String sp = FxDialogs.showNumericInput("Set-point", "Balão 3", "Digite o set-point:", "");
+			if (sp != null) {
+				modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
+				lblSp3.setText(sp);
+			}
 		}
 	}
 
 	@FXML
 	private void initProc1() {
 		provaDAO.updateDataInicial(prova1);
-		lblInicio1.setText(dataHoraFormatter.format(LocalDateTime.now()));
+		lblInicio1.setText(horaFormatter.format(LocalDateTime.now()));
 		btPlay1.setDisable(true);
 		btStop1.setDisable(false);
 		btExcluir1.setDisable(true);
@@ -619,7 +631,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private void initProc2() {
 		provaDAO.updateDataInicial(prova2);
-		lblInicio2.setText(dataHoraFormatter.format(LocalDateTime.now()));
+		lblInicio2.setText(horaFormatter.format(LocalDateTime.now()));
 		btPlay2.setDisable(true);
 		btStop2.setDisable(false);
 		btExcluir2.setDisable(true);
@@ -635,7 +647,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private void initProc3() {
 		provaDAO.updateDataInicial(prova3);
-		lblInicio3.setText(dataHoraFormatter.format(LocalDateTime.now()));
+		lblInicio3.setText(horaFormatter.format(LocalDateTime.now()));
 		btPlay3.setDisable(true);
 		btStop3.setDisable(false);
 		btExcluir3.setDisable(true);

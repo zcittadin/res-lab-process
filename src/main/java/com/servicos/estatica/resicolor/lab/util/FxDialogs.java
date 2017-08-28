@@ -3,6 +3,8 @@ package com.servicos.estatica.resicolor.lab.util;
 import java.awt.Robot;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -19,6 +23,8 @@ import javafx.scene.layout.Priority;
 import javafx.stage.StageStyle;
 
 public class FxDialogs {
+
+	private static DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
 	public static void showInformation(String title, String message) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -129,6 +135,23 @@ public class FxDialogs {
 		}
 	}
 
+	public static String showNumericInput(String title, String header, String message, String defaultValue) {
+		TextInputDialog dialog = new TextInputDialog(defaultValue);
+		formatNumberField(dialog.getEditor());
+		dialog.initStyle(StageStyle.UTILITY);
+		dialog.setTitle(title);
+		dialog.setHeaderText(header);
+		dialog.setContentText(message);
+
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()) {
+			return result.get();
+		} else {
+			return null;
+		}
+
+	}
+
 	public static String showTextInput(String title, String header, String message, String defaultValue) {
 		TextInputDialog dialog = new TextInputDialog(defaultValue);
 		dialog.initStyle(StageStyle.UTILITY);
@@ -143,6 +166,22 @@ public class FxDialogs {
 			return null;
 		}
 
+	}
+
+	private static void formatNumberField(TextField txtField) {
+		txtField.setTextFormatter(new TextFormatter<>(c -> {
+			if (c.getControlNewText().isEmpty()) {
+				return c;
+			}
+			ParsePosition parsePosition = new ParsePosition(0);
+			Object object = decimalFormat.parse(c.getControlNewText(), parsePosition);
+
+			if (object == null || parsePosition.getIndex() < c.getControlNewText().length()) {
+				return null;
+			} else {
+				return c;
+			}
+		}));
 	}
 
 }
