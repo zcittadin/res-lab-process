@@ -24,7 +24,7 @@
       <Rectangle fx:id="rect1" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="615.0" layoutX="363.0" layoutY="15.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="823.0" />
       <AnchorPane fx:id="pane3" layoutX="431.0" layoutY="437.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
          <children>
-            <Label fx:id="lblCrono3" alignment="CENTER" layoutX="164.0" layoutY="43.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblCrono3" alignment="CENTER" layoutX="164.0" layoutY="67.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Image url="@../style/thumbs.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblCrono31" alignment="CENTER" layoutX="164.0" layoutY="67.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblCrono31" alignment="CENTER" layoutX="164.0" layoutY="43.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -96,7 +96,7 @@
       </AnchorPane>
       <AnchorPane fx:id="pane2" layoutX="431.0" layoutY="232.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
          <children>
-            <Label fx:id="lblCrono2" alignment="CENTER" layoutX="163.0" layoutY="45.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblCrono2" alignment="CENTER" layoutX="163.0" layoutY="69.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -124,7 +124,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblCrono21" alignment="CENTER" layoutX="163.0" layoutY="69.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblCrono21" alignment="CENTER" layoutX="163.0" layoutY="45.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -168,7 +168,7 @@
       </AnchorPane>
       <AnchorPane fx:id="pane1" layoutX="431.0" layoutY="29.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
          <children>
-            <Label fx:id="lblCrono1" alignment="CENTER" layoutX="163.0" layoutY="44.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblCrono1" alignment="CENTER" layoutX="163.0" layoutY="68.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -197,7 +197,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblCrono11" alignment="CENTER" layoutX="163.0" layoutY="68.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblCrono11" alignment="CENTER" layoutX="163.0" layoutY="44.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>

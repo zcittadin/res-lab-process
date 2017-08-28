@@ -592,6 +592,7 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void initProc1() {
+		provaDAO.updateDataInicial(prova1);
 		btPlay1.setDisable(true);
 		btStop1.setDisable(false);
 		btExcluir1.setDisable(true);
@@ -606,6 +607,7 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void initProc2() {
+		provaDAO.updateDataInicial(prova2);
 		btPlay2.setDisable(true);
 		btStop2.setDisable(false);
 		btExcluir2.setDisable(true);
@@ -620,6 +622,7 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	@FXML
 	private void initProc3() {
+		provaDAO.updateDataInicial(prova3);
 		btPlay3.setDisable(true);
 		btStop3.setDisable(false);
 		btExcluir3.setDisable(true);
@@ -654,6 +657,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btExcluir1.setDisable(false);
 		isBalaoRunning1 = false;
 		isBalaoFinished1 = true;
+		provaDAO.updateDataFinal(prova1);
 		makeToast("Balão 1: Prova encerrada.");
 	}
 
@@ -679,6 +683,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btExcluir2.setDisable(false);
 		isBalaoRunning2 = false;
 		isBalaoFinished2 = true;
+		provaDAO.updateDataFinal(prova2);
 		makeToast("Balão 2: Prova encerrada.");
 	}
 
@@ -704,6 +709,7 @@ public class InicialController implements Initializable, ControlledScreen {
 		btExcluir3.setDisable(false);
 		isBalaoRunning3 = false;
 		isBalaoFinished3 = true;
+		provaDAO.updateDataFinal(prova3);
 		makeToast("Balão 3: Prova encerrada.");
 	}
 

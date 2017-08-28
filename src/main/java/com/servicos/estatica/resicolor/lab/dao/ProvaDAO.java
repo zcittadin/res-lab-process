@@ -1,5 +1,6 @@
 package com.servicos.estatica.resicolor.lab.dao;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -42,6 +43,28 @@ public class ProvaDAO {
 				amostraDao.removeAmostra(amostra);
 			}
 		}
+	}
+
+	public void updateDataInicial(Prova prova) {
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("UPDATE Prova set dhInicial = :dtIni WHERE id = :id");
+		query.setParameter("dtIni", Calendar.getInstance().getTime());
+		query.setParameter("id", prova.getId());
+		query.executeUpdate();
+		tx.commit();
+		session.close();
+	}
+
+	public void updateDataFinal(Prova prova) {
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("UPDATE Prova set dhFinal = :dtFim WHERE id = :id");
+		query.setParameter("dtFim", Calendar.getInstance().getTime());
+		query.setParameter("id", prova.getId());
+		query.executeUpdate();
+		tx.commit();
+		session.close();
 	}
 
 	public void updateTemperaturaMin(Prova prova) {
