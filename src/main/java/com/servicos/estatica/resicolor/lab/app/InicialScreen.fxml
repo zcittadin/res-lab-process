@@ -48,7 +48,7 @@
                   <Image url="@../style/thumbs.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblCrono31" alignment="CENTER" layoutX="164.0" layoutY="43.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblInicio3" alignment="CENTER" layoutX="164.0" layoutY="43.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -124,7 +124,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblCrono21" alignment="CENTER" layoutX="163.0" layoutY="45.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblInicio2" alignment="CENTER" layoutX="163.0" layoutY="45.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>
@@ -197,7 +197,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblCrono11" alignment="CENTER" layoutX="163.0" layoutY="44.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
+            <Label fx:id="lblInicio1" alignment="CENTER" layoutX="163.0" layoutY="44.0" prefHeight="25.0" prefWidth="123.0" style="-fx-border-color: #09156f;" text="00:00:00" textFill="#09156f">
                <font>
                   <Font name="DSEG7 Classic-Bold" size="14.0" />
                </font>

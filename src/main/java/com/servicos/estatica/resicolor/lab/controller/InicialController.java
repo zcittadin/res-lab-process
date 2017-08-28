@@ -2,6 +2,8 @@ package com.servicos.estatica.resicolor.lab.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -134,6 +136,12 @@ public class InicialController implements Initializable, ControlledScreen {
 	private Label lblTempMin3;
 	@FXML
 	private Label lblTempMax3;
+	@FXML
+	private Label lblInicio1;
+	@FXML
+	private Label lblInicio2;
+	@FXML
+	private Label lblInicio3;
 	@FXML
 	private ComboBox<String> comboPorts;
 	@FXML
@@ -283,6 +291,8 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	private static ProvaDAO provaDAO = new ProvaDAO();
 	private static LeituraDAO leituraDAO = new LeituraDAO();
+
+	private static DateTimeFormatter dataHoraFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 	ScreensController myController;
 
@@ -593,6 +603,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private void initProc1() {
 		provaDAO.updateDataInicial(prova1);
+		lblInicio1.setText(dataHoraFormatter.format(LocalDateTime.now()));
 		btPlay1.setDisable(true);
 		btStop1.setDisable(false);
 		btExcluir1.setDisable(true);
@@ -608,6 +619,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private void initProc2() {
 		provaDAO.updateDataInicial(prova2);
+		lblInicio2.setText(dataHoraFormatter.format(LocalDateTime.now()));
 		btPlay2.setDisable(true);
 		btStop2.setDisable(false);
 		btExcluir2.setDisable(true);
@@ -623,6 +635,7 @@ public class InicialController implements Initializable, ControlledScreen {
 	@FXML
 	private void initProc3() {
 		provaDAO.updateDataInicial(prova3);
+		lblInicio3.setText(dataHoraFormatter.format(LocalDateTime.now()));
 		btPlay3.setDisable(true);
 		btStop3.setDisable(false);
 		btExcluir3.setDisable(true);
