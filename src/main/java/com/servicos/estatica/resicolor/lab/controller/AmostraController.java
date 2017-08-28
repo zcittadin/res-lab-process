@@ -132,8 +132,8 @@ public class AmostraController implements Initializable {
 			protected Void call() throws Exception {
 				if (amostra == null) {
 					amostra = new Amostra(null, AmostraProperty.getProva(), new Date(),
-							Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)),
-							Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)),
+							Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)),
+							Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)),
 							txtViscGardner.getText(), txtCorGardner.getText(),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), COMMA, DOT)),
@@ -148,8 +148,9 @@ public class AmostraController implements Initializable {
 					tblAmostra.setItems(amostrasItens);
 				} else {
 					amostra.setDescricao(txtDescricao.getText());
-					amostra.setTemp(Integer.parseInt(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)));
-					amostra.setSetPoint(Integer.parseInt(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)));
+					amostra.setTemp(Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)));
+					amostra.setSetPoint(
+							Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)));
 					amostra.setIaSobreNv(
 							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)));
 					amostra.setViscGardner(txtViscGardner.getText());
@@ -247,19 +248,18 @@ public class AmostraController implements Initializable {
 					}
 				});
 		colTemp.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Amostra, Integer>, ObservableValue<Integer>>() {
-					public ObservableValue<Integer> call(CellDataFeatures<Amostra, Integer> cell) {
+				new Callback<TableColumn.CellDataFeatures<Amostra, Double>, ObservableValue<Double>>() {
+					public ObservableValue<Double> call(CellDataFeatures<Amostra, Double> cell) {
 						final Amostra a = cell.getValue();
-						final SimpleObjectProperty<Integer> simpleObject = new SimpleObjectProperty<Integer>(
-								a.getTemp());
+						final SimpleObjectProperty<Double> simpleObject = new SimpleObjectProperty<Double>(a.getTemp());
 						return simpleObject;
 					}
 				});
 		colSetPoint.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Amostra, Integer>, ObservableValue<Integer>>() {
-					public ObservableValue<Integer> call(CellDataFeatures<Amostra, Integer> cell) {
+				new Callback<TableColumn.CellDataFeatures<Amostra, Double>, ObservableValue<Double>>() {
+					public ObservableValue<Double> call(CellDataFeatures<Amostra, Double> cell) {
 						final Amostra a = cell.getValue();
-						final SimpleObjectProperty<Integer> simpleObject = new SimpleObjectProperty<Integer>(
+						final SimpleObjectProperty<Double> simpleObject = new SimpleObjectProperty<Double>(
 								a.getSetPoint());
 						return simpleObject;
 					}

@@ -31,6 +31,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -267,12 +268,12 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	private static ModbusRTUService modService = new ModbusRTUService();
 
-	private static Integer tempBalao1 = new Integer(0);
-	private static Integer tempBalao2 = new Integer(0);
-	private static Integer tempBalao3 = new Integer(0);
-	private static Integer spBalao1 = new Integer(0);
-	private static Integer spBalao2 = new Integer(0);
-	private static Integer spBalao3 = new Integer(0);
+	private static Double tempBalao1 = new Double(0);
+	private static Double tempBalao2 = new Double(0);
+	private static Double tempBalao3 = new Double(0);
+	private static Double spBalao1 = new Double(0);
+	private static Double spBalao2 = new Double(0);
+	private static Double spBalao3 = new Double(0);
 
 	private static Double tempMin1 = new Double(1900);
 	private static Double tempMax1 = new Double(0);
@@ -584,8 +585,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (isBalaoRunning1 || isBalaoReady1) {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 1", "Digite o set-point:", "");
 			if (sp != null) {
-				modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
-				lblSp1.setText(sp);
+				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
+				lblSp1.setText(sp.replace(",", "."));
 			}
 		}
 	}
@@ -595,8 +596,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (isBalaoRunning2 || isBalaoReady2) {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 2", "Digite o set-point:", "");
 			if (sp != null) {
-				modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
-				lblSp2.setText(sp);
+				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
+				lblSp2.setText(sp.replace(",", "."));
 			}
 		}
 	}
@@ -606,8 +607,8 @@ public class InicialController implements Initializable, ControlledScreen {
 		if (isBalaoRunning3 || isBalaoReady3) {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 3", "Digite o set-point:", "");
 			if (sp != null) {
-				modService.writeSingleRegister(1, 0, Integer.parseInt(sp));
-				lblSp3.setText(sp);
+				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
+				lblSp3.setText(sp.replace(",", "."));
 			}
 		}
 	}
@@ -751,16 +752,16 @@ public class InicialController implements Initializable, ControlledScreen {
 			modService.setConnectionParams(comboPorts.getValue(), 9600);
 			modService.openConnection();
 
-			Double t = modService.readMultipleRegisters(1, 0, 1);
+			tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
 			// tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			tempBalao1 = t.intValue();
+			// tempBalao1 = t.intValue();
 			lblTemp1.setText(tempBalao1.toString());
 			lblTemp2.setText(tempBalao1.toString());
 			lblTemp3.setText(tempBalao1.toString());
 
-			Double sp = modService.readMultipleRegisters(1, 0, 1);
+			spBalao1 = modService.readMultipleRegisters(1, 0, 1);
 			// spBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			spBalao1 = sp.intValue();
+			// spBalao1 = sp.intValue();
 			lblSp1.setText(spBalao1.toString());
 			lblSp2.setText(spBalao1.toString());
 			lblSp3.setText(spBalao1.toString());
@@ -917,51 +918,45 @@ public class InicialController implements Initializable, ControlledScreen {
 
 	private void calculaMinMax1() {
 		if (tempMin1 > tempBalao1) {
-			tempMin1 = tempBalao1.doubleValue();
-			Integer i = tempMin1.intValue();
-			lblTempMin1.setText(i.toString());
-			prova1.setTempMin(tempMin1.intValue());
+			tempMin1 = tempBalao1;
+			lblTempMin1.setText(tempMin1.toString());
+			prova1.setTempMin(tempMin1);
 			provaDAO.updateTemperaturaMin(prova1);
 		}
 		if (tempMax1 < tempBalao1) {
-			tempMax1 = roundToHalf(tempBalao1);
-			Integer i = tempMax1.intValue();
-			lblTempMax1.setText(i.toString());
-			prova1.setTempMax(tempMax1.intValue());
+			tempMax1 = tempBalao1;
+			lblTempMax1.setText(tempMax1.toString());
+			prova1.setTempMax(tempMax1);
 			provaDAO.updateTemperaturaMax(prova1);
 		}
 	}
 
 	private void calculaMinMax2() {
 		if (tempMin2 > tempBalao2) {
-			tempMin2 = tempBalao2.doubleValue();
-			Integer i = tempMin2.intValue();
-			lblTempMin2.setText(i.toString());
-			prova2.setTempMin(tempMin2.intValue());
+			tempMin2 = tempBalao2;
+			lblTempMin2.setText(tempMin2.toString());
+			prova2.setTempMin(tempMin2);
 			provaDAO.updateTemperaturaMin(prova2);
 		}
 		if (tempMax2 < tempBalao2) {
-			tempMax2 = roundToHalf(tempBalao2);
-			Integer i = tempMax2.intValue();
-			lblTempMax2.setText(i.toString());
-			prova2.setTempMax(tempMax2.intValue());
+			tempMax2 = tempBalao2;
+			lblTempMax2.setText(tempMax2.toString());
+			prova2.setTempMax(tempMax2);
 			provaDAO.updateTemperaturaMax(prova2);
 		}
 	}
 
 	private void calculaMinMax3() {
 		if (tempMin3 > tempBalao3) {
-			tempMin3 = tempBalao3.doubleValue();
-			Integer i = tempMin3.intValue();
-			lblTempMin3.setText(i.toString());
-			prova3.setTempMin(tempMin3.intValue());
+			tempMin3 = tempBalao3;
+			lblTempMin3.setText(tempMin3.toString());
+			prova3.setTempMin(tempMin3);
 			provaDAO.updateTemperaturaMin(prova3);
 		}
 		if (tempMax3 < tempBalao3) {
-			tempMax3 = roundToHalf(tempBalao3);
-			Integer i = tempMax3.intValue();
-			lblTempMax3.setText(i.toString());
-			prova3.setTempMax(tempMax3.intValue());
+			tempMax3 = tempBalao3;
+			lblTempMax3.setText(tempMax3.toString());
+			prova3.setTempMax(tempMax3);
 			provaDAO.updateTemperaturaMax(prova3);
 		}
 	}
@@ -1046,25 +1041,29 @@ public class InicialController implements Initializable, ControlledScreen {
 		scanModbusSlaves = new Timeline(new KeyFrame(Duration.millis(5000), new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 
-				Double t1 = modService.readMultipleRegisters(1, 0, 1);
-				tempBalao1 = t1.intValue();
-				Double t2 = modService.readMultipleRegisters(1, 0, 1);
-				tempBalao2 = t2.intValue();
-				Double t3 = modService.readMultipleRegisters(1, 0, 1);
-				tempBalao3 = t3.intValue();
+				Task<Void> readTask = new Task<Void>() {
 
-				Double sp1 = modService.readMultipleRegisters(1, 0, 1);
-				spBalao1 = sp1.intValue();
-				Double sp2 = modService.readMultipleRegisters(1, 0, 1);
-				spBalao2 = sp2.intValue();
-				Double sp3 = modService.readMultipleRegisters(1, 0, 1);
-				spBalao3 = sp3.intValue();
-
-				lblTemp1.setText(tempBalao1.toString());
-				lblTemp2.setText(tempBalao2.toString());
-				lblTemp3.setText(tempBalao3.toString());
-				// setPointReator = modService.readMultipleRegisters(slaveID, 1,
-				// 1);
+					@Override
+					protected Void call() throws Exception {
+						tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
+						tempBalao2 = modService.readMultipleRegisters(1, 0, 1);
+						tempBalao3 = modService.readMultipleRegisters(1, 0, 1);
+						spBalao1 = modService.readMultipleRegisters(1, 0, 1);
+						spBalao2 = modService.readMultipleRegisters(1, 0, 1);
+						spBalao3 = modService.readMultipleRegisters(1, 0, 1);
+						Platform.runLater(new Runnable() {
+							@Override
+							public void run() {
+								lblTemp1.setText(tempBalao1.toString());
+								lblTemp2.setText(tempBalao2.toString());
+								lblTemp3.setText(tempBalao3.toString());
+							}
+						});
+						return null;
+					}
+				};
+				Thread t = new Thread(readTask);
+				t.start();
 
 				if (isBalaoRunning1) {
 					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, spBalao1);
@@ -1132,15 +1131,15 @@ public class InicialController implements Initializable, ControlledScreen {
 		Toast.makeToast(stage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
 	}
 
-	public Integer getTemp1() {
+	public Double getTemp1() {
 		return tempBalao1;
 	}
 
-	public Integer getTemp2() {
+	public Double getTemp2() {
 		return tempBalao2;
 	}
 
-	public Integer getTemp3() {
+	public Double getTemp3() {
 		return tempBalao3;
 	}
 

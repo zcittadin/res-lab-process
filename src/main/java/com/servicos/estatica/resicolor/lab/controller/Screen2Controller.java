@@ -68,7 +68,7 @@ public class Screen2Controller implements Initializable, ControlledScreen {
 
 	}
 
-	public void plotTemp(Integer temp) {
+	public void plotTemp(Double temp) {
 		final XYChart.Data<String, Number> data = new XYChart.Data<>(dataHoraFormatter.format(LocalDateTime.now()),
 				temp);
 		Node mark = new HoverDataChart(0, temp);

@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 public class HoverDataChart extends StackPane {
 
-	public HoverDataChart(int priorValue, Integer value) {
+	public HoverDataChart(int priorValue, Double value) {
 		setPrefSize(8, 8);
 		setStyle(
 				"-fx-background-color: #8B008B; -fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 10px;");
@@ -33,7 +33,7 @@ public class HoverDataChart extends StackPane {
 		});
 	}
 
-	private Label createDataThresholdLabel(int priorValue, Integer value) {
+	private Label createDataThresholdLabel(int priorValue, Double value) {
 		final Label label = new Label(value.toString() + "ºC");
 		label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
 		label.setStyle("-fx-font-size: 14; -fx-font-weight: bold; "

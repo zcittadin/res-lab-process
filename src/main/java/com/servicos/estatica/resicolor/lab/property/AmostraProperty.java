@@ -2,39 +2,39 @@ package com.servicos.estatica.resicolor.lab.property;
 
 import com.servicos.estatica.resicolor.lab.model.Prova;
 
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class AmostraProperty {
 
-	private static SimpleIntegerProperty temp = new SimpleIntegerProperty();
-	private static SimpleIntegerProperty setPoint = new SimpleIntegerProperty();
+	private static SimpleDoubleProperty temp = new SimpleDoubleProperty();
+	private static SimpleDoubleProperty setPoint = new SimpleDoubleProperty();
 
 	private static SimpleObjectProperty<Prova> prova = new SimpleObjectProperty<Prova>();
 
 	// ========================================
-	public static SimpleIntegerProperty tempProperty() {
+	public static SimpleDoubleProperty tempProperty() {
 		return temp;
 	}
 
-	public static Integer getTemp() {
+	public static Double getTemp() {
 		return temp.get();
 	}
 
-	public final void setTemp(Integer temp) {
+	public final void setTemp(Double temp) {
 		tempProperty().set(temp);
 	}
 
 	// ========================================
-	public static SimpleIntegerProperty setPointProperty() {
+	public static SimpleDoubleProperty setPointProperty() {
 		return setPoint;
 	}
 
-	public static Integer getSetPoint() {
+	public static Double getSetPoint() {
 		return setPoint.get();
 	}
 
-	public final void setSetPoint(Integer setPoint) {
+	public final void setSetPoint(Double setPoint) {
 		setPointProperty().set(setPoint);
 	}
 
