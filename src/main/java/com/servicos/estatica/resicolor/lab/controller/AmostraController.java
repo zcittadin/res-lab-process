@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import com.servicos.estatica.resicolor.lab.dao.AmostraDAO;
 import com.servicos.estatica.resicolor.lab.model.Amostra;
 import com.servicos.estatica.resicolor.lab.property.AmostraProperty;
+import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 import com.servicos.estatica.resicolor.lab.util.NumberUtil;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,6 +25,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -126,6 +128,11 @@ public class AmostraController implements Initializable {
 
 	@FXML
 	private void saveAmostra() {
+		if (txtDescricao.getText() == null || txtDescricao.getText().trim().equals("")) {
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe uma descrição para a amostra.");
+			txtDescricao.requestFocus();
+			return;
+		}
 		Task<Void> saveTask = new Task<Void>() {
 			@SuppressWarnings("unchecked")
 			@Override

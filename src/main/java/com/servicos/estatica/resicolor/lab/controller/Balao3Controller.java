@@ -115,22 +115,22 @@ public class Balao3Controller extends BaseController {
 	@FXML
 	public void saveBalao3() {
 		if (txtProduto3.getText() == null || txtProduto3.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
 			txtProduto3.requestFocus();
 			return;
 		}
 		if (txtNumero3.getText() == null || txtNumero3.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o número do projeto.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o número do projeto.");
 			txtNumero3.requestFocus();
 			return;
 		}
 		if (txtExecutor3.getText() == null || txtExecutor3.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o executor da prova.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o executor da prova.");
 			txtExecutor3.requestFocus();
 			return;
 		}
 		if (txtObjetivo3.getText() == null || txtObjetivo3.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o objetivo da prova.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o objetivo da prova.");
 			txtObjetivo3.requestFocus();
 			return;
 		}
@@ -200,6 +200,7 @@ public class Balao3Controller extends BaseController {
 			btAddProjeto3.setDisable(false);
 			btAmostra3.setDisable(true);
 			btExcluir3.setDisable(true);
+			btPlay3.setDisable(true);
 			UsedProjetosMap.discardProjetoByBalao(Baloes.BALAO3);
 			makeToast("Prova removida com sucesso.");
 			prova3 = null;
@@ -208,7 +209,7 @@ public class Balao3Controller extends BaseController {
 
 	@FXML
 	private void changeSp3() {
-		if (isBalaoRunning3 || isBalaoReady3) {
+		if (isConnected) {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 3", "Digite o set-point:", "");
 			if (sp != null) {
 				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
@@ -242,7 +243,6 @@ public class Balao3Controller extends BaseController {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
-		UsedProjetosMap.discardProjeto(Baloes.BALAO3, projeto3);
 		imgGlass3.setImage(imgGlassFile);
 		tmlHeater3.stop();
 		chapaTransition3.stop();

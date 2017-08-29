@@ -26,6 +26,7 @@ public class UsedProjetosMap {
 		return false;
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	public static void discardProjetoByBalao(Baloes balao) {
 		Projeto p = usedProjetos.get(balao);
 		if (p != null)

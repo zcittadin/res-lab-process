@@ -16,6 +16,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -24,6 +25,10 @@ import javafx.stage.StageStyle;
 
 public class FxDialogs {
 
+	public static final String YES = "Yes";
+	public static final String NO = "No";
+	public static final String OK = "OK";
+	public static final String CANCEL = "Cancel";
 	private static DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
 	public static void showInformation(String title, String message) {
@@ -88,11 +93,6 @@ public class FxDialogs {
 
 		alert.showAndWait();
 	}
-
-	public static final String YES = "Yes";
-	public static final String NO = "No";
-	public static final String OK = "OK";
-	public static final String CANCEL = "Cancel";
 
 	public static String showConfirm(String title, String message, String... options) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -166,6 +166,13 @@ public class FxDialogs {
 			return null;
 		}
 
+	}
+	
+	public static void makeAlert(AlertType type, String title, String message) {
+		Alert alert = new Alert(type);
+		alert.setTitle(title);
+		alert.setHeaderText(message);
+		alert.showAndWait();
 	}
 
 	private static void formatNumberField(TextField txtField) {

@@ -15,11 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -57,13 +55,6 @@ public class BaseController {
 		int fadeOutTime = 600;
 		Stage stage = (Stage) tabForm.getScene().getWindow();
 		Toast.makeToast(stage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
-	}
-
-	protected void makeAlert(AlertType type, String title, String message) {
-		Alert alert = new Alert(type);
-		alert.setTitle(title);
-		alert.setHeaderText(message);
-		alert.showAndWait();
 	}
 
 	protected void disableForm(Node... nodes) {

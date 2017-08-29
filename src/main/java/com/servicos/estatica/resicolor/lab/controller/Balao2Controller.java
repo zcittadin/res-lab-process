@@ -115,22 +115,22 @@ public class Balao2Controller extends Balao3Controller {
 	@FXML
 	public void saveBalao2() {
 		if (txtProduto2.getText() == null || txtProduto2.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o produto.");
 			txtProduto2.requestFocus();
 			return;
 		}
 		if (txtNumero2.getText() == null || txtNumero2.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o número do projeto.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o número do projeto.");
 			txtNumero2.requestFocus();
 			return;
 		}
 		if (txtExecutor2.getText() == null || txtExecutor2.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o executor da prova.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o executor da prova.");
 			txtExecutor2.requestFocus();
 			return;
 		}
 		if (txtObjetivo2.getText() == null || txtObjetivo2.getText().trim().equals("")) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe o objetivo da prova.");
+			FxDialogs.makeAlert(AlertType.WARNING, "Atenção", "Informe o objetivo da prova.");
 			txtObjetivo2.requestFocus();
 			return;
 		}
@@ -200,6 +200,7 @@ public class Balao2Controller extends Balao3Controller {
 			btAddProjeto2.setDisable(false);
 			btAmostra2.setDisable(true);
 			btExcluir2.setDisable(true);
+			btPlay2.setDisable(true);
 			UsedProjetosMap.discardProjetoByBalao(Baloes.BALAO2);
 			makeToast("Prova removida com sucesso.");
 			prova2 = null;
@@ -208,7 +209,7 @@ public class Balao2Controller extends Balao3Controller {
 
 	@FXML
 	private void changeSp2() {
-		if (isBalaoRunning2 || isBalaoReady2) {
+		if (isConnected) {
 			String sp = FxDialogs.showNumericInput("Set-point", "Balão 2", "Digite o set-point:", "");
 			if (sp != null) {
 				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
@@ -242,7 +243,6 @@ public class Balao2Controller extends Balao3Controller {
 		if (result.get() != ButtonType.OK) {
 			return;
 		}
-		UsedProjetosMap.discardProjeto(Baloes.BALAO2, projeto2);
 		imgGlass2.setImage(imgGlassFile);
 		tmlHeater2.stop();
 		chapaTransition2.stop();
