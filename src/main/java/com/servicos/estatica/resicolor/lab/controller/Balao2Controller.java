@@ -201,6 +201,8 @@ public class Balao2Controller extends Balao3Controller {
 			btAmostra2.setDisable(true);
 			btExcluir2.setDisable(true);
 			btPlay2.setDisable(true);
+			ProvaProperty.provaClear2Property().set(!prova2Clear);
+			prova2Clear = !prova2Clear;
 			UsedProjetosMap.discardProjetoByBalao(Baloes.BALAO2);
 			makeToast("Prova removida com sucesso.");
 			prova2 = null;

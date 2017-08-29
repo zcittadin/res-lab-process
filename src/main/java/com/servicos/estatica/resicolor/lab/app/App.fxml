@@ -92,7 +92,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutY="267.0" mnemonicParsing="false" onAction="#openConsulta" prefHeight="37.0" prefWidth="158.0" text="Consultas">
+                  <Button layoutY="267.0" mnemonicParsing="false" onAction="#openConsulta" prefHeight="37.0" prefWidth="158.0" text="Consultas" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>

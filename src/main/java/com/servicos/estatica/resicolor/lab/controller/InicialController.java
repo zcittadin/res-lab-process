@@ -199,6 +199,9 @@ public class InicialController extends Balao1Controller implements Initializable
 								lblTemp1.setText(tempBalao1.toString());
 								lblTemp2.setText(tempBalao2.toString());
 								lblTemp3.setText(tempBalao3.toString());
+								lblSp1.setText(spBalao1.toString());
+								lblSp2.setText(spBalao2.toString());
+								lblSp3.setText(spBalao3.toString());
 							}
 						});
 						return null;

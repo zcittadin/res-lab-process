@@ -201,6 +201,8 @@ public class Balao3Controller extends BaseController {
 			btAmostra3.setDisable(true);
 			btExcluir3.setDisable(true);
 			btPlay3.setDisable(true);
+			ProvaProperty.provaClear3Property().set(!prova3Clear);
+			prova3Clear = !prova3Clear;
 			UsedProjetosMap.discardProjetoByBalao(Baloes.BALAO3);
 			makeToast("Prova removida com sucesso.");
 			prova3 = null;
@@ -284,7 +286,7 @@ public class Balao3Controller extends BaseController {
 		tempMax3 = new Double(0);
 		btAmostra3.setDisable(true);
 		btExcluir3.setDisable(true);
-		ProvaProperty.provaClear1Property().set(!prova3Clear);
+		ProvaProperty.provaClear3Property().set(!prova3Clear);
 		prova3Clear = !prova3Clear;
 
 		txtProduto3.setText(null);
