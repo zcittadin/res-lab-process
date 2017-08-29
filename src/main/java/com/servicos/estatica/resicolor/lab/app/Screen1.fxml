@@ -4,6 +4,7 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -12,7 +13,7 @@
    <children>
       <AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css">
          <children>
-            <CheckBox fx:id="chkMarcadores" layoutX="32.0" layoutY="13.0" mnemonicParsing="false" onAction="#toggleMarks" text="Visualizar marcadores" textFill="#09156f" />
+            <CheckBox fx:id="chkMarcadores" layoutX="1057.0" layoutY="14.0" mnemonicParsing="false" onAction="#toggleMarks" text="Visualizar marcadores" textFill="#09156f" />
          </children></AnchorPane>
       <Separator orientation="VERTICAL" prefHeight="664.0" />
       <LineChart fx:id="chartTemp" createSymbols="false" layoutX="14.0" layoutY="52.0" legendVisible="false" prefHeight="555.0" prefWidth="1184.0" stylesheets="@../style/style.css" title="Temperatura x tempo">
@@ -30,5 +31,10 @@
             </NumberAxis>
         </yAxis>
       </LineChart>
+      <Label layoutX="21.0" layoutY="13.0" text="Balão 1" textFill="#09156f">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
