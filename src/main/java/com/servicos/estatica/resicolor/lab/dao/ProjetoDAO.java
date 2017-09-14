@@ -1,11 +1,13 @@
 package com.servicos.estatica.resicolor.lab.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Query;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.model.Prova;
@@ -21,6 +23,17 @@ public class ProjetoDAO {
 		session.save(projeto);
 		session.getTransaction().commit();
 		session.clear();
+		session.close();
+	}
+
+	public void updateDataFinal(Projeto projeto) {
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("UPDATE Projeto set dtFinal = :dtFim WHERE id = :id");
+		query.setParameter("dtFim", Calendar.getInstance().getTime());
+		query.setParameter("id", projeto.getId());
+		query.executeUpdate();
+		tx.commit();
 		session.close();
 	}
 

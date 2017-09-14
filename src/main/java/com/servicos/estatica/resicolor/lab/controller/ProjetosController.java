@@ -24,7 +24,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,7 +31,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -72,7 +70,7 @@ public class ProjetosController implements Initializable {
 	@FXML
 	private TableColumn colDadosAdd;
 	@FXML
-	private TableColumn colExclusao;
+	private TableColumn colStatus;
 	@FXML
 	private TextField txtBuscar;
 	@FXML
@@ -287,75 +285,24 @@ public class ProjetosController implements Initializable {
 					}
 				});
 
-		Callback<TableColumn<Projeto, String>, TableCell<Projeto, String>> cellExcluirFactory = new Callback<TableColumn<Projeto, String>, TableCell<Projeto, String>>() {
-			@Override
-			public TableCell call(final TableColumn<Projeto, String> param) {
-				final TableCell<Projeto, String> cell = new TableCell<Projeto, String>() {
-
-					final Button btn = new Button();
-
-					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								Projeto projeto = getTableView().getItems().get(getIndex());
-								if (UsedProjetosMap.isProjetoUsed(projeto)) {
-									Alert alert = new Alert(AlertType.WARNING);
-									alert.setTitle("Atenção");
-									alert.setHeaderText("Existe uma prova deste projeto em andamento.");
-									alert.showAndWait();
-									ProvaProperty.setProvaProjeto(null);
-									return;
-								}
-								Alert alert = new Alert(AlertType.CONFIRMATION);
-								alert.setTitle("Confirmar cancelamento");
-								alert.setHeaderText("Os dados referentes a este processo serão perdidos. Confirmar?");
-								Optional<ButtonType> result = alert.showAndWait();
-								if (result.get() == ButtonType.OK) {
-									Task<Void> exclusionTask = new Task<Void>() {
-										@Override
-										protected Void call() throws Exception {
-											projetoDAO.removeProjeto(projeto);
-											projetos.remove(projeto);
-											ProvaProperty.setProvaProjeto(null);
-											populateTable();
-											return null;
-										}
-									};
-
-									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-										@Override
-										public void handle(WorkerStateEvent arg0) {
-											if (!projetos.isEmpty()) {
-
-											}
-										}
-									});
-									Thread t = new Thread(exclusionTask);
-									t.start();
-								}
-							});
-							Tooltip.install(btn, tooltipExcluir);
-							btn.setStyle("-fx-graphic: url('com/servicos/estatica/resicolor/lab/style/Delete.png');");
-							btn.setCursor(Cursor.HAND);
-							setGraphic(btn);
-							setText(null);
-						}
+		colStatus.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						String status;
+						if (p.getDtFinal() == null)
+							status = "Em andamento";
+						else
+							status = "Finalizado";
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(status);
+						return simpleObject;
 					}
-				};
-				return cell;
-			}
-		};
+				});
 
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				colExclusao.setCellFactory(cellExcluirFactory);
-				colExclusao.setStyle("-fx-alignment: CENTER;");
+				colStatus.setStyle("-fx-alignment: CENTER;");
 				colData.setSortType(TableColumn.SortType.DESCENDING);
 				colData.setStyle("-fx-alignment: CENTER;");
 				colTeorSolidos.setStyle("-fx-alignment: CENTER;");
@@ -412,6 +359,40 @@ public class ProjetosController implements Initializable {
 			Thread t = new Thread(exclusionTask);
 			t.start();
 		}
+	}
+
+	@FXML
+	private void finalizeProjeto() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Finalizar projeto");
+		alert.setHeaderText("Deseja realmente finalizar este projeto?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() != ButtonType.OK) {
+			return;
+		}
+		Task<Void> updateTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				projetoDAO.updateDataFinal(projeto);
+				return null;
+			}
+		};
+		updateTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				projetos.clear();
+				findProjetos();
+				tblProjetos.refresh();
+			}
+		});
+		updateTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+
+			}
+		});
+		Thread t = new Thread(updateTask);
+		t.start();
 	}
 
 	private void selectProjeto(ActionEvent event) {

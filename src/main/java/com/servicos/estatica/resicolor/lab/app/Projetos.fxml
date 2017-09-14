@@ -31,7 +31,8 @@
             <TableColumn fx:id="colTeorOh" prefWidth="93.0" text="Teor de OH" />
             <TableColumn fx:id="colPh" prefWidth="78.0" text="PH" />
             <TableColumn fx:id="colDadosAdd" prefWidth="249.0" text="Dados Adicionais" />
-            <TableColumn fx:id="colExclusao" prefWidth="94.0" text="Exclusão" />
+            <TableColumn fx:id="colStatus" prefWidth="94.0" text="Status" />
+            <TableColumn fx:id="colExclusao1" prefWidth="94.0" text="Status" />
         </columns>
       </TableView>
       <Label layoutX="125.0" layoutY="28.0" text="Localizar um projeto existente" textFill="#09156f" />
@@ -53,7 +54,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btFinalize" disable="true" layoutX="655.0" layoutY="89.0" mnemonicParsing="false" onAction="#ok" styleClass="btStyleTurnOff" stylesheets="@../style/style.css" text="Finalizar">
+      <Button fx:id="btFinalize" disable="true" layoutX="655.0" layoutY="89.0" mnemonicParsing="false" onAction="#finalizeProjeto" styleClass="btStyleTurnOff" stylesheets="@../style/style.css" text="Finalizar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
