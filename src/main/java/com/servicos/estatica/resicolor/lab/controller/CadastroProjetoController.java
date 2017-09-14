@@ -65,7 +65,7 @@ public class CadastroProjetoController implements Initializable {
 			protected Void call() throws Exception {
 				fetch(true);
 				Projeto projeto = new Projeto(null, null, txtNomeProjeto.getText(), Calendar.getInstance().getTime(),
-						txtTeorSolidos.getText(), txtViscosidade.getText(), txtCorGardner.getText(),
+						null, txtTeorSolidos.getText(), txtViscosidade.getText(), txtCorGardner.getText(),
 						txtIndiceAcidez.getText(), txtTeorOh.getText(), txtPh.getText(), txtDadosAdd.getText());
 				projetoDAO.saveProjeto(projeto);
 				return null;
@@ -78,7 +78,6 @@ public class CadastroProjetoController implements Initializable {
 				Stage stage = (Stage) txtNomeProjeto.getScene().getWindow();
 				stage.close();
 			}
-
 		});
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
@@ -107,7 +106,6 @@ public class CadastroProjetoController implements Initializable {
 		txtTeorOh.setDisable(b);
 		txtTeorSolidos.setDisable(b);
 		txtViscosidade.setDisable(b);
-
 	}
 
 }

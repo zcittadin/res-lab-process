@@ -37,6 +37,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -48,6 +49,8 @@ public class ProjetosController implements Initializable {
 
 	@FXML
 	private Rectangle rect1;
+	@FXML
+	private Rectangle rect2;
 	@FXML
 	private TableView<Projeto> tblProjetos;
 	@FXML
@@ -80,22 +83,35 @@ public class ProjetosController implements Initializable {
 	private Button btBuscar;
 	@FXML
 	private Button btOk;
+	@FXML
+	private Button btAddProjeto;
+	@FXML
+	private Button btFinalize;
+	@FXML
+	private Button btExcluir;
 
 	private static ProjetoDAO projetoDAO = new ProjetoDAO();
 	private static Projeto projeto;
 
 	private static ObservableList<Projeto> projetos = FXCollections.observableArrayList();
 
+	private static String TOOLTIP_CSS = "-fx-font-size: 8pt; -fx-font-weight: bold; -fx-font-style: normal; ";
+	private Tooltip tooltipExcluir = new Tooltip("Excluir projeto");
+	private Tooltip tooltipAdd = new Tooltip("Cadastrar novo projeto");
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		rect1.setFill(Color.TRANSPARENT);
+		rect2.setFill(Color.TRANSPARENT);
 
 		tblProjetos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if (newSelection != null) {
 				selectProjeto(null);
 			}
 		});
-
+		tooltipAdd.setStyle(TOOLTIP_CSS);
+		tooltipExcluir.setStyle(TOOLTIP_CSS);
+		Tooltip.install(btAddProjeto, tooltipAdd);
 		findProjetos();
 	}
 
@@ -201,12 +217,8 @@ public class ProjetosController implements Initializable {
 					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
 						final Projeto p = cell.getValue();
 						final SimpleObjectProperty<String> simpleObject;
-						if (p.getDtCriacao() != null) {
-							simpleObject = new SimpleObjectProperty<String>(
-									new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").format(p.getDtCriacao()));
-						} else {
-							simpleObject = new SimpleObjectProperty<String>("Em andamento");
-						}
+						simpleObject = new SimpleObjectProperty<String>(
+								new SimpleDateFormat("dd/MM/yyyy").format(p.getDtCriacao()));
 						return simpleObject;
 					}
 				});
@@ -235,7 +247,7 @@ public class ProjetosController implements Initializable {
 					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
 						final Projeto p = cell.getValue();
 						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
-								p.getViscosidade());
+								p.getCorGardner());
 						return simpleObject;
 					}
 				});
@@ -308,8 +320,6 @@ public class ProjetosController implements Initializable {
 										@Override
 										protected Void call() throws Exception {
 											projetoDAO.removeProjeto(projeto);
-											// processoDAO.removeProcesso(projeto);
-											// processos.remove(projeto);
 											projetos.remove(projeto);
 											ProvaProperty.setProvaProjeto(null);
 											populateTable();
@@ -329,7 +339,7 @@ public class ProjetosController implements Initializable {
 									t.start();
 								}
 							});
-							// Tooltip.install(btn, tooltipDelete);
+							Tooltip.install(btn, tooltipExcluir);
 							btn.setStyle("-fx-graphic: url('com/servicos/estatica/resicolor/lab/style/Delete.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
@@ -347,6 +357,7 @@ public class ProjetosController implements Initializable {
 				colExclusao.setCellFactory(cellExcluirFactory);
 				colExclusao.setStyle("-fx-alignment: CENTER;");
 				colData.setSortType(TableColumn.SortType.DESCENDING);
+				colData.setStyle("-fx-alignment: CENTER;");
 				colTeorSolidos.setStyle("-fx-alignment: CENTER;");
 				colViscosidade.setStyle("-fx-alignment: CENTER;");
 				colCorGardner.setStyle("-fx-alignment: CENTER;");
@@ -361,12 +372,58 @@ public class ProjetosController implements Initializable {
 
 	}
 
+	@FXML
+	private void removeProjeto() {
+		if (UsedProjetosMap.isProjetoUsed(projeto)) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Atenção");
+			alert.setHeaderText("Existe uma prova deste projeto em andamento.");
+			alert.showAndWait();
+			ProvaProperty.setProvaProjeto(null);
+			return;
+		}
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Excluir projeto");
+		alert.setHeaderText("Os dados referentes a este projeto serão perdidos. Confirmar?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			Task<Void> exclusionTask = new Task<Void>() {
+				@Override
+				protected Void call() throws Exception {
+					projetoDAO.removeProjeto(projeto);
+					projetos.remove(projeto);
+					ProvaProperty.setProvaProjeto(null);
+					txtSelecionado.clear();
+					btExcluir.setDisable(true);
+					btFinalize.setDisable(true);
+					populateTable();
+					return null;
+				}
+			};
+
+			exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+				@Override
+				public void handle(WorkerStateEvent arg0) {
+					if (!projetos.isEmpty()) {
+
+					}
+				}
+			});
+			Thread t = new Thread(exclusionTask);
+			t.start();
+		}
+	}
+
 	private void selectProjeto(ActionEvent event) {
 		projeto = (Projeto) tblProjetos.getSelectionModel().getSelectedItem();
 		if (projeto == null) {
+			btExcluir.setDisable(true);
+			btFinalize.setDisable(true);
 			tblProjetos.getSelectionModel().clearSelection();
 			return;
 		}
+		btExcluir.setDisable(false);
+		btFinalize.setDisable(false);
 		txtSelecionado.setText(projeto.getNome());
 		ProvaProperty.provaProjetoProperty().set(projeto);
 	}
@@ -376,8 +433,13 @@ public class ProjetosController implements Initializable {
 		progProjetos.setVisible(b);
 		btBuscar.setDisable(b);
 		btOk.setDisable(b);
+		btAddProjeto.setDisable(b);
 		txtBuscar.setDisable(b);
 		txtSelecionado.setDisable(b);
+		if (ProvaProperty.getProvaProjeto() != null) {
+			btFinalize.setDisable(b);
+			btExcluir.setDisable(b);
+		}
 	}
 
 	private void makeAlert(AlertType type, String title, String message) {

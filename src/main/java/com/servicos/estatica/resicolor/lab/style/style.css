@@ -90,3 +90,6 @@
 .btStyleVoltar {
   -fx-graphic: url('back.png');
 }
+.btStyleTurnOff {
+  -fx-graphic: url('Turnoff.png');
+}

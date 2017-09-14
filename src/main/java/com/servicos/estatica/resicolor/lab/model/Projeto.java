@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "projetos")
 public class Projeto implements Serializable {
 
-	private static final long serialVersionUID = -5703751620188252795L;
+	private static final long serialVersionUID = -2359635145603128321L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,8 @@ public class Projeto implements Serializable {
 	private String nome;
 	@Column(name = "dt_criacao")
 	private Date dtCriacao;
+	@Column(name = "dt_final")
+	private Date dtFinal;
 	@Column(name = "teor_solidos")
 	private String teorSolidos;
 	@Column(name = "viscosidade")
@@ -49,12 +51,13 @@ public class Projeto implements Serializable {
 
 	}
 
-	public Projeto(Long id, List<Prova> provas, String nome, Date dtCriacao, String teorSolidos, String viscosidade,
-			String corGardner, String indiceAcidez, String teorOh, String ph, String dadosAdd) {
+	public Projeto(Long id, List<Prova> provas, String nome, Date dtCriacao, Date dtFinal, String teorSolidos,
+			String viscosidade, String corGardner, String indiceAcidez, String teorOh, String ph, String dadosAdd) {
 		this.id = id;
 		this.provas = provas;
 		this.nome = nome;
 		this.dtCriacao = dtCriacao;
+		this.dtFinal = dtFinal;
 		this.teorSolidos = teorSolidos;
 		this.viscosidade = viscosidade;
 		this.corGardner = corGardner;
@@ -94,6 +97,14 @@ public class Projeto implements Serializable {
 
 	public void setDtCriacao(Date dtCriacao) {
 		this.dtCriacao = dtCriacao;
+	}
+
+	public Date getDtFinal() {
+		return dtFinal;
+	}
+
+	public void setDtFinal(Date dtFinal) {
+		this.dtFinal = dtFinal;
 	}
 
 	public String getTeorSolidos() {
@@ -154,10 +165,10 @@ public class Projeto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Projeto [id=" + id + ", provas=" + provas + ", nome=" + nome + ", dtCriacao=" + dtCriacao
-				+ ", teorSolidos=" + teorSolidos + ", viscosidade=" + viscosidade + ", corGardner=" + corGardner
-				+ ", indiceAcidez=" + indiceAcidez + ", teorOh=" + teorOh + ", ph=" + ph + ", dadosAdd=" + dadosAdd
-				+ "]";
+		return "Projeto [id=" + id + ", provas=" + provas + ", nome=" + nome + ", dtCriacao=" + dtCriacao + ", dtFinal="
+				+ dtFinal + ", teorSolidos=" + teorSolidos + ", viscosidade=" + viscosidade + ", corGardner="
+				+ corGardner + ", indiceAcidez=" + indiceAcidez + ", teorOh=" + teorOh + ", ph=" + ph + ", dadosAdd="
+				+ dadosAdd + "]";
 	}
 
 	@Override
