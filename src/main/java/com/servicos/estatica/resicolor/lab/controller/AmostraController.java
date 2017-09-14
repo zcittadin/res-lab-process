@@ -28,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -44,12 +45,6 @@ public class AmostraController implements Initializable {
 
 	@FXML
 	private Rectangle rectangle;
-	@FXML
-	private TextField txtHorario;
-	@FXML
-	private TextField txtTemp;
-	@FXML
-	private TextField txtSetPoint;
 	@FXML
 	private TextArea txtDescricao;
 	@FXML
@@ -96,6 +91,10 @@ public class AmostraController implements Initializable {
 	private TableColumn colDescricao;
 	@FXML
 	private Button btExcluir;
+	@FXML
+	private Label lblTemp;
+	@FXML
+	private Label lblSetPoint;
 
 	private static Amostra amostra;
 	private List<Amostra> amostras;
@@ -139,9 +138,11 @@ public class AmostraController implements Initializable {
 			@Override
 			protected Void call() throws Exception {
 				if (amostra == null) {
-					amostra = new Amostra(null, AmostraProperty.getProva(), new Date(),
-							Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)),
-							Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)),
+					amostra = new Amostra(null, AmostraProperty.getProva(), new Date(), AmostraProperty.getTemp(),
+							AmostraProperty.getSetPoint(),
+							// Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)),
+							// Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA,
+							// DOT)),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)),
 							txtViscGardner.getText(), txtCorGardner.getText(),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), COMMA, DOT)),
@@ -156,9 +157,11 @@ public class AmostraController implements Initializable {
 					tblAmostra.setItems(amostrasItens);
 				} else {
 					amostra.setDescricao(txtDescricao.getText());
-					amostra.setTemp(Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)));
-					amostra.setSetPoint(
-							Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA, DOT)));
+					// amostra.setTemp(Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(),
+					// COMMA, DOT)));
+					// amostra.setSetPoint(
+					// Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA,
+					// DOT)));
 					amostra.setIaSobreNv(
 							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)));
 					amostra.setViscGardner(txtViscGardner.getText());
@@ -232,9 +235,8 @@ public class AmostraController implements Initializable {
 	}
 
 	private void prepareFields() {
-		txtHorario.setText(dataHoraFormatter.format(LocalDateTime.now()));
-		txtTemp.setText(AmostraProperty.getTemp().toString());
-		txtSetPoint.setText(AmostraProperty.getSetPoint().toString());
+		lblTemp.setText(AmostraProperty.getTemp().toString());
+		lblSetPoint.setText(AmostraProperty.getSetPoint().toString());
 		txtDescricao.setText(null);
 		txtIAsobreNV.setText(null);
 		txtViscGardner.setText(null);

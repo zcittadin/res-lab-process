@@ -20,7 +20,7 @@
           <TableColumn fx:id="colTemp" prefWidth="85.00003051757812" resizable="false" text="°C" />
             <TableColumn fx:id="colSetPoint" prefWidth="89.0" resizable="false" text="Set-point" />
             <TableColumn fx:id="colIAsobreNV" prefWidth="91.0" resizable="false" text="IA sobre NV" />
-            <TableColumn fx:id="colViscGardner" prefWidth="97.0" resizable="false" text="Visc. Gardner" />
+            <TableColumn fx:id="colViscGardner" prefWidth="97.0" resizable="false" text="Viscosidade" />
             <TableColumn fx:id="colCorGardner" prefWidth="105.0" resizable="false" text="Cor Gardner" />
             <TableColumn fx:id="colNv" prefWidth="109.0" resizable="false" text="NV%" />
             <TableColumn fx:id="colGelTime" prefWidth="103.0" resizable="false" text="Gel time (seg)" />
@@ -31,12 +31,8 @@
         </columns>
       </TableView>
       <Rectangle fx:id="rectangle" arcHeight="40.0" arcWidth="40.0" fill="#1fc1ff" height="360.0" layoutX="223.0" layoutY="28.0" stroke="#09156f" strokeType="INSIDE" strokeWidth="2.0" width="854.0" />
-      <TextField fx:id="txtHorario" editable="false" layoutX="266.0" layoutY="83.0" />
-      <TextField fx:id="txtTemp" editable="false" layoutX="266.0" layoutY="144.0" />
-      <TextField fx:id="txtSetPoint" editable="false" layoutX="266.0" layoutY="207.0" />
-      <Label layoutX="266.0" layoutY="66.0" text="Horário:" textFill="#09156f" />
-      <Label layoutX="266.0" layoutY="128.0" text="Temperatura:" textFill="#09156f" />
-      <Label layoutX="266.0" layoutY="190.0" text="Set-point:" textFill="#09156f" />
+      <Label layoutX="257.0" layoutY="52.0" text="Temperatura:" textFill="#09156f" />
+      <Label layoutX="257.0" layoutY="128.0" text="Set-point:" textFill="#09156f" />
       <TextField fx:id="txtIAsobreNV" layoutX="518.0" layoutY="83.0" />
       <TextField fx:id="txtViscGardner" layoutX="518.0" layoutY="146.0" />
       <TextField fx:id="txtCorGardner" layoutX="517.0" layoutY="209.0" />
@@ -46,7 +42,7 @@
       <TextField fx:id="txtAmostra" layoutX="876.0" layoutY="83.0" />
       <TextField fx:id="txtPH" layoutX="876.0" layoutY="146.0" />
       <Label layoutX="518.0" layoutY="66.0" text="IA sobre NV:" textFill="#09156f" />
-      <Label layoutX="518.0" layoutY="128.0" text="Visc. Gardner:" textFill="#09156f" />
+      <Label layoutX="518.0" layoutY="128.0" text="Viscosidade" textFill="#09156f" />
       <Label layoutX="518.0" layoutY="192.0" text="Cor Gardner:" textFill="#09156f" />
       <Label layoutX="697.0" layoutY="66.0" text="NV%:" textFill="#09156f" />
       <Label layoutX="697.0" layoutY="128.0" text="Gel time (seg):" textFill="#09156f" />
@@ -82,5 +78,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="lblTemp" layoutX="256.0" layoutY="70.0" text="000,00" textFill="#09156f">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSetPoint" layoutX="256.0" layoutY="145.0" text="000,00" textFill="#09156f">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
