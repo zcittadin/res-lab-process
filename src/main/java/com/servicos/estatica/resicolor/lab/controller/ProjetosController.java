@@ -322,10 +322,7 @@ public class ProjetosController implements Initializable {
 	@FXML
 	private void removeProjeto() {
 		if (UsedProjetosMap.isProjetoUsed(projeto)) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Atenção");
-			alert.setHeaderText("Existe uma prova deste projeto em andamento.");
-			alert.showAndWait();
+			makeAlert(AlertType.WARNING, "Atenção", "Existe uma prova deste projeto em andamento.");
 			ProvaProperty.setProvaProjeto(null);
 			return;
 		}
@@ -339,6 +336,7 @@ public class ProjetosController implements Initializable {
 				protected Void call() throws Exception {
 					projetoDAO.removeProjeto(projeto);
 					projetos.remove(projeto);
+					projeto = null;
 					ProvaProperty.setProvaProjeto(null);
 					txtSelecionado.clear();
 					btExcluir.setDisable(true);
@@ -381,6 +379,11 @@ public class ProjetosController implements Initializable {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				projetos.clear();
+				projeto = null;
+				ProvaProperty.setProvaProjeto(null);
+				txtSelecionado.clear();
+				btExcluir.setDisable(true);
+				btFinalize.setDisable(true);
 				findProjetos();
 				tblProjetos.refresh();
 			}
@@ -388,7 +391,7 @@ public class ProjetosController implements Initializable {
 		updateTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-
+				makeAlert(AlertType.ERROR, "Erro", "Ocorreu uma falha ao finalizar o projeto.");
 			}
 		});
 		Thread t = new Thread(updateTask);
@@ -397,6 +400,15 @@ public class ProjetosController implements Initializable {
 
 	private void selectProjeto(ActionEvent event) {
 		projeto = (Projeto) tblProjetos.getSelectionModel().getSelectedItem();
+		if (projeto.getDtFinal() != null) {
+			makeAlert(AlertType.WARNING, "Atenção", "O projeto selecionado já foi finalizado.");
+			projeto = null;
+			ProvaProperty.setProvaProjeto(null);
+			txtSelecionado.clear();
+			btExcluir.setDisable(true);
+			btFinalize.setDisable(true);
+			return;
+		}
 		if (projeto == null) {
 			btExcluir.setDisable(true);
 			btFinalize.setDisable(true);

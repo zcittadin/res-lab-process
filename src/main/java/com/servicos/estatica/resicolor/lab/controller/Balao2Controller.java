@@ -300,6 +300,7 @@ public class Balao2Controller extends Balao3Controller {
 			UsedProjetosMap.useProjeto(Baloes.BALAO2, projeto2);
 			enableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		} else {
+			txtProjeto2.clear();
 			disableForm(txtProduto2, txtNumero2, txtExecutor2, txtObjetivo2, btSaveBalao2);
 		}
 		tempMin2 = new Double(1900);

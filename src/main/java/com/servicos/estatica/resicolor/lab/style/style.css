@@ -93,3 +93,6 @@
 .btStyleTurnOff {
   -fx-graphic: url('Turnoff.png');
 }
+.btStyleModify {
+  -fx-graphic: url('Modify.png');
+}
