@@ -4,8 +4,6 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,8 +23,8 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -101,7 +99,6 @@ public class AmostraController implements Initializable {
 	private static ObservableList<Amostra> amostrasItens = FXCollections.observableArrayList();
 	private static AmostraDAO amostraDAO = new AmostraDAO();
 
-	private static DateTimeFormatter dataHoraFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 	private static DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
 	private static String COMMA = ",";
@@ -140,9 +137,6 @@ public class AmostraController implements Initializable {
 				if (amostra == null) {
 					amostra = new Amostra(null, AmostraProperty.getProva(), new Date(), AmostraProperty.getTemp(),
 							AmostraProperty.getSetPoint(),
-							// Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(), COMMA, DOT)),
-							// Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA,
-							// DOT)),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)),
 							txtViscGardner.getText(), txtCorGardner.getText(),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), COMMA, DOT)),
@@ -157,11 +151,6 @@ public class AmostraController implements Initializable {
 					tblAmostra.setItems(amostrasItens);
 				} else {
 					amostra.setDescricao(txtDescricao.getText());
-					// amostra.setTemp(Double.parseDouble(NumberUtil.adjustDecimal(txtTemp.getText(),
-					// COMMA, DOT)));
-					// amostra.setSetPoint(
-					// Double.parseDouble(NumberUtil.adjustDecimal(txtSetPoint.getText(), COMMA,
-					// DOT)));
 					amostra.setIaSobreNv(
 							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)));
 					amostra.setViscGardner(txtViscGardner.getText());
@@ -174,7 +163,6 @@ public class AmostraController implements Initializable {
 					amostraDAO.updateAmostra(amostra);
 					tblAmostra.refresh();
 				}
-				// AmostraProperty.provaProperty().get().getAmostras().add(amostra);
 				return null;
 			}
 		};
