@@ -21,7 +21,7 @@
                <children>
                   <ImageView fx:id="imgCliente" fitHeight="70.0" fitWidth="124.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
                      <image>
-                        <Image url="@../style/resicolor.png" />
+                        <Image url="@../style/wtech.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />

@@ -18,6 +18,7 @@ import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 
 import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -28,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
@@ -55,6 +57,8 @@ public class Balao3Controller extends BaseController {
 	@FXML
 	protected TextArea txtObjetivo3;
 	@FXML
+	protected CheckBox chkBalao3;
+	@FXML
 	protected Label lblTemp3;
 	@FXML
 	protected Label lblSp3;
@@ -78,8 +82,6 @@ public class Balao3Controller extends BaseController {
 	protected Button btSaveBalao3;
 	@FXML
 	protected Button btExcluir3;
-	@FXML
-	protected Button btSp3;
 	@FXML
 	protected ImageView imgGlass3;
 	@FXML
@@ -221,6 +223,24 @@ public class Balao3Controller extends BaseController {
 	}
 
 	@FXML
+	private void toggleBalao3() {
+		if (chkBalao3.isSelected()) {
+			tempBalao3 = modService.readMultipleRegisters(3, 1, 1);
+			spBalao3 = modService.readMultipleRegisters(3, 0, 1);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					lblTemp3.setText(tempBalao3.toString());
+					lblSp3.setText(spBalao3.toString());
+				}
+			});
+		} else {
+			lblTemp3.setText("000.0");
+			lblSp3.setText("000.0");
+		}
+	}
+
+	@FXML
 	private void initProc3() {
 		provaDAO.updateDataInicial(prova3);
 		lblInicio3.setText(horaFormatter.format(LocalDateTime.now()));
@@ -229,8 +249,8 @@ public class Balao3Controller extends BaseController {
 		btExcluir3.setDisable(true);
 		imgGlass3.setImage(gifGlassFile);
 		imgMola3.setEffect(sepia3);
-		tmlHeater3.play();
 		chapaTransition3.play();
+		tmlHeater3.play();
 		chrono3.start(lblCrono3);
 		isBalaoRunning3 = true;
 		isBalaoReady3 = false;

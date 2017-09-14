@@ -18,6 +18,7 @@ import com.servicos.estatica.resicolor.lab.util.FxDialogs;
 
 import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -28,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
@@ -55,6 +57,8 @@ public class Balao2Controller extends Balao3Controller {
 	@FXML
 	protected TextArea txtObjetivo2;
 	@FXML
+	protected CheckBox chkBalao2;
+	@FXML
 	protected Label lblTemp2;
 	@FXML
 	protected Label lblSp2;
@@ -78,8 +82,6 @@ public class Balao2Controller extends Balao3Controller {
 	protected Button btSaveBalao2;
 	@FXML
 	protected Button btExcluir2;
-	@FXML
-	protected Button btSp2;
 	@FXML
 	protected ImageView imgGlass2;
 	@FXML
@@ -217,6 +219,24 @@ public class Balao2Controller extends Balao3Controller {
 				modService.writeSingleRegister(1, 0, Integer.parseInt(sp.replace(",", "")));
 				lblSp2.setText(sp.contains(",") ? sp.replace(",", ".") : sp.concat(".0"));
 			}
+		}
+	}
+
+	@FXML
+	private void toggleBalao2() {
+		if (chkBalao2.isSelected()) {
+			tempBalao2 = modService.readMultipleRegisters(2, 1, 1);
+			spBalao2 = modService.readMultipleRegisters(2, 0, 1);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					lblTemp2.setText(tempBalao2.toString());
+					lblSp2.setText(spBalao2.toString());
+				}
+			});
+		} else {
+			lblTemp2.setText("000.0");
+			lblSp2.setText("000.0");
 		}
 	}
 

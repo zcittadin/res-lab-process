@@ -182,7 +182,7 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 	}
 
 	private void initClienteInfo() {
-		imgCliente.setImage(new Image("/com/servicos/estatica/resicolor/lab/style/resicolor.png"));
+		imgCliente.setImage(new Image("/com/servicos/estatica/resicolor/lab/style/wtech.png"));
 		imgClienteResizer = new ImageViewResizer(imgCliente, 126, 70);
 		imgClienteResizer.setLayoutX(16);
 		imgClienteResizer.setLayoutY(6);

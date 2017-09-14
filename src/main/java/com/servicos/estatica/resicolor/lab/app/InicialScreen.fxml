@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -92,6 +93,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <CheckBox fx:id="chkBalao3" disable="true" layoutX="164.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#toggleBalao3" text="Habilitar" textFill="#09156f" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="pane2" layoutX="431.0" layoutY="232.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
@@ -164,6 +166,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <CheckBox fx:id="chkBalao2" disable="true" layoutX="163.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#toggleBalao2" text="Habilitar" textFill="#09156f" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="pane1" layoutX="431.0" layoutY="29.0" prefHeight="180.0" prefWidth="539.0" style="-fx-background-color: white;">
@@ -236,6 +239,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <CheckBox fx:id="chkBalao1" disable="true" layoutX="163.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#toggleBalao1" text="Habilitar" textFill="#09156f" />
          </children>
       </AnchorPane>
       <ImageView fx:id="imgNovus1" fitHeight="180.0" fitWidth="228.0" layoutX="970.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
@@ -308,30 +312,6 @@
             <Glow level="1.0" />
          </effect>
       </Label>
-      <Button fx:id="btSp1" layoutX="985.0" layoutY="162.0" mnemonicParsing="false" onAction="#changeSp1" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
-         <font>
-            <Font name="DejaVu Sans Bold" size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="btSp2" layoutX="985.0" layoutY="365.0" mnemonicParsing="false" onAction="#changeSp2" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
-         <font>
-            <Font name="DejaVu Sans Bold" size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="btSp3" layoutX="985.0" layoutY="570.0" mnemonicParsing="false" onAction="#changeSp3" prefHeight="28.0" prefWidth="29.0" text="P" textFill="#1017a1">
-         <font>
-            <Font name="DejaVu Sans Bold" size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Button fx:id="btAmostra3" disable="true" layoutX="399.0" layoutY="484.0" mnemonicParsing="false" onAction="#addOrManageAmostra3" styleClass="btStyleAmostra" stylesheets="@../style/style.css">
          <cursor>
             <Cursor fx:constant="HAND" />

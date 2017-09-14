@@ -90,6 +90,9 @@ public class InicialController extends Balao1Controller implements Initializable
 			scanModbusSlaves.stop();
 			modService.closeConnection();
 			isConnected = false;
+			chkBalao1.setDisable(true);
+			chkBalao2.setDisable(true);
+			chkBalao3.setDisable(true);
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
 			btConnect.setText("Conectar");
 			tabForm.setDisable(true);
@@ -97,25 +100,52 @@ public class InicialController extends Balao1Controller implements Initializable
 			modService.setConnectionParams(comboPorts.getValue(), 9600);
 			modService.openConnection();
 
-			tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			// tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			// tempBalao1 = t.intValue();
-			lblTemp1.setText(tempBalao1.toString());
-			lblTemp2.setText(tempBalao1.toString());
-			lblTemp3.setText(tempBalao1.toString());
-
-			spBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			// spBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			// spBalao1 = sp.intValue();
-			lblSp1.setText(spBalao1.toString());
-			lblSp2.setText(spBalao1.toString());
-			lblSp3.setText(spBalao1.toString());
+			chkBalao1.setDisable(false);
+			chkBalao2.setDisable(false);
+			chkBalao3.setDisable(false);
+			firstScan();
 
 			scanModbusSlaves.play();
 			isConnected = true;
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
 			btConnect.setText("Desconectar");
 			tabForm.setDisable(false);
+		}
+	}
+
+	private void firstScan() {
+		if (chkBalao1.isSelected()) {
+			tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
+			spBalao1 = modService.readMultipleRegisters(1, 0, 1);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					lblTemp1.setText(tempBalao1.toString());
+					lblSp1.setText(spBalao1.toString());
+				}
+			});
+		}
+		if (chkBalao2.isSelected()) {
+			tempBalao2 = modService.readMultipleRegisters(2, 1, 1);
+			spBalao2 = modService.readMultipleRegisters(2, 0, 1);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					lblTemp2.setText(tempBalao2.toString());
+					lblSp2.setText(spBalao2.toString());
+				}
+			});
+		}
+		if (chkBalao3.isSelected()) {
+			tempBalao3 = modService.readMultipleRegisters(3, 1, 1);
+			spBalao3 = modService.readMultipleRegisters(3, 0, 1);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					lblTemp3.setText(tempBalao3.toString());
+					lblSp3.setText(spBalao3.toString());
+				}
+			});
 		}
 	}
 
@@ -187,52 +217,73 @@ public class InicialController extends Balao1Controller implements Initializable
 
 					@Override
 					protected Void call() throws Exception {
-						tempBalao1 = modService.readMultipleRegisters(1, 0, 1);
-						tempBalao2 = modService.readMultipleRegisters(1, 0, 1);
-						tempBalao3 = modService.readMultipleRegisters(1, 0, 1);
-						spBalao1 = modService.readMultipleRegisters(1, 0, 1);
-						spBalao2 = modService.readMultipleRegisters(1, 0, 1);
-						spBalao3 = modService.readMultipleRegisters(1, 0, 1);
-						Platform.runLater(new Runnable() {
-							@Override
-							public void run() {
-								lblTemp1.setText(tempBalao1.toString());
-								lblTemp2.setText(tempBalao2.toString());
-								lblTemp3.setText(tempBalao3.toString());
-								lblSp1.setText(spBalao1.toString());
-								lblSp2.setText(spBalao2.toString());
-								lblSp3.setText(spBalao3.toString());
-							}
-						});
+						if (chkBalao1.isSelected()) {
+							tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
+							spBalao1 = modService.readMultipleRegisters(1, 0, 1);
+							Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
+									lblTemp1.setText(tempBalao1.toString());
+									lblSp1.setText(spBalao1.toString());
+								}
+							});
+						}
+						if (chkBalao2.isSelected()) {
+							tempBalao2 = modService.readMultipleRegisters(2, 1, 1);
+							spBalao2 = modService.readMultipleRegisters(2, 0, 1);
+							Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
+									lblTemp2.setText(tempBalao2.toString());
+									lblSp2.setText(spBalao2.toString());
+								}
+							});
+						}
+						if (chkBalao3.isSelected()) {
+							tempBalao3 = modService.readMultipleRegisters(3, 1, 1);
+							spBalao3 = modService.readMultipleRegisters(3, 0, 1);
+							Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
+									lblTemp3.setText(tempBalao3.toString());
+									lblSp3.setText(spBalao3.toString());
+								}
+							});
+						}
 						return null;
 					}
 				};
 				Thread t = new Thread(readTask);
 				t.start();
 
-				if (isBalaoRunning1) {
-					Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, spBalao1);
-					leituraDAO.saveLeitura(l);
-					prova1.getLeituras().add(l);
-					calculaMinMax1();
-					ProvaProperty.provaTemp1Property().set(!tempProva1Changed);
-					tempProva1Changed = !tempProva1Changed;
-				}
-				if (isBalaoRunning2) {
-					Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao2, spBalao2);
-					leituraDAO.saveLeitura(l);
-					prova2.getLeituras().add(l);
-					calculaMinMax2();
-					ProvaProperty.provaTemp2Property().set(!tempProva2Changed);
-					tempProva2Changed = !tempProva2Changed;
-				}
-				if (isBalaoRunning3) {
-					Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao3, spBalao3);
-					leituraDAO.saveLeitura(l);
-					prova3.getLeituras().add(l);
-					calculaMinMax3();
-					ProvaProperty.provaTemp3Property().set(!tempProva3Changed);
-					tempProva3Changed = !tempProva3Changed;
+				scanInterval++;
+
+				if (scanInterval == 24) {
+					if (isBalaoRunning1) {
+						Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, spBalao1);
+						leituraDAO.saveLeitura(l);
+						prova1.getLeituras().add(l);
+						calculaMinMax1();
+						ProvaProperty.provaTemp1Property().set(!tempProva1Changed);
+						tempProva1Changed = !tempProva1Changed;
+					}
+					if (isBalaoRunning2) {
+						Leitura l = new Leitura(null, prova2, Calendar.getInstance().getTime(), tempBalao2, spBalao2);
+						leituraDAO.saveLeitura(l);
+						prova2.getLeituras().add(l);
+						calculaMinMax2();
+						ProvaProperty.provaTemp2Property().set(!tempProva2Changed);
+						tempProva2Changed = !tempProva2Changed;
+					}
+					if (isBalaoRunning3) {
+						Leitura l = new Leitura(null, prova3, Calendar.getInstance().getTime(), tempBalao3, spBalao3);
+						leituraDAO.saveLeitura(l);
+						prova3.getLeituras().add(l);
+						calculaMinMax3();
+						ProvaProperty.provaTemp3Property().set(!tempProva3Changed);
+						tempProva3Changed = !tempProva3Changed;
+					}
+					scanInterval = 0;
 				}
 			}
 		}));

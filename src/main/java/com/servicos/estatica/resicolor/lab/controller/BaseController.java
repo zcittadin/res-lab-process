@@ -48,6 +48,8 @@ public class BaseController {
 	protected static LeituraDAO leituraDAO = new LeituraDAO();
 	protected static DateTimeFormatter horaFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
+	protected int scanInterval = 0;
+	
 	protected void makeToast(String message) {
 		String toastMsg = message;
 		int toastMsgTime = 5000;
