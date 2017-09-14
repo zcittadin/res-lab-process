@@ -1,8 +1,8 @@
 package com.servicos.estatica.resicolor.lab.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -22,8 +22,11 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -36,6 +39,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -45,27 +49,35 @@ public class ProjetosController implements Initializable {
 	@FXML
 	private Rectangle rect1;
 	@FXML
-	private Rectangle rect2;
-	@FXML
 	private TableView<Projeto> tblProjetos;
 	@FXML
 	private TableColumn colNome;
 	@FXML
 	private TableColumn colData;
 	@FXML
+	private TableColumn colTeorSolidos;
+	@FXML
+	private TableColumn colViscosidade;
+	@FXML
+	private TableColumn colCorGardner;
+	@FXML
+	private TableColumn colIndiceAcidez;
+	@FXML
+	private TableColumn colTeorOh;
+	@FXML
+	private TableColumn colPh;
+	@FXML
+	private TableColumn colDadosAdd;
+	@FXML
 	private TableColumn colExclusao;
 	@FXML
 	private TextField txtBuscar;
-	@FXML
-	private TextField txtNovo;
 	@FXML
 	private TextField txtSelecionado;
 	@FXML
 	private ProgressIndicator progProjetos;
 	@FXML
 	private Button btBuscar;
-	@FXML
-	private Button btSalvar;
 	@FXML
 	private Button btOk;
 
@@ -77,7 +89,6 @@ public class ProjetosController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		rect1.setFill(Color.TRANSPARENT);
-		rect2.setFill(Color.TRANSPARENT);
 
 		tblProjetos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if (newSelection != null) {
@@ -89,40 +100,19 @@ public class ProjetosController implements Initializable {
 	}
 
 	@FXML
-	private void saveProjeto(ActionEvent event) {
+	private void addProjeto() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/CadastroProjeto.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Novo projeto");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(tblProjetos.getScene().getWindow());
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
 
-		if (txtNovo.getText() == null || "".equals(txtNovo.getText().trim())) {
-			makeAlert(AlertType.WARNING, "Atenção", "Informe um nome para o novo projeto.");
-			txtNovo.requestFocus();
-			return;
-		}
-		fetch(true);
-		Task<Void> saveTask = new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
-				projeto = new Projeto(null, null, txtNovo.getText(), Calendar.getInstance().getTime());
-				projetoDAO.saveProjeto(projeto);
-				return null;
-			}
-		};
-		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-			@Override
-			public void handle(WorkerStateEvent arg0) {
-				fetch(false);
-				txtNovo.setText(null);
-				projetos.add(projeto);
-				populateTable();
-			}
-		});
-		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
-			@Override
-			public void handle(WorkerStateEvent arg0) {
-				fetch(false);
-				makeAlert(AlertType.ERROR, "Erro", "Ocorreu uma falha ao salvar o projeto.");
-			}
-		});
-		Thread t = new Thread(saveTask);
-		t.start();
+		findProjetos();
 	}
 
 	@FXML
@@ -221,6 +211,70 @@ public class ProjetosController implements Initializable {
 					}
 				});
 
+		colTeorSolidos.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								p.getTeorSolidos());
+						return simpleObject;
+					}
+				});
+
+		colViscosidade.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								p.getViscosidade());
+						return simpleObject;
+					}
+				});
+		colCorGardner.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								p.getViscosidade());
+						return simpleObject;
+					}
+				});
+		colIndiceAcidez.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								p.getIndiceAcidez());
+						return simpleObject;
+					}
+				});
+		colTeorOh.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								p.getTeorOh());
+						return simpleObject;
+					}
+				});
+		colPh.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(p.getPh());
+						return simpleObject;
+					}
+				});
+		colDadosAdd.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Projeto, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Projeto, String> cell) {
+						final Projeto p = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								p.getDadosAdd());
+						return simpleObject;
+					}
+				});
+
 		Callback<TableColumn<Projeto, String>, TableCell<Projeto, String>> cellExcluirFactory = new Callback<TableColumn<Projeto, String>, TableCell<Projeto, String>>() {
 			@Override
 			public TableCell call(final TableColumn<Projeto, String> param) {
@@ -293,7 +347,14 @@ public class ProjetosController implements Initializable {
 				colExclusao.setCellFactory(cellExcluirFactory);
 				colExclusao.setStyle("-fx-alignment: CENTER;");
 				colData.setSortType(TableColumn.SortType.DESCENDING);
-				tblProjetos.getSortOrder().add(colData);
+				colTeorSolidos.setStyle("-fx-alignment: CENTER;");
+				colViscosidade.setStyle("-fx-alignment: CENTER;");
+				colCorGardner.setStyle("-fx-alignment: CENTER;");
+				colIndiceAcidez.setStyle("-fx-alignment: CENTER;");
+				colTeorOh.setStyle("-fx-alignment: CENTER;");
+				colPh.setStyle("-fx-alignment: CENTER;");
+				colDadosAdd.setStyle("-fx-alignment: CENTER;");
+				tblProjetos.setStyle("-fx-alignment: CENTER;");
 
 			}
 		});
@@ -314,10 +375,8 @@ public class ProjetosController implements Initializable {
 		tblProjetos.setDisable(b);
 		progProjetos.setVisible(b);
 		btBuscar.setDisable(b);
-		btSalvar.setDisable(b);
 		btOk.setDisable(b);
 		txtBuscar.setDisable(b);
-		txtNovo.setDisable(b);
 		txtSelecionado.setDisable(b);
 	}
 
