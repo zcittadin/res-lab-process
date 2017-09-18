@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -23,8 +24,9 @@ public class App extends Application {
 
 		Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(root));
-		stage.setTitle("Resicolor - Divisão de resinas");
+		stage.setTitle("Wtech - Divisão de resinas");
 		stage.setMaximized(true);
+		stage.getIcons().add(new Image("/com/servicos/estatica/resicolor/lab/style/256_colors.png"));
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
