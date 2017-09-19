@@ -25,7 +25,7 @@ public class App extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Wtech - Divisão de resinas");
-		stage.setMaximized(true);
+		stage.setMaximized(false);
 		stage.getIcons().add(new Image("/com/servicos/estatica/resicolor/lab/style/256_colors.png"));
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
