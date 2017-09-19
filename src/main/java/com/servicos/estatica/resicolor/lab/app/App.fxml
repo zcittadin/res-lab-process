@@ -101,6 +101,14 @@
                      </cursor>
                   </Button>
                   <Clock fx:id="clock" layoutX="11.0" layoutY="21.0" lcdDesign="BLUE" prefHeight="60.0" prefWidth="136.0" running="true" secondsVisible="true" skinType="LCD" />
+                  <Button layoutY="267.0" mnemonicParsing="false" onAction="#openAmostras" prefHeight="37.0" prefWidth="158.0" text="Amostras">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children></AnchorPane>
          </left>
          <center>

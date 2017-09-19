@@ -43,6 +43,8 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 	public static String screen3File = "/com/servicos/estatica/resicolor/lab/app/Screen3.fxml";
 	public static String screenConsultaID = "Consulta";
 	public static String screenConsultaFile = "/com/servicos/estatica/resicolor/lab/app/Consulta.fxml";
+	public static String screenAmostrasID = "Amostra";
+	public static String screenAmostrasFile = "/com/servicos/estatica/resicolor/lab/app/AmostraEdicao.fxml";
 
 	@FXML
 	private AnchorPane mainPane;
@@ -64,6 +66,7 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 	private Screen1Controller screen1Controller = new Screen1Controller();
 	private Screen2Controller screen2Controller = new Screen2Controller();
 	private Screen3Controller screen3Controller = new Screen3Controller();
+	private AmostraEdicaoController amostraEdicaoController = new AmostraEdicaoController();
 
 	ScreensController mainContainer = new ScreensController();
 
@@ -98,6 +101,11 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 	@FXML
 	private void openConsulta() {
 		mainContainer.setScreen(screenConsultaID);
+	}
+
+	@FXML
+	private void openAmostras() {
+		mainContainer.setScreen(screenAmostrasID);
 	}
 
 	@FXML
@@ -175,6 +183,7 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 		mainContainer.loadScreenAndController(screen1ID, screen1File, screen1Controller);
 		mainContainer.loadScreenAndController(screen2ID, screen2File, screen2Controller);
 		mainContainer.loadScreenAndController(screen3ID, screen3File, screen3Controller);
+		mainContainer.loadScreenAndController(screenAmostrasID, screenAmostrasFile, amostraEdicaoController);
 		mainContainer.loadScreen(screenConsultaID, screenConsultaFile);
 		CurrentScreenProperty.setScreen(screenInicialID);
 		mainContainer.setScreen(screenInicialID);
