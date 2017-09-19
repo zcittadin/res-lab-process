@@ -90,21 +90,28 @@ public class InicialController extends Balao1Controller implements Initializable
 			scanModbusSlaves.stop();
 			modService.closeConnection();
 			isConnected = false;
+			chkBalao1.setSelected(false);
+			chkBalao2.setSelected(false);
+			chkBalao3.setSelected(false);
 			chkBalao1.setDisable(true);
 			chkBalao2.setDisable(true);
 			chkBalao3.setDisable(true);
+			lblTemp1.setText("000.0");
+			lblSp1.setText("000.0");
+			lblTemp2.setText("000.0");
+			lblSp2.setText("000.0");
+			lblTemp3.setText("000.0");
+			lblSp3.setText("000.0");
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/disconnect.png');");
 			btConnect.setText("Conectar");
 			tabForm.setDisable(true);
 		} else {
 			modService.setConnectionParams(comboPorts.getValue(), 9600);
 			modService.openConnection();
-
 			chkBalao1.setDisable(false);
 			chkBalao2.setDisable(false);
 			chkBalao3.setDisable(false);
 			firstScan();
-
 			scanModbusSlaves.play();
 			isConnected = true;
 			btConnect.setStyle("-fx-graphic: url('/com/servicos/estatica/resicolor/lab/style/connect.png');");
@@ -217,7 +224,7 @@ public class InicialController extends Balao1Controller implements Initializable
 
 					@Override
 					protected Void call() throws Exception {
-						if (chkBalao1.isSelected()) {
+						if (chkBalao1.isSelected() && CONNECTED_1) {
 							tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
 							spBalao1 = modService.readMultipleRegisters(1, 0, 1);
 							Platform.runLater(new Runnable() {
@@ -228,7 +235,7 @@ public class InicialController extends Balao1Controller implements Initializable
 								}
 							});
 						}
-						if (chkBalao2.isSelected()) {
+						if (chkBalao2.isSelected() && CONNECTED_2) {
 							tempBalao2 = modService.readMultipleRegisters(2, 1, 1);
 							spBalao2 = modService.readMultipleRegisters(2, 0, 1);
 							Platform.runLater(new Runnable() {
@@ -239,7 +246,7 @@ public class InicialController extends Balao1Controller implements Initializable
 								}
 							});
 						}
-						if (chkBalao3.isSelected()) {
+						if (chkBalao3.isSelected() && CONNECTED_3) {
 							tempBalao3 = modService.readMultipleRegisters(3, 1, 1);
 							spBalao3 = modService.readMultipleRegisters(3, 0, 1);
 							Platform.runLater(new Runnable() {

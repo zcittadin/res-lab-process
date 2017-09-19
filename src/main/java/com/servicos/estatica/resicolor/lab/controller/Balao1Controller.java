@@ -225,16 +225,27 @@ public class Balao1Controller extends Balao2Controller {
 	@FXML
 	private void toggleBalao1() {
 		if (chkBalao1.isSelected()) {
-			tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
-			spBalao1 = modService.readMultipleRegisters(1, 0, 1);
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					lblTemp1.setText(tempBalao1.toString());
-					lblSp1.setText(spBalao1.toString());
-				}
-			});
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Atenção");
+			alert.setHeaderText("Antes de continuar certifique-se que o controlador de temperatura está ligado.");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() != ButtonType.OK) {
+				chkBalao1.setSelected(false);
+				return;
+			} else {
+				CONNECTED_1 = true;
+				tempBalao1 = modService.readMultipleRegisters(1, 1, 1);
+				spBalao1 = modService.readMultipleRegisters(1, 0, 1);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						lblTemp1.setText(tempBalao1.toString());
+						lblSp1.setText(spBalao1.toString());
+					}
+				});
+			}
 		} else {
+			CONNECTED_1 = false;
 			lblTemp1.setText("000.0");
 			lblSp1.setText("000.0");
 		}
