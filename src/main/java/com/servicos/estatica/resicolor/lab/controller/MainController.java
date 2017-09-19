@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.resicolor.lab.property.CurrentScreenProperty;
+import com.servicos.estatica.resicolor.lab.property.EnsaioStatusManager;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 import com.servicos.estatica.resicolor.lab.util.EstaticaInfoUtil;
 
@@ -124,6 +125,8 @@ public class MainController extends EstaticaInfoUtil implements Initializable {
 
 	@FXML
 	private void exit() {
+		if (EnsaioStatusManager.verifyProvaRunning())
+			return;
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar encerramento");
 		alert.setHeaderText("Deseja realmente sair do sistema?");

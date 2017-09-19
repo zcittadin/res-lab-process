@@ -37,6 +37,10 @@ public class BaseController {
 	protected ComboBox<String> comboPorts;
 	@FXML
 	protected Button btConnect;
+	
+	protected static  String PROVA_1_KEY = "prova1";
+	protected static  String PROVA_2_KEY = "prova2";
+	protected static  String PROVA_3_KEY = "prova3";
 
 	protected static Image gifGlassFile = new Image("/com/servicos/estatica/resicolor/lab/style/glass.gif");
 	protected static Image imgGlassFile = new Image("/com/servicos/estatica/resicolor/lab/style/glass.png");

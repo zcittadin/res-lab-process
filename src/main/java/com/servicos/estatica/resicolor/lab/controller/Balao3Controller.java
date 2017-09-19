@@ -10,6 +10,7 @@ import com.servicos.estatica.resicolor.lab.model.Leitura;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.property.AmostraProperty;
+import com.servicos.estatica.resicolor.lab.property.EnsaioStatusManager;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 import com.servicos.estatica.resicolor.lab.property.UsedProjetosMap;
 import com.servicos.estatica.resicolor.lab.util.Baloes;
@@ -254,6 +255,7 @@ public class Balao3Controller extends BaseController {
 		chrono3.start(lblCrono3);
 		isBalaoRunning3 = true;
 		isBalaoReady3 = false;
+		EnsaioStatusManager.setProvaStatus(PROVA_3_KEY, true);
 	}
 
 	@FXML
@@ -278,6 +280,7 @@ public class Balao3Controller extends BaseController {
 		isBalaoRunning3 = false;
 		isBalaoFinished3 = true;
 		provaDAO.updateDataFinal(prova3);
+		EnsaioStatusManager.setProvaStatus(PROVA_3_KEY, false);
 		makeToast("Balão 3: Prova encerrada.");
 	}
 

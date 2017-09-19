@@ -2,6 +2,7 @@ package com.servicos.estatica.resicolor.lab.app;
 
 import java.util.Optional;
 
+import com.servicos.estatica.resicolor.lab.property.EnsaioStatusManager;
 import com.servicos.estatica.resicolor.lab.util.HibernateUtil;
 
 import javafx.application.Application;
@@ -31,8 +32,8 @@ public class App extends Application {
 			@Override
 			public void handle(WindowEvent event) {
 				event.consume();
-				// if (ProcessoStatusManager.verifyProcessoRunning())
-				// return;
+				if (EnsaioStatusManager.verifyProvaRunning())
+					return;
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Confirmar encerramento");
 				alert.setHeaderText("Deseja realmente sair do sistema?");

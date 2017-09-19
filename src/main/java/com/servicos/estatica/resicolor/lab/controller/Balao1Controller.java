@@ -10,6 +10,7 @@ import com.servicos.estatica.resicolor.lab.model.Leitura;
 import com.servicos.estatica.resicolor.lab.model.Projeto;
 import com.servicos.estatica.resicolor.lab.model.Prova;
 import com.servicos.estatica.resicolor.lab.property.AmostraProperty;
+import com.servicos.estatica.resicolor.lab.property.EnsaioStatusManager;
 import com.servicos.estatica.resicolor.lab.property.ProvaProperty;
 import com.servicos.estatica.resicolor.lab.property.UsedProjetosMap;
 import com.servicos.estatica.resicolor.lab.util.Baloes;
@@ -27,6 +28,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -34,7 +36,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.ImageView;
@@ -254,6 +255,7 @@ public class Balao1Controller extends Balao2Controller {
 		chrono1.start(lblCrono1);
 		isBalaoRunning1 = true;
 		isBalaoReady1 = false;
+		EnsaioStatusManager.setProvaStatus(PROVA_1_KEY, true);
 	}
 
 	@FXML
@@ -278,6 +280,7 @@ public class Balao1Controller extends Balao2Controller {
 		isBalaoRunning1 = false;
 		isBalaoFinished1 = true;
 		provaDAO.updateDataFinal(prova1);
+		EnsaioStatusManager.setProvaStatus(PROVA_1_KEY, false);
 		makeToast("Balão 1: Prova encerrada.");
 	}
 
