@@ -160,7 +160,6 @@ public class Balao1Controller extends Balao2Controller {
 			public void handle(WorkerStateEvent arg0) {
 				prog1.setVisible(false);
 				btPlay1.setDisable(false);
-				btAmostra1.setDisable(false);
 				btExcluir1.setDisable(false);
 				isBalaoReady1 = true;
 				makeToast("Prova registrada com sucesso.");
@@ -246,6 +245,7 @@ public class Balao1Controller extends Balao2Controller {
 		lblInicio1.setText(horaFormatter.format(LocalDateTime.now()));
 		btPlay1.setDisable(true);
 		btStop1.setDisable(false);
+		btAmostra1.setDisable(false);
 		btExcluir1.setDisable(true);
 		imgGlass1.setImage(gifGlassFile);
 		imgMola1.setEffect(sepia1);

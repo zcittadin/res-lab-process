@@ -17,9 +17,9 @@
       <TableView fx:id="tblAmostra" layoutX="37.0" layoutY="427.0" onMouseClicked="#selectAmostra" prefHeight="211.0" prefWidth="1226.0">
         <columns>
           <TableColumn fx:id="colHora" prefWidth="91.99996948242188" resizable="false" text="Hora" />
-          <TableColumn fx:id="colTemp" prefWidth="85.00003051757812" resizable="false" text="°C" />
-            <TableColumn fx:id="colSetPoint" prefWidth="89.0" resizable="false" text="Set-point" />
-            <TableColumn fx:id="colIAsobreNV" prefWidth="91.0" resizable="false" text="IA sobre NV" />
+          <TableColumn fx:id="colTemp" prefWidth="67.0" resizable="false" text="°C" />
+            <TableColumn fx:id="colSetPoint" prefWidth="81.0" resizable="false" text="Set-point" />
+            <TableColumn fx:id="colIAsobreNV" prefWidth="118.0" resizable="false" text="Índice de acidez" />
             <TableColumn fx:id="colViscGardner" prefWidth="97.0" resizable="false" text="Viscosidade" />
             <TableColumn fx:id="colCorGardner" prefWidth="105.0" resizable="false" text="Cor Gardner" />
             <TableColumn fx:id="colNv" prefWidth="109.0" resizable="false" text="NV%" />
@@ -41,8 +41,8 @@
       <TextField fx:id="txtAgua" layoutX="697.0" layoutY="209.0" />
       <TextField fx:id="txtAmostra" layoutX="876.0" layoutY="83.0" />
       <TextField fx:id="txtPH" layoutX="876.0" layoutY="146.0" />
-      <Label layoutX="518.0" layoutY="66.0" text="IA sobre NV:" textFill="#09156f" />
-      <Label layoutX="518.0" layoutY="128.0" text="Viscosidade" textFill="#09156f" />
+      <Label layoutX="518.0" layoutY="66.0" text="Índice de acidez:" textFill="#09156f" />
+      <Label layoutX="518.0" layoutY="128.0" text="Viscosidade:" textFill="#09156f" />
       <Label layoutX="518.0" layoutY="192.0" text="Cor Gardner:" textFill="#09156f" />
       <Label layoutX="697.0" layoutY="66.0" text="NV%:" textFill="#09156f" />
       <Label layoutX="697.0" layoutY="128.0" text="Gel time (seg):" textFill="#09156f" />

@@ -160,7 +160,6 @@ public class Balao3Controller extends BaseController {
 			public void handle(WorkerStateEvent arg0) {
 				prog3.setVisible(false);
 				btPlay3.setDisable(false);
-				btAmostra3.setDisable(false);
 				btExcluir3.setDisable(false);
 				isBalaoReady3 = true;
 				makeToast("Prova registrada com sucesso.");
@@ -247,6 +246,7 @@ public class Balao3Controller extends BaseController {
 		btPlay3.setDisable(true);
 		btStop3.setDisable(false);
 		btExcluir3.setDisable(true);
+		btAmostra3.setDisable(false);
 		imgGlass3.setImage(gifGlassFile);
 		imgMola3.setEffect(sepia3);
 		chapaTransition3.play();
