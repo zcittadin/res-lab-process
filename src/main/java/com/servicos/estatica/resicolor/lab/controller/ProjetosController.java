@@ -401,13 +401,41 @@ public class ProjetosController implements Initializable {
 	private void selectProjeto(ActionEvent event) {
 		projeto = (Projeto) tblProjetos.getSelectionModel().getSelectedItem();
 		if (projeto.getDtFinal() != null) {
-			makeAlert(AlertType.WARNING, "Atenção", "O projeto selecionado já foi finalizado.");
-			projeto = null;
-			ProvaProperty.setProvaProjeto(null);
-			txtSelecionado.clear();
-			btExcluir.setDisable(true);
-			btFinalize.setDisable(true);
-			return;
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Status do projeto");
+			alert.setHeaderText("O projeto selecionado já foi finalizado. Deseja reabrir este projeto?");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				Task<Void> reopenTask = new Task<Void>() {
+					@Override
+					protected Void call() throws Exception {
+						projetoDAO.reopenProjeto(projeto);
+						return null;
+					}
+				};
+				reopenTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+					@Override
+					public void handle(WorkerStateEvent arg0) {
+						projetos.clear();
+						findProjetos();
+						tblProjetos.refresh();
+					}
+				});
+				reopenTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+					@Override
+					public void handle(WorkerStateEvent arg0) {
+						makeAlert(AlertType.WARNING, "Erro", "Ocorreu uma falha ao reabrir o projeto.");
+					}
+				});
+				new Thread(reopenTask).start();
+			} else {
+				projeto = null;
+				ProvaProperty.setProvaProjeto(null);
+				txtSelecionado.clear();
+				btExcluir.setDisable(true);
+				btFinalize.setDisable(true);
+				return;
+			}
 		}
 		if (projeto == null) {
 			btExcluir.setDisable(true);

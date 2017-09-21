@@ -37,6 +37,17 @@ public class ProjetoDAO {
 		session.close();
 	}
 
+	public void reopenProjeto(Projeto projeto) {
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("UPDATE Projeto set dtFinal = :dtFim WHERE id = :id");
+		query.setParameter("dtFim", null);
+		query.setParameter("id", projeto.getId());
+		query.executeUpdate();
+		tx.commit();
+		session.close();
+	}
+
 	public void removeProjeto(Projeto projeto) {
 		removeChildren(projeto);
 		Session session = HibernateUtil.openSession();
