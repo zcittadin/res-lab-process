@@ -265,7 +265,7 @@ public class InicialController extends Balao1Controller implements Initializable
 
 				scanInterval++;
 
-				if (scanInterval == 24) { // Registro de leitura com intervalo de 2 minutos
+				if (scanInterval == 24) { // Registro de leitura com intervalo de 2 minutos (24)
 					if (isBalaoRunning1) {
 						Leitura l = new Leitura(null, prova1, Calendar.getInstance().getTime(), tempBalao1, spBalao1);
 						leituraDAO.saveLeitura(l);
