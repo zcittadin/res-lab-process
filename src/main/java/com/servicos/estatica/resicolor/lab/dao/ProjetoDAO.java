@@ -26,6 +26,15 @@ public class ProjetoDAO {
 		session.close();
 	}
 
+	public void updateProjeto(Projeto projeto) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		session.update(projeto);
+		session.getTransaction().commit();
+		session.clear();
+		session.close();
+	}
+
 	public void updateDataFinal(Projeto projeto) {
 		Session session = HibernateUtil.openSession();
 		Transaction tx = session.beginTransaction();

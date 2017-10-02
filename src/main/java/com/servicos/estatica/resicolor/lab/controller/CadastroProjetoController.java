@@ -44,10 +44,23 @@ public class CadastroProjetoController implements Initializable {
 	private Button btSalvar;
 
 	private static ProjetoDAO projetoDAO = new ProjetoDAO();
+	private Projeto projeto;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+	}
+
+	public void setContext(Projeto p) {
+		this.projeto = p;
+		txtNomeProjeto.setText(projeto.getNome());
+		txtTeorSolidos.setText(projeto.getTeorSolidos());
+		txtViscosidade.setText(projeto.getViscosidade());
+		txtCorGardner.setText(projeto.getCorGardner());
+		txtIndiceAcidez.setText(projeto.getIndiceAcidez());
+		txtTeorOh.setText(projeto.getTeorOh());
+		txtPh.setText(projeto.getPh());
+		txtDadosAdd.setText(projeto.getDadosAdd());
 	}
 
 	@FXML
@@ -64,10 +77,23 @@ public class CadastroProjetoController implements Initializable {
 			@Override
 			protected Void call() throws Exception {
 				fetch(true);
-				Projeto projeto = new Projeto(null, null, txtNomeProjeto.getText(), Calendar.getInstance().getTime(),
-						null, txtTeorSolidos.getText(), txtViscosidade.getText(), txtCorGardner.getText(),
-						txtIndiceAcidez.getText(), txtTeorOh.getText(), txtPh.getText(), txtDadosAdd.getText());
-				projetoDAO.saveProjeto(projeto);
+				if (projeto == null) {
+					Projeto projeto = new Projeto(null, null, txtNomeProjeto.getText(),
+							Calendar.getInstance().getTime(), null, txtTeorSolidos.getText(), txtViscosidade.getText(),
+							txtCorGardner.getText(), txtIndiceAcidez.getText(), txtTeorOh.getText(), txtPh.getText(),
+							txtDadosAdd.getText());
+					projetoDAO.saveProjeto(projeto);
+				} else {
+					projeto.setNome(txtNomeProjeto.getText());
+					projeto.setCorGardner(txtCorGardner.getText());
+					projeto.setDadosAdd(txtDadosAdd.getText());
+					projeto.setIndiceAcidez(txtIndiceAcidez.getText());
+					projeto.setPh(txtPh.getText());
+					projeto.setTeorOh(txtTeorOh.getText());
+					projeto.setTeorSolidos(txtTeorSolidos.getText());
+					projeto.setViscosidade(txtViscosidade.getText());
+					projetoDAO.updateProjeto(projeto);
+				}
 				return null;
 			}
 		};

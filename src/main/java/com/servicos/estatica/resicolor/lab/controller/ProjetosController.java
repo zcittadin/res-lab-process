@@ -24,6 +24,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -87,6 +88,8 @@ public class ProjetosController implements Initializable {
 	private Button btFinalize;
 	@FXML
 	private Button btExcluir;
+	@FXML
+	private Button btEditar;
 
 	private static ProjetoDAO projetoDAO = new ProjetoDAO();
 	private static Projeto projeto;
@@ -119,6 +122,28 @@ public class ProjetosController implements Initializable {
 		Parent root;
 		stage = new Stage();
 		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/resicolor/lab/app/CadastroProjeto.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Novo projeto");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(tblProjetos.getScene().getWindow());
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
+
+		findProjetos();
+	}
+	
+	@FXML
+	private void editProjeto() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		URL url = getClass()
+				.getResource("/com/servicos/estatica/resicolor/lab/app/CadastroProjeto.fxml");
+		FXMLLoader fxmlloader = new FXMLLoader();
+		fxmlloader.setLocation(url);
+		fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
+		root = (Parent) fxmlloader.load(url.openStream());
+		((CadastroProjetoController) fxmlloader.getController()).setContext(projeto);
 		stage.setScene(new Scene(root));
 		stage.setTitle("Novo projeto");
 		stage.initModality(Modality.APPLICATION_MODAL);
@@ -183,6 +208,7 @@ public class ProjetosController implements Initializable {
 			public void handle(WorkerStateEvent arg0) {
 				fetch(false);
 				populateTable();
+				tblProjetos.refresh();
 			}
 		});
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -341,6 +367,7 @@ public class ProjetosController implements Initializable {
 					txtSelecionado.clear();
 					btExcluir.setDisable(true);
 					btFinalize.setDisable(true);
+					btEditar.setDisable(true);
 					populateTable();
 					return null;
 				}
@@ -434,15 +461,18 @@ public class ProjetosController implements Initializable {
 				txtSelecionado.clear();
 				btExcluir.setDisable(true);
 				btFinalize.setDisable(true);
+				btEditar.setDisable(true);
 				return;
 			}
 		}
 		if (projeto == null) {
+			btEditar.setDisable(true);
 			btExcluir.setDisable(true);
 			btFinalize.setDisable(true);
 			tblProjetos.getSelectionModel().clearSelection();
 			return;
 		}
+		btEditar.setDisable(false);
 		btExcluir.setDisable(false);
 		btFinalize.setDisable(false);
 		txtSelecionado.setText(projeto.getNome());
@@ -460,6 +490,7 @@ public class ProjetosController implements Initializable {
 		if (ProvaProperty.getProvaProjeto() != null) {
 			btFinalize.setDisable(b);
 			btExcluir.setDisable(b);
+			btEditar.setDisable(b);
 		}
 	}
 
