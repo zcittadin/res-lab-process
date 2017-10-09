@@ -140,7 +140,7 @@ public class AmostraController implements Initializable {
 							Double.parseDouble(NumberUtil.adjustDecimal(txtIAsobreNV.getText(), COMMA, DOT)),
 							txtViscGardner.getText(), txtCorGardner.getText(),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), COMMA, DOT)),
-							Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText(), COMMA, DOT)),
+							txtGelTime.getText(),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText(), COMMA, DOT)),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText(), COMMA, DOT)),
 							Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText(), COMMA, DOT)),
@@ -156,7 +156,7 @@ public class AmostraController implements Initializable {
 					amostra.setViscGardner(txtViscGardner.getText());
 					amostra.setCorGardner(txtCorGardner.getText());
 					amostra.setPercentualNv(Double.parseDouble(NumberUtil.adjustDecimal(txtNV.getText(), COMMA, DOT)));
-					amostra.setGelTime(Integer.parseInt(NumberUtil.adjustDecimal(txtGelTime.getText(), COMMA, DOT)));
+					amostra.setGelTime(txtGelTime.getText());
 					amostra.setAgua(Double.parseDouble(NumberUtil.adjustDecimal(txtAgua.getText(), COMMA, DOT)));
 					amostra.setAmostra(Double.parseDouble(NumberUtil.adjustDecimal(txtAmostra.getText(), COMMA, DOT)));
 					amostra.setPh(Double.parseDouble(NumberUtil.adjustDecimal(txtPH.getText(), COMMA, DOT)));
@@ -209,7 +209,7 @@ public class AmostraController implements Initializable {
 		txtViscGardner.setText(amostra.getViscGardner());
 		txtCorGardner.setText(amostra.getCorGardner());
 		txtNV.setText(NumberUtil.adjustDecimal(new Double(amostra.getPercentualNv()).toString(), DOT, COMMA));
-		txtGelTime.setText(NumberUtil.adjustDecimal(new Integer(amostra.getGelTime()).toString(), DOT, COMMA));
+		txtGelTime.setText(amostra.getGelTime());
 		txtAgua.setText(NumberUtil.adjustDecimal(new Double(amostra.getAgua()).toString(), DOT, COMMA));
 		txtAmostra.setText(NumberUtil.adjustDecimal(new Double(amostra.getAmostra()).toString(), DOT, COMMA));
 		txtPH.setText(NumberUtil.adjustDecimal(new Double(amostra.getPh()).toString(), DOT, COMMA));
@@ -303,10 +303,10 @@ public class AmostraController implements Initializable {
 					}
 				});
 		colGelTime.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Amostra, Integer>, ObservableValue<Integer>>() {
-					public ObservableValue<Integer> call(CellDataFeatures<Amostra, Integer> cell) {
+				new Callback<TableColumn.CellDataFeatures<Amostra, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Amostra, String> cell) {
 						final Amostra a = cell.getValue();
-						final SimpleObjectProperty<Integer> simpleObject = new SimpleObjectProperty<Integer>(
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
 								a.getGelTime());
 						return simpleObject;
 					}
@@ -367,13 +367,13 @@ public class AmostraController implements Initializable {
 		formatNumberField(txtAmostra);
 		formatNumberField(txtPH);
 
-		txtGelTime.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue == null)
-				return;
-			if (!newValue.matches("\\d*")) {
-				txtGelTime.setText(newValue.replaceAll("[^\\d]", ""));
-			}
-		});
+		// txtGelTime.textProperty().addListener((observable, oldValue, newValue) -> {
+		// if (newValue == null)
+		// return;
+		// if (!newValue.matches("\\d*")) {
+		// txtGelTime.setText(newValue.replaceAll("[^\\d]", ""));
+		// }
+		// });
 	}
 
 	private void clearFields() {
