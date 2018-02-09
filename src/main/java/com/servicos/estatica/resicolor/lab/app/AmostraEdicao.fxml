@@ -15,8 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<AnchorPane prefHeight="664.0" prefWidth="1208.0" styleClass="myGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator orientation="VERTICAL" prefHeight="664.0" />
       <TableView fx:id="tblProvas" layoutX="29.0" layoutY="267.0" onMouseClicked="#selectProva" prefHeight="360.0" prefWidth="1150.0">
@@ -63,5 +62,10 @@
          </cursor>
       </Button>
       <Line endX="408.0" layoutX="712.0" layoutY="201.0" startX="-100.0" stroke="#09156f" strokeWidth="2.0" />
+      <Button fx:id="btCancel" layoutX="991.0" layoutY="168.0" mnemonicParsing="false" onAction="#cancelProva" prefHeight="25.0" prefWidth="123.0" styleClass="btStyleCancel" stylesheets="@../style/style.css" text="Cancelar prova" visible="false">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

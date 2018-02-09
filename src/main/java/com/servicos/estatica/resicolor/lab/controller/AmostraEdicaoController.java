@@ -3,6 +3,7 @@ package com.servicos.estatica.resicolor.lab.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -83,6 +84,8 @@ public class AmostraEdicaoController implements Initializable, ControlledScreen 
 	private Button btSearch;
 	@FXML
 	private Button btAmostras;
+	@FXML
+	private Button btCancel;
 	@FXML
 	private ProgressIndicator progDados;
 	@FXML
@@ -225,7 +228,17 @@ public class AmostraEdicaoController implements Initializable, ControlledScreen 
 			return;
 		}
 		lblProvaSelecionada.setText(prova.getNomeProva());
+		if (prova.getDhFinal() == null)
+			btCancel.setVisible(true);
+		else
+			btCancel.setVisible(false);
 		btAmostras.setDisable(false);
+	}
+
+	@FXML
+	private void cancelProva() {
+		provaDAO.updateDataFinal(prova);
+		retrieveLastProvas();
 	}
 
 	private void retrieveLastProvas() {

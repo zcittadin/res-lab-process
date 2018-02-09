@@ -96,3 +96,7 @@
 .btStyleModify {
   -fx-graphic: url('Modify.png');
 }
+
+.btStyleCancel {
+  -fx-graphic: url('Cancel.png');
+}
